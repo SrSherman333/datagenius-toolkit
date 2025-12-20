@@ -2,6 +2,10 @@
 import customtkinter as ctk
 import tkinter as tk
 from PIL import Image, ImageTk
+import sys
+import os
+import math
+sys.path.append("calculators")
 
 # Configuration of the window
 ctk.set_appearance_mode("dark")
@@ -11,28 +15,41 @@ app.geometry("640x480")
 app.title("Datagenius Toolkit")
 
 # Creation of the pages
-initial_page = ctk.CTkFrame(app, fg_color=("#0a0a2a", "#1a1a2e"))
-menu_page = ctk.CTkFrame(app,fg_color=("#0a0a2a", "#1a1a2e"))
-temperature_conversion_page = ctk.CTkFrame(app, fg_color=("#0a0a2a", "#1a1a2e"))
+pages = {}
 
-# Switch in the pages
-def show_initial_page():
-    menu_page.place_forget()
-    temperature_conversion_page.place_forget()
-    initial_page.place(relwidth=1, relheight=1)
-def show_menu_page():
-    initial_page.place_forget()
-    temperature_conversion_page.place_forget()
-    menu_page.place(relwidth=1, relheight=1)
-def show_temperature_conversion_page():
-    menu_page.place_forget()
-    initial_page.place_forget()
-    temperature_conversion_page.place(relwidth=1, relheight=1)
+def show_page(page_name):
+    for page in pages.values():
+        page.place_forget()
+
+    if page_name in pages:
+        pages[page_name].place(relwidth=1, relheight=1)
+    else:
+        print(f"Error: La página '{page_name}' no existe.")
+
+page_names_list = [
+    "initial_page",
+    "menu_page",
+    "temperature_conversion_page",
+    "cloud_storage_cost_page",
+    "execution_time_calculator_page",
+    "euclidean_distance_calculator_page",
+    "average_grade_page",
+    "simple_interest_calculator_page",
+    "average_speed_of_a_drone_page",
+    "body_mass_index_calculator_page",
+    "energy_consumption_page",
+    "currency_conversion_page",
+]
+
+for name in page_names_list:
+    frame = ctk.CTkFrame(app, fg_color=("#0a0a2a", "#1a1a2e"))
+    pages[name] = frame
+
 
 # INITIAL PAGE CONTENT-------------------------------------------------
 # Title
 title_label = ctk.CTkLabel(
-    initial_page, 
+    pages["initial_page"], 
     text="DATAGENIUS TOOLKIT", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=42, weight="bold"), 
@@ -44,7 +61,7 @@ title_label.place(relx=0.5, rely=0.1, anchor=tk.CENTER)
 
 # Subtitle
 subtitle_label = ctk.CTkLabel(
-    initial_page,
+    pages["initial_page"],
     text="Calculation toolset",
     font=ctk.CTkFont(size=16),
     text_color="#8888ff",
@@ -53,7 +70,7 @@ subtitle_label.place(relx=0.5, rely=0.2, anchor=tk.CENTER)
 
 # Decoration ring 
 central_device = ctk.CTkFrame(
-    initial_page,
+    pages["initial_page"],
     width=180,
     height=180,
     corner_radius=90,
@@ -81,7 +98,7 @@ device_label.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
 
 # Principal button
 start_button = ctk.CTkButton(
-    initial_page,
+    pages["initial_page"],
     text="START SYSTEM",
     font=ctk.CTkFont(size=20, weight="bold"),
     width=200,
@@ -93,13 +110,13 @@ start_button = ctk.CTkButton(
     hover_color="#0e0e3d",
     border_width=3,
     border_color="#00ccff",
-    command=show_menu_page)
+    command=lambda: show_page("menu_page"))
 start_button.place(relx=0.5, rely=0.85, anchor=tk.CENTER)
 
 # MENU PAGE CONTENT--------------------------------------------
 # Title
 title_label = ctk.CTkLabel(
-    menu_page, 
+    pages["menu_page"], 
     text="MENU", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=28, weight="bold"), 
@@ -111,7 +128,7 @@ title_label.place(relx=0.5, rely=0.1, anchor=tk.CENTER)
 
 # Button to return
 return_button = ctk.CTkButton(
-    menu_page,
+    pages["menu_page"],
     text="Return to menu",
     font=ctk.CTkFont(size=15, weight="bold"),
     width=195,
@@ -123,11 +140,11 @@ return_button = ctk.CTkButton(
     hover_color="#0e0e3d",
     border_width=3,
     border_color="#00ccff",
-    command=show_initial_page)
+    command=lambda: show_page("initial_page"))
 return_button.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
 
 # Frame for ubicate others buttons
-scrollable_frame = ctk.CTkScrollableFrame(menu_page, width=600, height=300)
+scrollable_frame = ctk.CTkScrollableFrame(pages["menu_page"], width=600, height=300)
 scrollable_frame.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
 
 scrollable_frame.columnconfigure(0, weight=1, uniform="group1")
@@ -135,427 +152,80 @@ scrollable_frame.columnconfigure(1, weight=1, uniform="group1")
 scrollable_frame.columnconfigure(2, weight=1, uniform="group1")
 
 # Program 1
-# Icon
-# Possible errors
-try:
-    icon1_original = Image.open("docs/images/icon1.jpg")
-    icon1_photo = ctk.CTkImage(light_image=icon1_original, size=(64, 64))
-except Exception as e:
-    print(f"Error loading image: {e}.")
-    icon1_photo = None
+buttons_config = [
+    {"text":"Temperature", "image":"docs/images/icon1.jpg", "color":"#ff5555", "command": lambda: show_page("temperature_conversion_page")},
+    {"text":"Cloud Storage Cost", "image":"docs/images/icon2.jpg", "color":"#aa55ff", "command": lambda: show_page("cloud_storage_cost_page")},
+    {"text":"Execution Time", "image":"docs/images/icon3.jpg", "color":"#ffff55", "command": lambda: show_page("execution_time_calculator_page")},
+    {"text":"Euclidean Distance", "image":"docs/images/icon4.jpg", "color":"#55ff55", "command": lambda: show_page("euclidean_distance_calculator_page")},
+    {"text":"Average Grade", "image":"docs/images/icon5.jpg", "color":"#ff55aa", "command": lambda: show_page("average_grade_page")},
+    {"text":"Simple Interest", "image":"docs/images/icon6.jpg", "color":"#ffaa00", "command": lambda: show_page("simple_interest_calculator_page")},
+    {"text":"Average Speed", "image":"docs/images/icon7.jpg", "color":"#55ffff", "command": lambda: show_page("average_speed_of_a_drone_page")},
+    {"text":"Body Mass Index", "image":"docs/images/icon8.jpg", "color":"#5555ff", "command": lambda: show_page("body_mass_index_calculator_page")},
+    {"text":"Energy Consumption", "image":"docs/images/icon9.jpg", "color":"#aaff55", "command": lambda: show_page("energy_consumption_page")},
+    {"text":"Currency Conversion", "image":"docs/images/icon10.jpg", "color":"#aaff00", "command": lambda: show_page("currency_conversion_page")},
+]
+
+
+for i, config in enumerate(buttons_config):
+    row_val = i // 3
+    column_val = i % 3
+    
+    # Icon
+    # Possible errors
+    try:
+        icon_original = Image.open(config["image"])
+        icon_photo = ctk.CTkImage(light_image=icon_original, size=(64, 64))
+    except Exception as e:
+        print(f"Error loading image: {e}.")
+        icon_photo = None
 # Icon placement
-if icon1_photo:
-    option1_button = ctk.CTkButton(
-    scrollable_frame,
-    text="Temperature",
-    font=ctk.CTkFont(size=15, weight="bold"),
-    width=200,
-    height=45,
-    text_color="#ff5555",
-    corner_radius=25,
+    if icon_photo:
+        option_button = ctk.CTkButton(
+        scrollable_frame,
+        text=config["text"],
+        font=ctk.CTkFont(size=15, weight="bold"),
+        width=200,
+        height=45,
+        text_color=config["color"],
+        corner_radius=25,
+        fg_color="#0a0a2a",
+        bg_color="#1a1a2e",
+        hover_color="#0e0e3d",
+        border_width=3,
+        border_color=config["color"],
+        compound="bottom",
+        image=icon_photo,
+        command=config["command"])
+    else:
+        option_button = ctk.CTkButton(
+        scrollable_frame,
+        text=config["text"],
+        font=ctk.CTkFont(size=15, weight="bold"),
+        width=200,
+        height=45,
+        text_color=config["color"],
+        corner_radius=25,
+        fg_color="#0a0a2a",
+        bg_color="#1a1a2e",
+        hover_color="#0e0e3d",
+        border_width=3,
+        border_color=config["color"],
+        command=config["command"])
+    option_button.grid(row=row_val, column=column_val, pady=10,sticky="NSEW")
+
+# TEMPERATURE COBERSION PAGE CONTENT-----------------------
+# Title
+title1 = ctk.CTkLabel(
+    pages["temperature_conversion_page"], 
+    text="TEMPERATURE CONVERSION", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=28, weight="bold"), 
+    text_color="#00ccff", 
     fg_color="#0a0a2a",
     bg_color="#1a1a2e",
-    hover_color="#0e0e3d",
-    border_width=3,
-    border_color="#ff5555",
-    compound="bottom",
-    image=icon1_photo,
-    command=show_temperature_conversion_page)
-else:
-    option1_button = ctk.CTkButton(
-    scrollable_frame,
-    text="Temperature",
-    font=ctk.CTkFont(size=15, weight="bold"),
-    width=200,
-    height=45,
-    text_color="#ff5555",
-    corner_radius=25,
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
-    hover_color="#0e0e3d",
-    border_width=3,
-    border_color="#ff5555",
-    command=show_temperature_conversion_page)
-option1_button.grid(row=0, column=0, pady=10,sticky="NSEW")
+    corner_radius=50)
+title1.place(relx=0.5, rely=0.1, anchor=tk.CENTER) 
 
-# Program 2
-# Icon
-# Possible errors
-try:
-    icon2_original = Image.open("docs/images/icon2.jpg")
-    icon2_photo = ctk.CTkImage(light_image=icon2_original, size=(64, 64))
-except Exception as e:
-    print(f"Error loading image: {e}.")
-    icon2_photo = None
-# Icon placement
-if icon2_photo:
-    option2_button = ctk.CTkButton(
-        scrollable_frame,
-        text="Cloud Storage Cost",
-        font=ctk.CTkFont(size=15, weight="bold"),
-        width=200,
-        height=45,
-        text_color="#aa55ff",
-        corner_radius=25,
-        fg_color="#0a0a2a",
-        bg_color="#1a1a2e",
-        hover_color="#0e0e3d",
-        border_width=3,
-        border_color="#aa55ff",
-        compound = "bottom",
-        image = icon2_photo)
-else:
-    option2_button = ctk.CTkButton(
-        scrollable_frame,
-        text="Cloud Storage Cost",
-        font=ctk.CTkFont(size=15, weight="bold"),
-        width=200,
-        height=45,
-        text_color="#aa55ff",
-        corner_radius=25,
-        fg_color="#0a0a2a",
-        bg_color="#1a1a2e",
-        hover_color="#0e0e3d",
-        border_width=3,
-        border_color="#aa55ff")
-option2_button.grid(row=0, column=1, pady=10, sticky="NSEW")
-
-# Program 3
-# Icon
-# Possible errors
-try:
-    icon3_original = Image.open("docs/images/icon3.jpg")
-    icon3_photo = ctk.CTkImage(light_image=icon3_original, size=(64, 64))
-except Exception as e:
-    print(f"Error loading imge: {e}.")
-    icon3_photo = None
-# Icon placement
-if icon3_photo:
-    option3_button = ctk.CTkButton(
-        scrollable_frame,
-        text="Execution Time",
-        font=ctk.CTkFont(size=15, weight="bold"),
-        width=200,
-        height=45,
-        text_color="#ffff55",
-        corner_radius=25,
-        fg_color="#0a0a2a",
-        bg_color="#1a1a2e",
-        hover_color="#0e0e3d",
-        border_width=3,
-        border_color="#ffff55",
-        compound = "bottom",
-        image = icon3_photo)
-else:
-    option3_button = ctk.CTkButton(
-        scrollable_frame,
-        text="Execution Time",
-        font=ctk.CTkFont(size=15, weight="bold"),
-        width=200,
-        height=45,
-        text_color="#ffff55",
-        corner_radius=25,
-        fg_color="#0a0a2a",
-        bg_color="#1a1a2e",
-        hover_color="#0e0e3d",
-        border_width=3,
-        border_color="#ffff55")
-option3_button.grid(row=0, column=2, pady=10, sticky="NSEW")
-
-# Program 4
-# Icon
-# Possible errors
-try:
-    icon4_original = Image.open("docs/images/icon4.jpg")
-    icon4_photo = ctk.CTkImage(light_image=icon4_original, size=(64, 64))
-except Exception as e:
-    print(f"Error loading image: {e}")
-    icon4_photo = None
-# Icon placement
-if icon4_photo:
-    option4_button = ctk.CTkButton(
-        scrollable_frame,
-        text="Euclidean Distance",
-        font=ctk.CTkFont(size=15, weight="bold"),
-        width=200,
-        height=45,
-        text_color="#55ff55",
-        corner_radius=25,
-        fg_color="#0a0a2a",
-        bg_color="#1a1a2e",
-        hover_color="#0e0e3d",
-        border_width=3,
-        border_color="#55ff55",
-        compound = "bottom",
-        image = icon4_photo)
-else:
-    option4_button = ctk.CTkButton(
-        scrollable_frame,
-        text="Euclidean Distance",
-        font=ctk.CTkFont(size=15, weight="bold"),
-        width=200,
-        height=45,
-        text_color="#55ff55",
-        corner_radius=25,
-        fg_color="#0a0a2a",
-        bg_color="#1a1a2e",
-        hover_color="#0e0e3d",
-        border_width=3,
-        border_color="#55ff55")
-option4_button.grid(row=1, column=0, pady=10, sticky="NSEW")
-
-# Program 5
-# Icon
-# Possible errors
-try:
-    icon5_original = Image.open("docs/images/icon5.jpg")
-    icon5_photo = ctk.CTkImage(light_image=icon5_original, size=(64,64))
-except Exception as e:
-    print(f"Error loading image: {e}")
-    icon5_photo = None
-# Icon placement
-if icon5_photo:
-    option5_button = ctk.CTkButton(
-        scrollable_frame,
-        text="Average Grade",
-        font=ctk.CTkFont(size=15, weight="bold"),
-        width=200,
-        height=45,
-        text_color="#ff55aa",
-        corner_radius=25,
-        fg_color="#0a0a2a",
-        bg_color="#1a1a2e",
-        hover_color="#0e0e3d",
-        border_width=3,
-        border_color="#ff55aa",
-        compound = "bottom",
-        image = icon5_photo)
-else:
-    option5_button = ctk.CTkButton(
-        scrollable_frame,
-        text="Average Grade",
-        font=ctk.CTkFont(size=15, weight="bold"),
-        width=200,
-        height=45,
-        text_color="#ff55aa",
-        corner_radius=25,
-        fg_color="#0a0a2a",
-        bg_color="#1a1a2e",
-        hover_color="#0e0e3d",
-        border_width=3,
-        border_color="#ff55aa")
-option5_button.grid(row=1, column=1, pady=10, sticky="NSEW")
-
-# Program 6
-# Icon
-# Possible errors
-try:
-    icon6_original = Image.open("docs/images/icon6.jpg")
-    icon6_photo = ctk.CTkImage(light_image=icon6_original, size=(64,64))
-except Exception as e:
-    print(f"Error loading image: {e}")
-    icon6_photo = None
-# Icon placement
-if icon6_photo:
-    option6_button = ctk.CTkButton(
-        scrollable_frame,
-        text="Simple Interest",
-        font=ctk.CTkFont(size=15, weight="bold"),
-        width=200,
-        height=45,
-        text_color="#ffaa00",
-        corner_radius=25,
-        fg_color="#0a0a2a",
-        bg_color="#1a1a2e",
-        hover_color="#0e0e3d",
-        border_width=3,
-        border_color="#ffaa00",
-        compound = "bottom",
-        image = icon6_photo)
-else:
-    option6_button = ctk.CTkButton(
-        scrollable_frame,
-        text="Simple Interest",
-        font=ctk.CTkFont(size=15, weight="bold"),
-        width=200,
-        height=45,
-        text_color="#ffaa00",
-        corner_radius=25,
-        fg_color="#0a0a2a",
-        bg_color="#1a1a2e",
-        hover_color="#0e0e3d",
-        border_width=3,
-        border_color="#ffaa00")
-option6_button.grid(row=1, column=2, pady=10, sticky="NSEW")
-
-# Program 7
-# Icon
-# Possible errors
-try:
-    icon7_original = Image.open("docs/images/icon7.jpg")
-    icon7_photo = ctk.CTkImage(light_image=icon7_original, size=(64, 64))
-except Exception as e:
-    print(f"Error loading image: {e}")
-    icon7_photo = None
-# Icon placement
-if icon7_photo:
-    option7_button = ctk.CTkButton(
-        scrollable_frame,
-        text="Average Speed",
-        font=ctk.CTkFont(size=15, weight="bold"),
-        width=200,
-        height=45,
-        text_color="#55ffff",
-        corner_radius=25,
-        fg_color="#0a0a2a",
-        bg_color="#1a1a2e",
-        hover_color="#0e0e3d",
-        border_width=3,
-        border_color="#55ffff",
-        compound = "bottom",
-        image = icon7_photo)
-else:
-    option7_button = ctk.CTkButton(
-        scrollable_frame,
-        text="Average Speed",
-        font=ctk.CTkFont(size=15, weight="bold"),
-        width=200,
-        height=45,
-        text_color="#55ffff",
-        corner_radius=25,
-        fg_color="#0a0a2a",
-        bg_color="#1a1a2e",
-        hover_color="#0e0e3d",
-        border_width=3,
-        border_color="#55ffff")
-option7_button.grid(row=2, column=0, pady=10, sticky="NSEW")
-
-# Program 8
-# Icon
-# Possible errors
-try:
-    icon8_original = Image.open("docs/images/icon8.jpg")
-    icon8_photo = ctk.CTkImage(light_image=icon8_original, size=(64, 64))
-except Exception as e:
-    print(f"Error loading image: {e}")
-    icon8_photo = None
-# Icon placement
-if icon8_photo:
-    option8_button = ctk.CTkButton(
-        scrollable_frame,
-        text="Body Mass Index",
-        font=ctk.CTkFont(size=15, weight="bold"),
-        width=200,
-        height=45,
-        text_color="#5555ff",
-        corner_radius=25,
-        fg_color="#0a0a2a",
-        bg_color="#1a1a2e",
-        hover_color="#0e0e3d",
-        border_width=3,
-        border_color="#5555ff",
-        compound = "bottom",
-        image = icon8_photo)
-else:
-    option8_button = ctk.CTkButton(
-        scrollable_frame,
-        text="Body Mass Index",
-        font=ctk.CTkFont(size=15, weight="bold"),
-        width=200,
-        height=45,
-        text_color="#5555ff",
-        corner_radius=25,
-        fg_color="#0a0a2a",
-        bg_color="#1a1a2e",
-        hover_color="#0e0e3d",
-        border_width=3,
-        border_color="#5555ff")
-option8_button.grid(row=2, column=1, pady=10, sticky="NSEW")
-
-# Program 9
-# Icon
-# Possible errors
-try:
-    icon9_original = Image.open("docs/images/icon9.jpg")
-    icon9_photo = ctk.CTkImage(light_image=icon9_original, size=(64, 64))
-except Exception as e:
-    print(f"Error loading image: {e}")
-    icon9_photo = None
-# Icon placement
-if icon9_photo:
-    option9_button = ctk.CTkButton(
-        scrollable_frame,
-        text="Energy Consumption",
-        font=ctk.CTkFont(size=15, weight="bold"),
-        width=200,
-        height=45,
-        text_color="#aaff55",
-        corner_radius=25,
-        fg_color="#0a0a2a",
-        bg_color="#1a1a2e",
-        hover_color="#0e0e3d",
-        border_width=3,
-        border_color="#aaff55",
-        compound = "bottom",
-        image = icon9_photo)
-else:
-    option9_button = ctk.CTkButton(
-        scrollable_frame,
-        text="Energy Consumption",
-        font=ctk.CTkFont(size=15, weight="bold"),
-        width=200,
-        height=45,
-        text_color="#aaff55",
-        corner_radius=25,
-        fg_color="#0a0a2a",
-        bg_color="#1a1a2e",
-        hover_color="#0e0e3d",
-        border_width=3,
-        border_color="#aaff55")
-option9_button.grid(row=2, column=2, pady=10, sticky="NSEW")
-
-# Program 10
-# Icon
-# Possible errors
-try:
-    icon10_original = Image.open("docs/images/icon10.jpg")
-    icon10_photo = ctk.CTkImage(light_image=icon10_original, size=(64, 64))
-except Exception as e:
-    print(f"Error loading imagen: {e}")
-    icon10_photo = None
-# Icon placement
-if icon10_photo:
-    option10_button = ctk.CTkButton(
-        scrollable_frame,
-        text="Currency Conversion",
-        font=ctk.CTkFont(size=15, weight="bold"),
-        width=200,
-        height=45,
-        text_color="#aaff00",
-        corner_radius=25,
-        fg_color="#0a0a2a",
-        bg_color="#1a1a2e",
-        hover_color="#0e0e3d",
-        border_width=3,
-        border_color="#aaff00",
-        compound = "bottom",
-        image = icon10_photo)
-else:
-    option10_button = ctk.CTkButton(
-        scrollable_frame,
-        text="Currency Conversion",
-        font=ctk.CTkFont(size=15, weight="bold"),
-        width=200,
-        height=45,
-        text_color="#aaff00",
-        corner_radius=25,
-        fg_color="#0a0a2a",
-        bg_color="#1a1a2e",
-        hover_color="#0e0e3d",
-        border_width=3,
-        border_color="#aaff00")
-option10_button.grid(row=3, column=0, pady=10, sticky="NSEW")
-
-show_initial_page()
+show_page("initial_page")
 
 app.mainloop()
