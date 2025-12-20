@@ -5,7 +5,10 @@ from PIL import Image, ImageTk
 import sys
 import os
 import math
-sys.path.append("calculators")
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+src_dir = os.path.join(parent_dir, 'calculators')
+sys.path.append(src_dir)
 
 # Configuration of the window
 ctk.set_appearance_mode("dark")
@@ -129,7 +132,7 @@ title_label.place(relx=0.5, rely=0.1, anchor=tk.CENTER)
 # Button to return
 return_button = ctk.CTkButton(
     pages["menu_page"],
-    text="Return to menu",
+    text="Back",
     font=ctk.CTkFont(size=15, weight="bold"),
     width=195,
     height=45,
@@ -213,18 +216,248 @@ for i, config in enumerate(buttons_config):
         command=config["command"])
     option_button.grid(row=row_val, column=column_val, pady=10,sticky="NSEW")
 
-# TEMPERATURE COBERSION PAGE CONTENT-----------------------
+# TEMPERATURE CONVERSION PAGE CONTENT-----------------------
+# Functions
+import temperature_conversion
+def calculate_values():
+    value = entry.get()
+    try:
+        value = float(value)
+    except ValueError as v:
+        entry.delete(0, "end")
+        entry.insert(0, f"Error: {v}")
+        return
+    if value < -273.15:
+        entry.delete(0, "end")
+        entry.insert(0, "Error: Temperature cannot be below absolute zero (-273.15°C)")
+        return
+    fahrenheit_results.configure(text=f"{temperature_conversion.celsius_to_fahrenheit(value):.2f}°F")
+    kelvin_results.configure(text=f"{temperature_conversion.celsius_to_kelvin(value):.2f}K")
+    entry.delete(0, "end")
+    entry.focus()
+
+def clean():
+    entry.delete(0, "end")
+    entry.focus()
+    fahrenheit_results.configure(text="00.00°F")
+    kelvin_results.configure(text="00.00K")
+    
+def copy_text_fahrenheit():
+    text_copy = fahrenheit_results.cget("text")
+    app.clipboard_clear()
+    app.clipboard_append(text_copy)
+    app.update()
+    button_copy1.configure(text="Copied Text")
+    app.after(2000, lambda: button_copy1.configure(text="Copy"))
+    
+def copy_text_kelvin():
+    text_copy = kelvin_results.cget("text")
+    app.clipboard_clear()
+    app.clipboard_append(text_copy)
+    app.update()
+    button_copy2.configure(text="Copied Text")
+    app.after(2000, lambda: button_copy2.configure(text="Copy"))
+        
 # Title
 title1 = ctk.CTkLabel(
     pages["temperature_conversion_page"], 
     text="TEMPERATURE CONVERSION", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=28, weight="bold"), 
+    text_color="#ff5555", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+title1.place(relx=0.5, rely=0.08, anchor=tk.CENTER) 
+
+# Input section
+frame_input = ctk.CTkFrame(
+    pages["temperature_conversion_page"], 
+    width=600, height=150, 
+    fg_color="#1a1a2e",
+    border_color="#ff5555",
+    border_width=2,
+    corner_radius=15)
+frame_input.place(relx=0.5, rely=0.32, anchor=tk.CENTER)
+# Title
+title_input = ctk.CTkLabel(
+    frame_input, 
+    text="Input Section", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#ff5555", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+title_input.place(relx=0.5, rely=0.15,anchor=tk.CENTER)
+# Order
+order = ctk.CTkLabel(
+    frame_input, 
+    text="Enter temperature in Celsius:", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#ffaa66", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+order.place(relx=0.2, rely=0.43, anchor=tk.CENTER)
+# Entry order
+entry = ctk.CTkEntry(
+    frame_input, 
+    placeholder_text="0.0",
+    fg_color="#0a0a2a",                 
+    text_color="#ffffff",               
+    border_color="#ffaa66",             
+    placeholder_text_color="#8888ff")
+entry.place(relx=0.55, rely=0.43, anchor=tk.CENTER)
+# Buttons order
+button_convert = ctk.CTkButton(
+    frame_input,
+    text="CONVERT",
+    font=ctk.CTkFont(size=12, weight="bold"),
+    width=200,
+    height=45,
+    text_color="#ffffff",
+    corner_radius=25,
+    fg_color="#ff5555",
+    bg_color="#1a1a2e",
+    hover_color="#ff3333",
+    border_width=3,
+    border_color="#ffffff",
+    command=calculate_values)
+button_convert.place(relx=0.2, rely=0.8, anchor=tk.CENTER)
+button_clean = ctk.CTkButton(
+    frame_input,
+    text="CLEAN",
+    font=ctk.CTkFont(size=12, weight="bold"),
+    width=200,
+    height=45,
+    text_color="#cccccc",
+    corner_radius=25,
+    fg_color="#555577",
+    bg_color="#1a1a2e",
+    hover_color="#444466",
+    border_width=3,
+    border_color="#8888ff",
+    command=clean)
+button_clean.place(relx=0.8, rely=0.8, anchor=tk.CENTER)
+
+# Results panel
+frame_results = ctk.CTkFrame(
+    pages["temperature_conversion_page"], 
+    width=600, height=150,
+    fg_color="#1a1a2e",
+    border_color="#333355",
+    border_width=3,
+    corner_radius=10)
+frame_results.place(relx=0.5, rely=0.66, anchor=tk.CENTER)
+# Title
+title_input = ctk.CTkLabel(
+    frame_results, 
+    text="Results Panel", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
     text_color="#00ccff", 
     fg_color="#0a0a2a",
     bg_color="#1a1a2e",
     corner_radius=50)
-title1.place(relx=0.5, rely=0.1, anchor=tk.CENTER) 
+title_input.place(relx=0.5, rely=0.15,anchor=tk.CENTER)
+
+# Fahrenheit results
+fahrenheit_title = ctk.CTkLabel(
+    frame_results, 
+    text="The temperature in Fahrenheit is:", 
+    font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"), 
+    text_color="#ffaa66",
+    width=200,
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+fahrenheit_title.place(relx=0.23, rely=0.43, anchor=tk.CENTER)
+
+fahrenheit_results = ctk.CTkLabel(
+    frame_results,
+    text="00.00°F",
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#ffaa44", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+fahrenheit_results.place(relx=0.52, rely=0.43, anchor=tk.CENTER)
+
+button_copy1 = ctk.CTkButton(
+    frame_results,
+    text="COPY",
+    font=ctk.CTkFont(size=12, weight="bold"),
+    width=200,
+    height=45,
+    text_color="#ffaa66",
+    corner_radius=25,
+    fg_color="transparent",
+    bg_color="#1a1a2e",
+    hover_color="#332211",
+    border_width=3,
+    border_color="#ff8844",
+    command=copy_text_fahrenheit)
+button_copy1.place(relx=0.8, rely=0.43, anchor=tk.CENTER)
+
+# Kelvin results
+kelvin_title = ctk.CTkLabel(
+    frame_results, 
+    text="The temperature in Kelvin is:", 
+    font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"), 
+    text_color="#66aaff",
+    width=200,
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+kelvin_title.place(relx=0.23, rely=0.80, anchor=tk.CENTER)
+
+kelvin_results = ctk.CTkLabel(
+    frame_results,
+    text="00.00K",
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#4488ff", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+kelvin_results.place(relx=0.52, rely=0.80, anchor=tk.CENTER)
+
+button_copy2 = ctk.CTkButton(
+    frame_results,
+    text="COPY",
+    font=ctk.CTkFont(size=12, weight="bold"),
+    width=200,
+    height=45,
+    text_color="#66aaff",
+    corner_radius=25,
+    fg_color="transparent",
+    bg_color="#1a1a2e",
+    hover_color="#112233",
+    border_width=3,
+    border_color="#4488ff",
+    command=copy_text_kelvin)
+button_copy2.place(relx=0.8, rely=0.80, anchor=tk.CENTER)
+
+# Return to menu
+return_button = ctk.CTkButton(
+    pages["temperature_conversion_page"],
+    text="Back to menu",
+    font=ctk.CTkFont(size=15, weight="bold"),
+    width=195,
+    height=45,
+    text_color="#ff5555",
+    corner_radius=25,
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    hover_color="#0e0e3d",
+    border_width=3,
+    border_color="#ff5555",
+    command=lambda: show_page("menu_page"))
+return_button.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
+
 
 show_page("initial_page")
 
