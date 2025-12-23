@@ -247,16 +247,16 @@ def copy_text_fahrenheit():
     app.clipboard_clear()
     app.clipboard_append(text_copy)
     app.update()
-    button_copy1.configure(text="Copied Text")
-    app.after(2000, lambda: button_copy1.configure(text="Copy"))
+    button_copy1.configure(text="COPIED TEXT")
+    app.after(2000, lambda: button_copy1.configure(text="COPY"))
     
 def copy_text_kelvin():
     text_copy = kelvin_results.cget("text")
     app.clipboard_clear()
     app.clipboard_append(text_copy)
     app.update()
-    button_copy2.configure(text="Copied Text")
-    app.after(2000, lambda: button_copy2.configure(text="Copy"))
+    button_copy2.configure(text="COPIED TEXT")
+    app.after(2000, lambda: button_copy2.configure(text="COPY"))
         
 # Title
 title1 = ctk.CTkLabel(
@@ -457,6 +457,293 @@ return_button = ctk.CTkButton(
     border_color="#ff5555",
     command=lambda: show_page("menu_page"))
 return_button.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
+
+
+# CLOUD STORAGE COST PAGE CONTENT-----------------------
+# Functions
+import cloud_storage_cost
+def calculate_cost():
+    try:
+        gb = float(entry_cloud1.get())
+        c = float(entry_cloud2.get())
+    except ValueError as v:
+        errors_cloud.configure(text="")
+        errors_cloud.configure(text=f"Error: {v}")
+        app.after(3000, lambda:errors_cloud.configure(text=""))
+        return
+    
+    if gb <= 0 or c <= 0:
+        errors_cloud.configure(text="")
+        errors_cloud.configure(text=f"Error: Values must be greater than zero")
+        app.after(3000, lambda:errors_cloud.configure(text=""))
+        return
+    
+    cm = cloud_storage_cost.monthly_cost(gb, c)
+    montly_cost_results.configure(text=f"{cm:.2f}$")
+    anual_cost_results.configure(text=f"{cloud_storage_cost.annual_cost(cm):.2f}$")
+    
+    entry_cloud1.delete(0, "end")
+    entry_cloud1.focus()
+    entry_cloud2.delete(0, "end")
+    
+def clean_text():
+    entry_cloud1.delete(0, "end")
+    entry_cloud1.focus()
+    entry_cloud2.delete(0, "end")
+    montly_cost_results.configure(text="00.00$")
+    anual_cost_results.configure(text="00.00$")
+    
+def copy_results1():
+    copy = montly_cost_results.cget("text")
+    app.clipboard_clear()
+    app.clipboard_append(copy)
+    app.update
+    button_copy_cloud.configure(text="COPIED TEXT")
+    app.after(2000, lambda:button_copy_cloud.configure(text="COPY"))
+    
+def copy_results2():
+    copy = anual_cost_results.cget("text")
+    app.clipboard_clear()
+    app.clipboard_append(copy)
+    app.update
+    button_copy_cloud2.configure(text="COPIED TEXT")
+    app.after(2000, lambda:button_copy_cloud2.configure(text="COPY"))
+
+# Title
+title2 = ctk.CTkLabel(
+    pages["cloud_storage_cost_page"], 
+    text="CLOUD STORAGE COST", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=28, weight="bold"), 
+    text_color="#aa55ff", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+title2.place(relx=0.5, rely=0.06, anchor=tk.CENTER)
+
+# Input Section
+frame_input2 = ctk.CTkFrame(
+    pages["cloud_storage_cost_page"],
+    width=600, height=170,
+    border_color="#aa55ff",
+    border_width=3,
+    corner_radius=10,
+    fg_color="#1a1a2e"
+)
+frame_input2.place(relx=0.5, rely=0.3, anchor=tk.CENTER)
+
+# Title
+title_input2 = ctk.CTkLabel(
+    frame_input2, 
+    text="Input Section", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#aa55ff", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+title_input2.place(relx=0.5, rely=0.13,anchor=tk.CENTER)
+
+# Label for errors
+errors_cloud = ctk.CTkLabel(
+    frame_input2, 
+    text="",
+    width=150, height=100,
+    font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"),
+    wraplength=150,
+    justify=tk.LEFT,
+    text_color="#aa55ff", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=10)
+errors_cloud.place(relx=0.83, rely=0.34, anchor=tk.CENTER)
+
+# Orders
+order_cloud_1 = ctk.CTkLabel(
+    frame_input2, 
+    text="Enter stored data in GB:", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#aa55ff", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+order_cloud_1.place(relx=0.2, rely=0.33, anchor=tk.CENTER)
+order_cloud_2 = ctk.CTkLabel(
+    frame_input2, 
+    text="Enter cost per GB:", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#aa55ff", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+order_cloud_2.place(relx=0.2, rely=0.53, anchor=tk.CENTER)
+# Entrys orders
+entry_cloud1 = ctk.CTkEntry(
+    frame_input2, 
+    placeholder_text="0.0",
+    fg_color="#0a0a2a",                 
+    text_color="#ffffff",               
+    border_color="#aa55ff",             
+    placeholder_text_color="#8888ff")
+entry_cloud1.place(relx=0.55, rely=0.33, anchor=tk.CENTER)
+entry_cloud2 = ctk.CTkEntry(
+    frame_input2, 
+    placeholder_text="0.0",
+    fg_color="#0a0a2a",                 
+    text_color="#ffffff",               
+    border_color="#aa55ff",             
+    placeholder_text_color="#8888ff")
+entry_cloud2.place(relx=0.55, rely=0.53, anchor=tk.CENTER)
+# Button calculate and clean
+button_calculate = ctk.CTkButton(
+    frame_input2,
+    text="CALCULATE",
+    font=ctk.CTkFont(size=12, weight="bold"),
+    width=200,
+    height=45,
+    text_color="#ffffff",
+    corner_radius=25,
+    fg_color="#ff5555",
+    bg_color="#1a1a2e",
+    hover_color="#aa55ff",
+    border_width=3,
+    border_color="#ffffff",
+    command=calculate_cost)
+button_calculate.place(relx=0.2, rely=0.8, anchor=tk.CENTER)
+button_clean2 = ctk.CTkButton(
+    frame_input2,
+    text="CLEAN",
+    font=ctk.CTkFont(size=12, weight="bold"),
+    width=200,
+    height=45,
+    text_color="#cccccc",
+    corner_radius=25,
+    fg_color="#555577",
+    bg_color="#1a1a2e",
+    hover_color="#444466",
+    border_width=3,
+    border_color="#8888ff",
+    command=clean_text)
+button_clean2.place(relx=0.8, rely=0.8, anchor=tk.CENTER)
+
+# Results panel
+frame_results2 = ctk.CTkFrame(
+    pages["cloud_storage_cost_page"], 
+    width=600, height=150,
+    fg_color="#1a1a2e",
+    border_color="#aa55ff",
+    border_width=3,
+    corner_radius=10)
+frame_results2.place(relx=0.5, rely=0.66, anchor=tk.CENTER)
+# Title
+title_results = ctk.CTkLabel(
+    frame_results2, 
+    text="Results Panel", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#aa55ff", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+title_results.place(relx=0.5, rely=0.15,anchor=tk.CENTER)
+
+# Montly cost results
+montly_cost = ctk.CTkLabel(
+    frame_results2, 
+    text="The monthly cost is:", 
+    font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"), 
+    text_color="#ffaa66",
+    width=200,
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+montly_cost.place(relx=0.23, rely=0.43, anchor=tk.CENTER)
+
+montly_cost_results = ctk.CTkLabel(
+    frame_results2,
+    text="00.00$",
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#ffaa44", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+montly_cost_results.place(relx=0.52, rely=0.43, anchor=tk.CENTER)
+
+button_copy_cloud = ctk.CTkButton(
+    frame_results2,
+    text="COPY",
+    font=ctk.CTkFont(size=12, weight="bold"),
+    width=200,
+    height=45,
+    text_color="#ffaa66",
+    corner_radius=25,
+    fg_color="transparent",
+    bg_color="#1a1a2e",
+    hover_color="#332211",
+    border_width=3,
+    border_color="#ff8844",
+    command=copy_results1)
+button_copy_cloud.place(relx=0.8, rely=0.43, anchor=tk.CENTER)
+
+# Anual cost results
+anual_cost = ctk.CTkLabel(
+    frame_results2, 
+    text="The annual cost is:", 
+    font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"), 
+    text_color="#66aaff",
+    width=200,
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+anual_cost.place(relx=0.23, rely=0.80, anchor=tk.CENTER)
+
+anual_cost_results = ctk.CTkLabel(
+    frame_results2,
+    text="00.00$",
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#4488ff", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+anual_cost_results.place(relx=0.52, rely=0.80, anchor=tk.CENTER)
+
+button_copy_cloud2 = ctk.CTkButton(
+    frame_results2,
+    text="COPY",
+    font=ctk.CTkFont(size=12, weight="bold"),
+    width=200,
+    height=45,
+    text_color="#66aaff",
+    corner_radius=25,
+    fg_color="transparent",
+    bg_color="#1a1a2e",
+    hover_color="#112233",
+    border_width=3,
+    border_color="#4488ff",
+    command=copy_results2)
+button_copy_cloud2.place(relx=0.8, rely=0.80, anchor=tk.CENTER)
+
+# Return to menu
+return_button2 = ctk.CTkButton(
+    pages["cloud_storage_cost_page"],
+    text="Back to menu",
+    font=ctk.CTkFont(size=15, weight="bold"),
+    width=195,
+    height=45,
+    text_color="#ff5555",
+    corner_radius=25,
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    hover_color="#0e0e3d",
+    border_width=3,
+    border_color="#ff5555",
+    command=lambda: show_page("menu_page"))
+return_button2.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
+
 
 
 show_page("initial_page")
