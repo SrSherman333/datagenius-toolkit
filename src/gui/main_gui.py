@@ -181,7 +181,7 @@ for i, config in enumerate(buttons_config):
     except Exception as e:
         print(f"Error loading image: {e}.")
         icon_photo = None
-# Icon placement
+# Icon placement and creation of button
     if icon_photo:
         option_button = ctk.CTkButton(
         scrollable_frame,
@@ -189,6 +189,7 @@ for i, config in enumerate(buttons_config):
         font=ctk.CTkFont(size=15, weight="bold"),
         width=200,
         height=45,
+        
         text_color=config["color"],
         corner_radius=25,
         fg_color="#0a0a2a",
@@ -224,12 +225,14 @@ def calculate_values():
     try:
         value = float(value)
     except ValueError as v:
-        entry.delete(0, "end")
-        entry.insert(0, f"Error: {v}")
+        errors_cloud1.configure(text="")
+        errors_cloud1.configure(text=f"Error: {v}")
+        app.after(3000, lambda:errors_cloud1.configure(text=""))
         return
     if value < -273.15:
-        entry.delete(0, "end")
-        entry.insert(0, "Error: Temperature cannot be below absolute zero (-273.15°C)")
+        errors_cloud1.configure(text="")
+        errors_cloud1.configure(text=f"Error: Temperature cannot be below absolute zero (-273.15°C)")
+        app.after(3000, lambda:errors_cloud1.configure(text=""))
         return
     fahrenheit_results.configure(text=f"{temperature_conversion.celsius_to_fahrenheit(value):.2f}°F")
     kelvin_results.configure(text=f"{temperature_conversion.celsius_to_kelvin(value):.2f}K")
@@ -290,6 +293,21 @@ title_input = ctk.CTkLabel(
     bg_color="#1a1a2e",
     corner_radius=50)
 title_input.place(relx=0.5, rely=0.15,anchor=tk.CENTER)
+
+#Label for errors
+errors_cloud1 = ctk.CTkLabel(
+    frame_input, 
+    text="",
+    width=150, height=85,
+    font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"),
+    wraplength=150,
+    justify=tk.LEFT,
+    text_color="#aa55ff", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=10)
+errors_cloud1.place(relx=0.83, rely=0.34, anchor=tk.CENTER)
+
 # Order
 order = ctk.CTkLabel(
     frame_input, 
@@ -486,14 +504,14 @@ def calculate_cost():
     entry_cloud1.focus()
     entry_cloud2.delete(0, "end")
     
-def clean_text():
+def clean_text_cloud():
     entry_cloud1.delete(0, "end")
     entry_cloud1.focus()
     entry_cloud2.delete(0, "end")
     montly_cost_results.configure(text="00.00$")
     anual_cost_results.configure(text="00.00$")
     
-def copy_results1():
+def copy_results_cloud1():
     copy = montly_cost_results.cget("text")
     app.clipboard_clear()
     app.clipboard_append(copy)
@@ -501,7 +519,7 @@ def copy_results1():
     button_copy_cloud.configure(text="COPIED TEXT")
     app.after(2000, lambda:button_copy_cloud.configure(text="COPY"))
     
-def copy_results2():
+def copy_results_cloud2():
     copy = anual_cost_results.cget("text")
     app.clipboard_clear()
     app.clipboard_append(copy)
@@ -625,7 +643,7 @@ button_clean2 = ctk.CTkButton(
     hover_color="#444466",
     border_width=3,
     border_color="#8888ff",
-    command=clean_text)
+    command=clean_text_cloud)
 button_clean2.place(relx=0.8, rely=0.8, anchor=tk.CENTER)
 
 # Results panel
@@ -685,7 +703,7 @@ button_copy_cloud = ctk.CTkButton(
     hover_color="#332211",
     border_width=3,
     border_color="#ff8844",
-    command=copy_results1)
+    command=copy_results_cloud1)
 button_copy_cloud.place(relx=0.8, rely=0.43, anchor=tk.CENTER)
 
 # Anual cost results
@@ -724,7 +742,7 @@ button_copy_cloud2 = ctk.CTkButton(
     hover_color="#112233",
     border_width=3,
     border_color="#4488ff",
-    command=copy_results2)
+    command=copy_results_cloud2)
 button_copy_cloud2.place(relx=0.8, rely=0.80, anchor=tk.CENTER)
 
 # Return to menu
@@ -734,17 +752,303 @@ return_button2 = ctk.CTkButton(
     font=ctk.CTkFont(size=15, weight="bold"),
     width=195,
     height=45,
-    text_color="#ff5555",
+    text_color="#aa55ff",
     corner_radius=25,
     fg_color="#0a0a2a",
     bg_color="#1a1a2e",
     hover_color="#0e0e3d",
     border_width=3,
-    border_color="#ff5555",
+    border_color="#aa55ff",
     command=lambda: show_page("menu_page"))
 return_button2.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
 
 
+# EXECUTION TIME CALCULATOR PAGE CONTENT-----------------------
+# Functions
+import execution_time_calculator
+def calculate_execution():
+    try:
+        n = float(entry_exe1.get())
+        v = float(entry_exe2.get())
+    except ValueError as v:
+        errors_exe.configure(text="")
+        errors_exe.configure(text=f"Error: {v}")
+        app.after(3000, lambda:errors_exe.configure(text=""))
+        return
+    
+    if n <= 0 or v <= 0:
+        errors_exe.configure(text="")
+        errors_exe.configure(text=f"Error: Values must be greater than zero")
+        app.after(3000, lambda:errors_exe.configure(text=""))
+        return
+    
+    ts = execution_time_calculator.time_seconds(n,v)
+    time_seconds_results.configure(text=f"{ts:.2f}s")
+    time_minutes_results.configure(text=f"{execution_time_calculator.time_minutes(ts):.2f}min")
+    
+    entry_exe1.delete(0, "end")
+    entry_exe1.focus()
+    entry_exe2.delete(0, "end")
+    
+def clean_text_exe():
+    entry_exe1.delete(0, "end")
+    entry_exe1.focus()
+    entry_exe2.delete(0, "end")
+    time_seconds_results.configure(text="00.00s")
+    time_minutes_results.configure(text="00.00min")
+    
+def copy_results_exe1():
+    copy = time_seconds_results.cget("text")
+    app.clipboard_clear()
+    app.clipboard_append(copy)
+    app.update
+    button_copy_exe.configure(text="COPIED TEXT")
+    app.after(2000, lambda:button_copy_exe.configure(text="COPY"))
+    
+def copy_results_exe2():
+    copy = time_minutes_results.cget("text")
+    app.clipboard_clear()
+    app.clipboard_append(copy)
+    app.update
+    button_copy_exe2.configure(text="COPIED TEXT")
+    app.after(2000, lambda:button_copy_exe2.configure(text="COPY"))
+
+# Title
+title3 = ctk.CTkLabel(
+    pages["execution_time_calculator_page"], 
+    text="Program Execution Time Calculator", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=28, weight="bold"), 
+    text_color="#ffff55", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+title3.place(relx=0.5, rely=0.06, anchor=tk.CENTER)
+
+# Input Section
+frame_input3 = ctk.CTkFrame(
+    pages["execution_time_calculator_page"],
+    width=600, height=170,
+    border_color="#ffff55",
+    border_width=3,
+    corner_radius=10,
+    fg_color="#1a1a2e"
+)
+frame_input3.place(relx=0.5, rely=0.3, anchor=tk.CENTER)
+
+# Title
+title_input3 = ctk.CTkLabel(
+    frame_input3, 
+    text="Input Section", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#ffff55", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+title_input3.place(relx=0.5, rely=0.13,anchor=tk.CENTER)
+
+# Label for errors
+errors_exe = ctk.CTkLabel(
+    frame_input3, 
+    text="",
+    width=150, height=100,
+    font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"),
+    wraplength=140,
+    justify=tk.LEFT,
+    text_color="#ffff55", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=10)
+errors_exe.place(relx=0.86, rely=0.34, anchor=tk.CENTER)
+
+# Orders
+order_exe_1 = ctk.CTkLabel(
+    frame_input3, 
+    text="Enter the number of operations:", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#ffff55", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+order_exe_1.place(relx=0.22, rely=0.33, anchor=tk.CENTER)
+order_exe_2 = ctk.CTkLabel(
+    frame_input3, 
+    text="Enter execution speed (operations/second):", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#ffff55", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+order_exe_2.place(relx=0.28, rely=0.53, anchor=tk.CENTER)
+# Entrys orders
+entry_exe1 = ctk.CTkEntry(
+    frame_input3, 
+    placeholder_text="0.0",
+    width=100,
+    fg_color="#0a0a2a",                 
+    text_color="#ffffff",               
+    border_color="#ffff55",             
+    placeholder_text_color="#8888ff")
+entry_exe1.place(relx=0.64, rely=0.33, anchor=tk.CENTER)
+entry_exe2 = ctk.CTkEntry(
+    frame_input3, 
+    placeholder_text="0.0",
+    width=100,
+    fg_color="#0a0a2a",                 
+    text_color="#ffffff",               
+    border_color="#ffff55",             
+    placeholder_text_color="#8888ff")
+entry_exe2.place(relx=0.64, rely=0.53, anchor=tk.CENTER)
+# Button calculate and clean
+button_calculate_exe = ctk.CTkButton(
+    frame_input3,
+    text="CALCULATE",
+    font=ctk.CTkFont(size=12, weight="bold"),
+    width=200,
+    height=45,
+    text_color="#ffffff",
+    corner_radius=25,
+    fg_color="#ff5555",
+    bg_color="#1a1a2e",
+    hover_color="#ffff55",
+    border_width=3,
+    border_color="#ffffff",
+    command=calculate_execution)
+button_calculate_exe.place(relx=0.2, rely=0.8, anchor=tk.CENTER)
+button_clean3 = ctk.CTkButton(
+    frame_input3,
+    text="CLEAN",
+    font=ctk.CTkFont(size=12, weight="bold"),
+    width=200,
+    height=45,
+    text_color="#cccccc",
+    corner_radius=25,
+    fg_color="#555577",
+    bg_color="#1a1a2e",
+    hover_color="#444466",
+    border_width=3,
+    border_color="#8888ff",
+    command=clean_text_exe)
+button_clean3.place(relx=0.8, rely=0.8, anchor=tk.CENTER)
+
+# Results panel
+frame_results3 = ctk.CTkFrame(
+    pages["execution_time_calculator_page"], 
+    width=600, height=150,
+    fg_color="#1a1a2e",
+    border_color="#ffff55",
+    border_width=3,
+    corner_radius=10)
+frame_results3.place(relx=0.5, rely=0.66, anchor=tk.CENTER)
+# Title
+title_results_exe = ctk.CTkLabel(
+    frame_results3, 
+    text="Results Panel", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#ffff55", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+title_results_exe.place(relx=0.5, rely=0.15,anchor=tk.CENTER)
+
+# Time seconds results
+time_seconds = ctk.CTkLabel(
+    frame_results3, 
+    text="The time in seconds is:", 
+    font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"), 
+    text_color="#ffaa66",
+    width=200,
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+time_seconds.place(relx=0.23, rely=0.43, anchor=tk.CENTER)
+
+time_seconds_results = ctk.CTkLabel(
+    frame_results3,
+    text="00.00s",
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#ffaa44", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+time_seconds_results.place(relx=0.52, rely=0.43, anchor=tk.CENTER)
+
+button_copy_exe = ctk.CTkButton(
+    frame_results3,
+    text="COPY",
+    font=ctk.CTkFont(size=12, weight="bold"),
+    width=200,
+    height=45,
+    text_color="#ffaa66",
+    corner_radius=25,
+    fg_color="transparent",
+    bg_color="#1a1a2e",
+    hover_color="#332211",
+    border_width=3,
+    border_color="#ff8844",
+    command=copy_results_exe1)
+button_copy_exe.place(relx=0.8, rely=0.43, anchor=tk.CENTER)
+
+# Time minutes results
+time_minutes = ctk.CTkLabel(
+    frame_results3, 
+    text="The time in minutes is:", 
+    font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"), 
+    text_color="#66aaff",
+    width=200,
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+time_minutes.place(relx=0.23, rely=0.80, anchor=tk.CENTER)
+
+time_minutes_results = ctk.CTkLabel(
+    frame_results3,
+    text="00.00min",
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#4488ff", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+time_minutes_results.place(relx=0.52, rely=0.80, anchor=tk.CENTER)
+
+button_copy_exe2 = ctk.CTkButton(
+    frame_results3,
+    text="COPY",
+    font=ctk.CTkFont(size=12, weight="bold"),
+    width=200,
+    height=45,
+    text_color="#66aaff",
+    corner_radius=25,
+    fg_color="transparent",
+    bg_color="#1a1a2e",
+    hover_color="#112233",
+    border_width=3,
+    border_color="#4488ff",
+    command=copy_results_exe2)
+button_copy_exe2.place(relx=0.8, rely=0.80, anchor=tk.CENTER)
+
+# Return to menu
+return_button3 = ctk.CTkButton(
+    pages["execution_time_calculator_page"],
+    text="Back to menu",
+    font=ctk.CTkFont(size=15, weight="bold"),
+    width=195,
+    height=45,
+    text_color="#ffff55",
+    corner_radius=25,
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    hover_color="#0e0e3d",
+    border_width=3,
+    border_color="#ffff55",
+    command=lambda: show_page("menu_page"))
+return_button3.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
 
 show_page("initial_page")
 
