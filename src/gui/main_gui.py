@@ -4,7 +4,6 @@ import tkinter as tk
 from PIL import Image, ImageTk
 import sys
 import os
-import math
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
 src_dir = os.path.join(parent_dir, 'calculators')
@@ -515,7 +514,7 @@ def copy_results_cloud1():
     copy = montly_cost_results.cget("text")
     app.clipboard_clear()
     app.clipboard_append(copy)
-    app.update
+    app.update()
     button_copy_cloud.configure(text="COPIED TEXT")
     app.after(2000, lambda:button_copy_cloud.configure(text="COPY"))
     
@@ -523,7 +522,7 @@ def copy_results_cloud2():
     copy = anual_cost_results.cget("text")
     app.clipboard_clear()
     app.clipboard_append(copy)
-    app.update
+    app.update()
     button_copy_cloud2.configure(text="COPIED TEXT")
     app.after(2000, lambda:button_copy_cloud2.configure(text="COPY"))
 
@@ -801,7 +800,7 @@ def copy_results_exe1():
     copy = time_seconds_results.cget("text")
     app.clipboard_clear()
     app.clipboard_append(copy)
-    app.update
+    app.update()
     button_copy_exe.configure(text="COPIED TEXT")
     app.after(2000, lambda:button_copy_exe.configure(text="COPY"))
     
@@ -809,16 +808,16 @@ def copy_results_exe2():
     copy = time_minutes_results.cget("text")
     app.clipboard_clear()
     app.clipboard_append(copy)
-    app.update
+    app.update()
     button_copy_exe2.configure(text="COPIED TEXT")
     app.after(2000, lambda:button_copy_exe2.configure(text="COPY"))
 
 # Title
 title3 = ctk.CTkLabel(
     pages["execution_time_calculator_page"], 
-    text="Program Execution Time Calculator", 
+    text="PROGRAM EXECUTION TIME CALCULATOR", 
     font=ctk.CTkFont(family="OCR A Extended", 
-    size=28, weight="bold"), 
+    size=26, weight="bold"), 
     text_color="#ffff55", 
     fg_color="#0a0a2a",
     bg_color="#1a1a2e",
@@ -1049,6 +1048,331 @@ return_button3 = ctk.CTkButton(
     border_color="#ffff55",
     command=lambda: show_page("menu_page"))
 return_button3.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
+
+
+# EUCLIDEAN DISTANCE CALCULATOR PAGE CONTENT-----------------------
+# Functions
+import euclidean_distance_calculator
+def calculate_euclidean():
+    try:
+        x1 = float(entry_euclidean1.get())
+        y1 = float(entry_euclidean2.get())
+        x2 = float(entry_euclidean3.get())
+        y2 = float(entry_euclidean4.get())
+    except ValueError as v:
+        errors_euclidean.configure(text="")
+        errors_euclidean.configure(text=f"Error: {v}")
+        app.after(3000, lambda:errors_euclidean.configure(text=""))
+        return
+    
+    coordinates_results.configure(text=f"(P1: {entry_euclidean1.get()}, {entry_euclidean2.get()} | P2: {entry_euclidean3.get()}, {entry_euclidean4.get()})")
+    euclidean_distance_results.configure(text=f"{euclidean_distance_calculator.euclidean_distance(x1, y1, x2, y2):.2f}")
+    
+    entry_euclidean1.delete(0, "end")
+    entry_euclidean2.delete(0, "end")
+    entry_euclidean3.delete(0, "end")
+    entry_euclidean4.delete(0, "end")
+    entry_euclidean1.focus()
+    
+def clean_text_euclidean():
+    entry_euclidean1.delete(0, "end")
+    entry_euclidean2.delete(0, "end")
+    entry_euclidean3.delete(0, "end")
+    entry_euclidean4.delete(0, "end")
+    entry_euclidean1.focus()
+    coordinates_results.configure(text="(P1: 0, 0 | P2: 0, 0)")
+    euclidean_distance_results.configure(text="00.00")
+    
+def copy_results_euclidean1():
+    copy = coordinates_results.cget("text")
+    app.clipboard_clear()
+    app.clipboard_append(copy)
+    app.update()
+    button_copy_euclidean.configure(text="COPIED TEXT")
+    app.after(2000, lambda:button_copy_euclidean.configure(text="COPY"))
+    
+def copy_results_euclidean2():
+    copy = euclidean_distance_results.cget("text")
+    app.clipboard_clear()
+    app.clipboard_append(copy)
+    app.update()
+    button_copy_euclidean2.configure(text="COPIED TEXT")
+    app.after(2000, lambda:button_copy_euclidean2.configure(text="COPY"))
+
+# Title
+title4 = ctk.CTkLabel(
+    pages["euclidean_distance_calculator_page"], 
+    text="EUCLIDEAN DISTANCE CALCULATOR", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=28, weight="bold"), 
+    text_color="#55ff55", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+title4.place(relx=0.5, rely=0.06, anchor=tk.CENTER)
+
+# Input Section
+frame_input4 = ctk.CTkFrame(
+    pages["euclidean_distance_calculator_page"],
+    width=600, height=170,
+    border_color="#55ff55",
+    border_width=3,
+    corner_radius=10,
+    fg_color="#1a1a2e"
+)
+frame_input4.place(relx=0.5, rely=0.3, anchor=tk.CENTER)
+
+# Title
+title_input4 = ctk.CTkLabel(
+    frame_input4, 
+    text="Input Section", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#55ff55", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+title_input4.place(relx=0.5, rely=0.13,anchor=tk.CENTER)
+
+# Label for errors
+errors_euclidean = ctk.CTkLabel(
+    frame_input4, 
+    text="",
+    width=150, height=100,
+    font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"),
+    wraplength=140,
+    justify=tk.LEFT,
+    text_color="#55ff55", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=10)
+errors_euclidean.place(relx=0.86, rely=0.34, anchor=tk.CENTER)
+
+# Orders
+order_euclidean1 = ctk.CTkLabel(
+    frame_input4, 
+    text="Enter the value of point 1 - x1:", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#55ff55", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+order_euclidean1.place(relx=0.21, rely=0.33, anchor=tk.CENTER)
+order_euclidean2 = ctk.CTkLabel(
+    frame_input4, 
+    text="y1:", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#55ff55", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+order_euclidean2.place(relx=0.57, rely=0.33, anchor=tk.CENTER)
+order_euclidean3 = ctk.CTkLabel(
+    frame_input4, 
+    text="Enter the value of point 2 - x2:", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#55ff55", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+order_euclidean3.place(relx=0.21, rely=0.53, anchor=tk.CENTER)
+order_euclidean4 = ctk.CTkLabel(
+    frame_input4, 
+    text="y2:", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#55ff55", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+order_euclidean4.place(relx=0.57, rely=0.53, anchor=tk.CENTER)
+# Entrys orders
+entry_euclidean1 = ctk.CTkEntry(
+    frame_input4, 
+    placeholder_text="0.0",
+    width=60,
+    fg_color="#0a0a2a",                 
+    text_color="#ffffff",               
+    border_color="#55ff55",             
+    placeholder_text_color="#8888ff")
+entry_euclidean1.place(relx=0.47, rely=0.33, anchor=tk.CENTER)
+entry_euclidean2 = ctk.CTkEntry(
+    frame_input4, 
+    placeholder_text="0.0",
+    width=60,
+    fg_color="#0a0a2a",                 
+    text_color="#ffffff",               
+    border_color="#55ff55",             
+    placeholder_text_color="#8888ff")
+entry_euclidean2.place(relx=0.67, rely=0.33, anchor=tk.CENTER)
+entry_euclidean3 = ctk.CTkEntry(
+    frame_input4, 
+    placeholder_text="0.0",
+    width=60,
+    fg_color="#0a0a2a",                 
+    text_color="#ffffff",               
+    border_color="#55ff55",             
+    placeholder_text_color="#8888ff")
+entry_euclidean3.place(relx=0.47, rely=0.53, anchor=tk.CENTER)
+entry_euclidean4 = ctk.CTkEntry(
+    frame_input4, 
+    placeholder_text="0.0",
+    width=60,
+    fg_color="#0a0a2a",                 
+    text_color="#ffffff",               
+    border_color="#55ff55",             
+    placeholder_text_color="#8888ff")
+entry_euclidean4.place(relx=0.67, rely=0.53, anchor=tk.CENTER)
+# Button calculate and clean
+button_calculate_euclidean = ctk.CTkButton(
+    frame_input4,
+    text="CALCULATE",
+    font=ctk.CTkFont(size=12, weight="bold"),
+    width=200,
+    height=45,
+    text_color="#ffffff",
+    corner_radius=25,
+    fg_color="#ff5555",
+    bg_color="#1a1a2e",
+    hover_color="#55ff55",
+    border_width=3,
+    border_color="#ffffff",
+    command=calculate_euclidean)
+button_calculate_euclidean.place(relx=0.2, rely=0.8, anchor=tk.CENTER)
+button_clean4 = ctk.CTkButton(
+    frame_input4,
+    text="CLEAN",
+    font=ctk.CTkFont(size=12, weight="bold"),
+    width=200,
+    height=45,
+    text_color="#cccccc",
+    corner_radius=25,
+    fg_color="#555577",
+    bg_color="#1a1a2e",
+    hover_color="#444466",
+    border_width=3,
+    border_color="#8888ff",
+    command=clean_text_euclidean)
+button_clean4.place(relx=0.8, rely=0.8, anchor=tk.CENTER)
+
+# Results panel
+frame_results4 = ctk.CTkFrame(
+    pages["euclidean_distance_calculator_page"], 
+    width=600, height=150,
+    fg_color="#1a1a2e",
+    border_color="#55ff55",
+    border_width=3,
+    corner_radius=10)
+frame_results4.place(relx=0.5, rely=0.66, anchor=tk.CENTER)
+# Title
+title_results_euclidean = ctk.CTkLabel(
+    frame_results4, 
+    text="Results Panel", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#55ff55", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+title_results_euclidean.place(relx=0.5, rely=0.15,anchor=tk.CENTER)
+
+# Time seconds results
+coordinates = ctk.CTkLabel(
+    frame_results4, 
+    text="Coordinates:", 
+    font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"), 
+    text_color="#55ff55",
+    width=160,
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+coordinates.place(relx=0.15, rely=0.43, anchor=tk.CENTER)
+
+coordinates_results = ctk.CTkLabel(
+    frame_results4,
+    text="(P1: 0, 0 | P2: 0, 0)",
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#55ff55", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+coordinates_results.place(relx=0.46, rely=0.43, anchor=tk.CENTER)
+
+button_copy_euclidean = ctk.CTkButton(
+    frame_results4,
+    text="COPY",
+    font=ctk.CTkFont(size=12, weight="bold"),
+    width=200,
+    height=45,
+    text_color="#ffaa66",
+    corner_radius=25,
+    fg_color="transparent",
+    bg_color="#1a1a2e",
+    hover_color="#332211",
+    border_width=3,
+    border_color="#ff8844",
+    command=copy_results_euclidean1)
+button_copy_euclidean.place(relx=0.8, rely=0.43, anchor=tk.CENTER)
+
+# Time minutes results
+euclidean_distance = ctk.CTkLabel(
+    frame_results4, 
+    text="The Euclidean distance is:", 
+    font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"), 
+    text_color="#66aaff",
+    width=200,
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+euclidean_distance.place(relx=0.19, rely=0.80, anchor=tk.CENTER)
+
+euclidean_distance_results = ctk.CTkLabel(
+    frame_results4,
+    text="00.00",
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#4488ff", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+euclidean_distance_results.place(relx=0.50, rely=0.80, anchor=tk.CENTER)
+
+button_copy_euclidean2 = ctk.CTkButton(
+    frame_results4,
+    text="COPY",
+    font=ctk.CTkFont(size=12, weight="bold"),
+    width=200,
+    height=45,
+    text_color="#66aaff",
+    corner_radius=25,
+    fg_color="transparent",
+    bg_color="#1a1a2e",
+    hover_color="#112233",
+    border_width=3,
+    border_color="#4488ff",
+    command=copy_results_euclidean2)
+button_copy_euclidean2.place(relx=0.8, rely=0.80, anchor=tk.CENTER)
+
+# Return to menu
+return_button4 = ctk.CTkButton(
+    pages["euclidean_distance_calculator_page"],
+    text="Back to menu",
+    font=ctk.CTkFont(size=15, weight="bold"),
+    width=195,
+    height=45,
+    text_color="#55ff55",
+    corner_radius=25,
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    hover_color="#0e0e3d",
+    border_width=3,
+    border_color="#55ff55",
+    command=lambda: show_page("menu_page"))
+return_button4.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
 
 show_page("initial_page")
 
