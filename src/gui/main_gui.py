@@ -2015,6 +2015,294 @@ return_button6 = ctk.CTkButton(
     command=lambda: show_page("menu_page"))
 return_button6.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
 
+
+# AVERAGE SPEED OF A DRONE PAGE CONTENT-----------------------
+# Functions
+import average_speed_of_a_drone
+def calculate_speed():
+    try:
+        d = float(entry_speed1.get())
+        t = float(entry_speed2.get())
+    except ValueError as v:
+        errors_speed.configure(text="")
+        errors_speed.configure(text=f"Error: {v}")
+        app.after(3000, lambda:errors_speed.configure(text=""))
+        return
+    
+    if d <= 0 or t <= 0:
+        errors_speed.configure(text="Error: All values must be greater than zero")
+        app.after(3000, lambda:errors_speed.configure(text=""))
+        return
+    
+    vkm = average_speed_of_a_drone.speed_kmh(d, t)
+    
+    kmh_results.configure(text=f"{vkm:.2f}km/h")
+    ms_results.configure(text=f"{average_speed_of_a_drone.speed_ms(vkm):.2f}m/s")
+    
+    entry_speed1.delete(0, "end")
+    entry_speed2.delete(0, "end")
+    entry_speed1.focus()
+    
+def clean_text_speed():
+    entry_speed1.delete(0, "end")
+    entry_speed2.delete(0, "end")
+    entry_speed1.focus()
+    kmh_results.configure(text="00.00km/h")
+    ms_results.configure(text="00.00m/s")
+    
+def copy_results_speed1():
+    copy = kmh_results.cget("text")
+    app.clipboard_clear()
+    app.clipboard_append(copy)
+    app.update()
+    button_copy_speed.configure(text="COPIED TEXT")
+    app.after(2000, lambda:button_copy_speed.configure(text="COPY"))
+    
+def copy_results_speed2():
+    copy = ms_results.cget("text")
+    app.clipboard_clear()
+    app.clipboard_append(copy)
+    app.update()
+    button_copy_speed2.configure(text="COPIED TEXT")
+    app.after(2000, lambda:button_copy_speed2.configure(text="COPY"))
+
+# Title
+title7 = ctk.CTkLabel(
+    pages["average_speed_of_a_drone_page"], 
+    text="AVERAGE SPEED OF A DRONE", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=28, weight="bold"), 
+    text_color="#55ffff", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+title7.place(relx=0.5, rely=0.06, anchor=tk.CENTER)
+
+# Input Section
+frame_input7 = ctk.CTkFrame(
+    pages["average_speed_of_a_drone_page"],
+    width=600, height=170,
+    border_color="#55ffff",
+    border_width=3,
+    corner_radius=10,
+    fg_color="#1a1a2e"
+)
+frame_input7.place(relx=0.5, rely=0.3, anchor=tk.CENTER)
+
+# Title
+title_input7 = ctk.CTkLabel(
+    frame_input7, 
+    text="Input Section", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#55ffff", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+title_input7.place(relx=0.5, rely=0.13,anchor=tk.CENTER)
+
+# Label for errors
+errors_speed = ctk.CTkLabel(
+    frame_input7, 
+    text="",
+    width=150, height=100,
+    font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"),
+    wraplength=140,
+    justify=tk.LEFT,
+    text_color="#55ffff", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=10)
+errors_speed.place(relx=0.80, rely=0.34, anchor=tk.CENTER)
+
+# Orders
+order_speed1 = ctk.CTkLabel(
+    frame_input7, 
+    text="Enter the distance traveled (km):", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#55ffff", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+order_speed1.place(relx=0.23, rely=0.33, anchor=tk.CENTER)
+order_speed2 = ctk.CTkLabel(
+    frame_input7, 
+    text="Enter the time taken (hours):", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#55ffff", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+order_speed2.place(relx=0.21, rely=0.53, anchor=tk.CENTER)
+# Entrys orders
+entry_speed1 = ctk.CTkEntry(
+    frame_input7, 
+    placeholder_text="0.0",
+    width=60,
+    fg_color="#0a0a2a",                 
+    text_color="#ffffff",               
+    border_color="#55ffff",             
+    placeholder_text_color="#8888ff")
+entry_speed1.place(relx=0.51, rely=0.33, anchor=tk.CENTER)
+entry_speed2 = ctk.CTkEntry(
+    frame_input7, 
+    placeholder_text="0.0",
+    width=60,
+    fg_color="#0a0a2a",                 
+    text_color="#ffffff",               
+    border_color="#55ffff",             
+    placeholder_text_color="#8888ff")
+entry_speed2.place(relx=0.51, rely=0.53, anchor=tk.CENTER)
+# Button calculate and clean
+button_calculate_speed = ctk.CTkButton(
+    frame_input7,
+    text="CALCULATE",
+    font=ctk.CTkFont(size=12, weight="bold"),
+    width=200,
+    height=45,
+    text_color="#ffffff",
+    corner_radius=25,
+    fg_color="#ff5555",
+    bg_color="#1a1a2e",
+    hover_color="#55ffff",
+    border_width=3,
+    border_color="#ffffff",
+    command=calculate_speed)
+button_calculate_speed.place(relx=0.2, rely=0.8, anchor=tk.CENTER)
+button_clean7 = ctk.CTkButton(
+    frame_input7,
+    text="CLEAN",
+    font=ctk.CTkFont(size=12, weight="bold"),
+    width=200,
+    height=45,
+    text_color="#cccccc",
+    corner_radius=25,
+    fg_color="#555577",
+    bg_color="#1a1a2e",
+    hover_color="#444466",
+    border_width=3,
+    border_color="#8888ff",
+    command=clean_text_speed)
+button_clean7.place(relx=0.8, rely=0.8, anchor=tk.CENTER)
+
+# Results panel
+frame_results7 = ctk.CTkFrame(
+    pages["average_speed_of_a_drone_page"], 
+    width=600, height=150,
+    fg_color="#1a1a2e",
+    border_color="#55ffff",
+    border_width=3,
+    corner_radius=10)
+frame_results7.place(relx=0.5, rely=0.66, anchor=tk.CENTER)
+# Title
+title_results_speed = ctk.CTkLabel(
+    frame_results7, 
+    text="Results Panel", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#55ffff", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+title_results_speed.place(relx=0.5, rely=0.15,anchor=tk.CENTER)
+
+# Average speed km/h results
+kmh = ctk.CTkLabel(
+    frame_results7, 
+    text="Average speed in km/h:", 
+    font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"), 
+    text_color="#55ffff",
+    width=160,
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+kmh.place(relx=0.18, rely=0.43, anchor=tk.CENTER)
+
+kmh_results = ctk.CTkLabel(
+    frame_results7,
+    text="00.00km/h",
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#55ffff", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+kmh_results.place(relx=0.50, rely=0.43, anchor=tk.CENTER)
+
+button_copy_speed = ctk.CTkButton(
+    frame_results7,
+    text="COPY",
+    font=ctk.CTkFont(size=12, weight="bold"),
+    width=200,
+    height=45,
+    text_color="#ffaa66",
+    corner_radius=25,
+    fg_color="transparent",
+    bg_color="#1a1a2e",
+    hover_color="#332211",
+    border_width=3,
+    border_color="#ff8844",
+    command=copy_results_speed1)
+button_copy_speed.place(relx=0.8, rely=0.43, anchor=tk.CENTER)
+
+# Average speed in m/s results
+ms = ctk.CTkLabel(
+    frame_results7, 
+    text="Average speed in m/s:", 
+    font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"), 
+    text_color="#55ffff",
+    width=200,
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+ms.place(relx=0.19, rely=0.80, anchor=tk.CENTER)
+
+ms_results = ctk.CTkLabel(
+    frame_results7,
+    text="00.00m/s",
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#55ffff", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+ms_results.place(relx=0.50, rely=0.80, anchor=tk.CENTER)
+
+button_copy_speed2 = ctk.CTkButton(
+    frame_results7,
+    text="COPY",
+    font=ctk.CTkFont(size=12, weight="bold"),
+    width=200,
+    height=45,
+    text_color="#66aaff",
+    corner_radius=25,
+    fg_color="transparent",
+    bg_color="#1a1a2e",
+    hover_color="#112233",
+    border_width=3,
+    border_color="#4488ff",
+    command=copy_results_speed2)
+button_copy_speed2.place(relx=0.8, rely=0.80, anchor=tk.CENTER)
+
+# Return to menu
+return_button7 = ctk.CTkButton(
+    pages["average_speed_of_a_drone_page"],
+    text="Back to menu",
+    font=ctk.CTkFont(size=15, weight="bold"),
+    width=195,
+    height=45,
+    text_color="#55ffff",
+    corner_radius=25,
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    hover_color="#0e0e3d",
+    border_width=3,
+    border_color="#55ffff",
+    command=lambda: show_page("menu_page"))
+return_button7.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
+
 show_page("initial_page")
 
 app.mainloop()
