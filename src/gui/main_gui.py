@@ -1279,7 +1279,7 @@ title_results_euclidean = ctk.CTkLabel(
     corner_radius=50)
 title_results_euclidean.place(relx=0.5, rely=0.15,anchor=tk.CENTER)
 
-# Time seconds results
+# Coordinates results
 coordinates = ctk.CTkLabel(
     frame_results4, 
     text="Coordinates:", 
@@ -1318,7 +1318,7 @@ button_copy_euclidean = ctk.CTkButton(
     command=copy_results_euclidean1)
 button_copy_euclidean.place(relx=0.8, rely=0.43, anchor=tk.CENTER)
 
-# Time minutes results
+# Euclidean distance results
 euclidean_distance = ctk.CTkLabel(
     frame_results4, 
     text="The Euclidean distance is:", 
@@ -1373,6 +1373,335 @@ return_button4 = ctk.CTkButton(
     border_color="#55ff55",
     command=lambda: show_page("menu_page"))
 return_button4.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
+
+
+# AVERAGE GRADE PAGE CONTENT-----------------------
+# Functions
+import average_grade
+def calculate_grades():
+    try:
+        n1 = float(entry_grade1.get())
+        n2 = float(entry_grade2.get())
+        n3 = float(entry_grade3.get())
+        n4 = float(entry_grade4.get())
+    except ValueError as v:
+        errors_grade.configure(text="")
+        errors_grade.configure(text=f"Error: {v}")
+        app.after(3000, lambda:errors_grade.configure(text=""))
+        return
+    
+    if n1 <= 0 or n2 <= 0 or n3 <= 0 or n4 <= 0:
+        errors_grade.configure(text="Error: Please enter only numbers greater than or equal to zero")
+        return
+    
+    grades_results.configure(text=f"(G1: {entry_grade1.get()}| G2: {entry_grade2.get()}| G3: {entry_grade3.get()}| G4: {entry_grade4.get()})")
+    average_grade_results.configure(text=f"{average_grade.calculate_average(n1, n2, n3, n4):.2f}")
+    
+    entry_grade1.delete(0, "end")
+    entry_grade2.delete(0, "end")
+    entry_grade3.delete(0, "end")
+    entry_grade4.delete(0, "end")
+    entry_grade1.focus()
+    
+def clean_text_grade():
+    entry_grade1.delete(0, "end")
+    entry_grade2.delete(0, "end")
+    entry_grade3.delete(0, "end")
+    entry_grade4.delete(0, "end")
+    entry_grade1.focus()
+    grades_results.configure(text="(G1: 0| G2: 0| G3: 0| G4: 0)")
+    average_grade_results.configure(text="00.00")
+    
+def copy_results_grade1():
+    copy = grades_results.cget("text")
+    app.clipboard_clear()
+    app.clipboard_append(copy)
+    app.update()
+    button_copy_grades.configure(text="COPIED TEXT")
+    app.after(2000, lambda:button_copy_grades.configure(text="COPY"))
+    
+def copy_results_grade2():
+    copy = average_grade_results.cget("text")
+    app.clipboard_clear()
+    app.clipboard_append(copy)
+    app.update()
+    button_copy_grades2.configure(text="COPIED TEXT")
+    app.after(2000, lambda:button_copy_grades2.configure(text="COPY"))
+
+# Title
+title5 = ctk.CTkLabel(
+    pages["average_grade_page"], 
+    text="AVERAGE GRADE CALCULATOR", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=28, weight="bold"), 
+    text_color="#ff55aa", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+title5.place(relx=0.5, rely=0.06, anchor=tk.CENTER)
+
+# Input Section
+frame_input5 = ctk.CTkFrame(
+    pages["average_grade_page"],
+    width=600, height=170,
+    border_color="#ff55aa",
+    border_width=3,
+    corner_radius=10,
+    fg_color="#1a1a2e"
+)
+frame_input5.place(relx=0.5, rely=0.3, anchor=tk.CENTER)
+
+# Title
+title_input5 = ctk.CTkLabel(
+    frame_input5, 
+    text="Input Section", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#ff55aa", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+title_input5.place(relx=0.5, rely=0.13,anchor=tk.CENTER)
+
+# Label for errors
+errors_grade = ctk.CTkLabel(
+    frame_input5, 
+    text="",
+    width=150, height=100,
+    font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"),
+    wraplength=140,
+    justify=tk.LEFT,
+    text_color="#ff55aa", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=10)
+errors_grade.place(relx=0.86, rely=0.34, anchor=tk.CENTER)
+
+# Orders
+order_grade1 = ctk.CTkLabel(
+    frame_input5, 
+    text="Enter the value of the grade 1:", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#ff55aa", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+order_grade1.place(relx=0.21, rely=0.33, anchor=tk.CENTER)
+order_grade2 = ctk.CTkLabel(
+    frame_input5, 
+    text="2:", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#ff55aa", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+order_grade2.place(relx=0.57, rely=0.33, anchor=tk.CENTER)
+order_grade3 = ctk.CTkLabel(
+    frame_input5, 
+    text="Enter the value of the grade 3:", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#ff55aa", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+order_grade3.place(relx=0.21, rely=0.53, anchor=tk.CENTER)
+order_grade4 = ctk.CTkLabel(
+    frame_input5, 
+    text="4:", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#ff55aa", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+order_grade4.place(relx=0.57, rely=0.53, anchor=tk.CENTER)
+# Entrys orders
+entry_grade1 = ctk.CTkEntry(
+    frame_input5, 
+    placeholder_text="0.0",
+    width=60,
+    fg_color="#0a0a2a",                 
+    text_color="#ffffff",               
+    border_color="#ff55aa",             
+    placeholder_text_color="#8888ff")
+entry_grade1.place(relx=0.47, rely=0.33, anchor=tk.CENTER)
+entry_grade2 = ctk.CTkEntry(
+    frame_input5, 
+    placeholder_text="0.0",
+    width=60,
+    fg_color="#0a0a2a",                 
+    text_color="#ffffff",               
+    border_color="#ff55aa",             
+    placeholder_text_color="#8888ff")
+entry_grade2.place(relx=0.67, rely=0.33, anchor=tk.CENTER)
+entry_grade3 = ctk.CTkEntry(
+    frame_input5, 
+    placeholder_text="0.0",
+    width=60,
+    fg_color="#0a0a2a",                 
+    text_color="#ffffff",               
+    border_color="#ff55aa",             
+    placeholder_text_color="#8888ff")
+entry_grade3.place(relx=0.47, rely=0.53, anchor=tk.CENTER)
+entry_grade4 = ctk.CTkEntry(
+    frame_input5, 
+    placeholder_text="0.0",
+    width=60,
+    fg_color="#0a0a2a",                 
+    text_color="#ffffff",               
+    border_color="#ff55aa",             
+    placeholder_text_color="#8888ff")
+entry_grade4.place(relx=0.67, rely=0.53, anchor=tk.CENTER)
+# Button calculate and clean
+button_calculate_grade = ctk.CTkButton(
+    frame_input5,
+    text="CALCULATE",
+    font=ctk.CTkFont(size=12, weight="bold"),
+    width=200,
+    height=45,
+    text_color="#ffffff",
+    corner_radius=25,
+    fg_color="#ff5555",
+    bg_color="#1a1a2e",
+    hover_color="#ff55aa",
+    border_width=3,
+    border_color="#ffffff",
+    command=calculate_grades)
+button_calculate_grade.place(relx=0.2, rely=0.8, anchor=tk.CENTER)
+button_clean5 = ctk.CTkButton(
+    frame_input5,
+    text="CLEAN",
+    font=ctk.CTkFont(size=12, weight="bold"),
+    width=200,
+    height=45,
+    text_color="#cccccc",
+    corner_radius=25,
+    fg_color="#555577",
+    bg_color="#1a1a2e",
+    hover_color="#444466",
+    border_width=3,
+    border_color="#8888ff",
+    command=clean_text_grade)
+button_clean5.place(relx=0.8, rely=0.8, anchor=tk.CENTER)
+
+# Results panel
+frame_results5 = ctk.CTkFrame(
+    pages["average_grade_page"], 
+    width=600, height=150,
+    fg_color="#1a1a2e",
+    border_color="#ff55aa",
+    border_width=3,
+    corner_radius=10)
+frame_results5.place(relx=0.5, rely=0.66, anchor=tk.CENTER)
+# Title
+title_results_grade = ctk.CTkLabel(
+    frame_results5, 
+    text="Results Panel", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#ff55aa", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+title_results_grade.place(relx=0.5, rely=0.15,anchor=tk.CENTER)
+
+# Grades results
+grades = ctk.CTkLabel(
+    frame_results5, 
+    text="Grades:", 
+    font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"), 
+    text_color="#ff55aa",
+    width=160,
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+grades.place(relx=0.15, rely=0.43, anchor=tk.CENTER)
+
+grades_results = ctk.CTkLabel(
+    frame_results5,
+    text="(G1: 0| G2: 0| G3: 0| G4: 0)",
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#ff55aa", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+grades_results.place(relx=0.46, rely=0.43, anchor=tk.CENTER)
+
+button_copy_grades = ctk.CTkButton(
+    frame_results5,
+    text="COPY",
+    font=ctk.CTkFont(size=12, weight="bold"),
+    width=200,
+    height=45,
+    text_color="#ffaa66",
+    corner_radius=25,
+    fg_color="transparent",
+    bg_color="#1a1a2e",
+    hover_color="#332211",
+    border_width=3,
+    border_color="#ff8844",
+    command=copy_results_grade1)
+button_copy_grades.place(relx=0.8, rely=0.43, anchor=tk.CENTER)
+
+# Average grade results
+average = ctk.CTkLabel(
+    frame_results5, 
+    text="The average grade is:", 
+    font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"), 
+    text_color="#66aaff",
+    width=200,
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+average.place(relx=0.19, rely=0.80, anchor=tk.CENTER)
+
+average_grade_results = ctk.CTkLabel(
+    frame_results5,
+    text="00.00",
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#4488ff", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+average_grade_results.place(relx=0.50, rely=0.80, anchor=tk.CENTER)
+
+button_copy_grades2 = ctk.CTkButton(
+    frame_results5,
+    text="COPY",
+    font=ctk.CTkFont(size=12, weight="bold"),
+    width=200,
+    height=45,
+    text_color="#66aaff",
+    corner_radius=25,
+    fg_color="transparent",
+    bg_color="#1a1a2e",
+    hover_color="#112233",
+    border_width=3,
+    border_color="#4488ff",
+    command=copy_results_grade2)
+button_copy_grades2.place(relx=0.8, rely=0.80, anchor=tk.CENTER)
+
+# Return to menu
+return_button5 = ctk.CTkButton(
+    pages["average_grade_page"],
+    text="Back to menu",
+    font=ctk.CTkFont(size=15, weight="bold"),
+    width=195,
+    height=45,
+    text_color="#ff55aa",
+    corner_radius=25,
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    hover_color="#0e0e3d",
+    border_width=3,
+    border_color="#ff55aa",
+    command=lambda: show_page("menu_page"))
+return_button5.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
 
 show_page("initial_page")
 
