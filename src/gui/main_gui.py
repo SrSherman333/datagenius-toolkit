@@ -1390,8 +1390,9 @@ def calculate_grades():
         app.after(3000, lambda:errors_grade.configure(text=""))
         return
     
-    if n1 <= 0 or n2 <= 0 or n3 <= 0 or n4 <= 0:
+    if n1 < 0 or n2 < 0 or n3 < 0 or n4 < 0:
         errors_grade.configure(text="Error: Please enter only numbers greater than or equal to zero")
+        app.after(3000, lambda:errors_grade.configure(text=""))
         return
     
     grades_results.configure(text=f"(G1: {entry_grade1.get()}| G2: {entry_grade2.get()}| G3: {entry_grade3.get()}| G4: {entry_grade4.get()})")
@@ -1702,6 +1703,317 @@ return_button5 = ctk.CTkButton(
     border_color="#ff55aa",
     command=lambda: show_page("menu_page"))
 return_button5.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
+
+
+# SIMPLE INTEREST CALCULATOR PAGE CONTENT-----------------------
+# Functions
+import simple_interest_calculator
+def calculate_interest():
+    try:
+        c = float(entry_interest1.get())
+        i = float(entry_interest3.get())
+        t = float(entry_interest2.get())
+    except ValueError as v:
+        errors_interest.configure(text="")
+        errors_interest.configure(text=f"Error: {v}")
+        app.after(3000, lambda:errors_interest.configure(text=""))
+        return
+    
+    if c <= 0 or i <= 0 or t <= 0:
+        errors_interest.configure(text="Error: All values must be greater than zero")
+        app.after(3000, lambda:errors_interest.configure(text=""))
+        return
+    
+    i = simple_interest_calculator.rate_percentage(i)
+    m = simple_interest_calculator.calculate_total_amount(c, i ,t)
+    
+    interest_results.configure(text=f"{m-c:.2f}$")
+    amount_results.configure(text=f"{m:.2f}$")
+    
+    entry_interest1.delete(0, "end")
+    entry_interest2.delete(0, "end")
+    entry_interest3.delete(0, "end")
+    entry_interest1.focus()
+    
+def clean_text_interest():
+    entry_interest1.delete(0, "end")
+    entry_interest2.delete(0, "end")
+    entry_interest3.delete(0, "end")
+    entry_interest1.focus()
+    interest_results.configure(text="00.00$")
+    amount_results.configure(text="00.00$")
+    
+def copy_results_interest1():
+    copy = interest_results.cget("text")
+    app.clipboard_clear()
+    app.clipboard_append(copy)
+    app.update()
+    button_copy_interest.configure(text="COPIED TEXT")
+    app.after(2000, lambda:button_copy_interest.configure(text="COPY"))
+    
+def copy_results_interest2():
+    copy = amount_results.cget("text")
+    app.clipboard_clear()
+    app.clipboard_append(copy)
+    app.update()
+    button_copy_interest2.configure(text="COPIED TEXT")
+    app.after(2000, lambda:button_copy_interest2.configure(text="COPY"))
+
+# Title
+title6 = ctk.CTkLabel(
+    pages["simple_interest_calculator_page"], 
+    text="SIMPLE INTEREST CALCULATOR", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=28, weight="bold"), 
+    text_color="#ffaa00", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+title6.place(relx=0.5, rely=0.06, anchor=tk.CENTER)
+
+# Input Section
+frame_input6 = ctk.CTkFrame(
+    pages["simple_interest_calculator_page"],
+    width=600, height=170,
+    border_color="#ffaa00",
+    border_width=3,
+    corner_radius=10,
+    fg_color="#1a1a2e"
+)
+frame_input6.place(relx=0.5, rely=0.3, anchor=tk.CENTER)
+
+# Title
+title_input6 = ctk.CTkLabel(
+    frame_input6, 
+    text="Input Section", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#ffaa00", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+title_input6.place(relx=0.5, rely=0.13,anchor=tk.CENTER)
+
+# Label for errors
+errors_interest = ctk.CTkLabel(
+    frame_input6, 
+    text="",
+    width=150, height=100,
+    font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"),
+    wraplength=140,
+    justify=tk.LEFT,
+    text_color="#ffaa00", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=10)
+errors_interest.place(relx=0.86, rely=0.34, anchor=tk.CENTER)
+
+# Orders
+order_interest1 = ctk.CTkLabel(
+    frame_input6, 
+    text="Enter the initial capital:", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#ffaa00", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+order_interest1.place(relx=0.17, rely=0.33, anchor=tk.CENTER)
+order_interest2 = ctk.CTkLabel(
+    frame_input6, 
+    text="Years:", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#ffaa00", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+order_interest2.place(relx=0.55, rely=0.33, anchor=tk.CENTER)
+order_interest3 = ctk.CTkLabel(
+    frame_input6, 
+    text="Enter the annual interest rate (%):", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#ffaa00", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+order_interest3.place(relx=0.23, rely=0.53, anchor=tk.CENTER)
+# Entrys orders
+entry_interest1 = ctk.CTkEntry(
+    frame_input6, 
+    placeholder_text="0.0",
+    width=60,
+    fg_color="#0a0a2a",                 
+    text_color="#ffffff",               
+    border_color="#ffaa00",             
+    placeholder_text_color="#8888ff")
+entry_interest1.place(relx=0.39, rely=0.33, anchor=tk.CENTER)
+entry_interest2 = ctk.CTkEntry(
+    frame_input6, 
+    placeholder_text="0.0",
+    width=60,
+    fg_color="#0a0a2a",                 
+    text_color="#ffffff",               
+    border_color="#ffaa00",             
+    placeholder_text_color="#8888ff")
+entry_interest2.place(relx=0.67, rely=0.33, anchor=tk.CENTER)
+entry_interest3 = ctk.CTkEntry(
+    frame_input6, 
+    placeholder_text="0.0",
+    width=60,
+    fg_color="#0a0a2a",                 
+    text_color="#ffffff",               
+    border_color="#ffaa00",             
+    placeholder_text_color="#8888ff")
+entry_interest3.place(relx=0.51, rely=0.53, anchor=tk.CENTER)
+# Button calculate and clean
+button_calculate_interest = ctk.CTkButton(
+    frame_input6,
+    text="CALCULATE",
+    font=ctk.CTkFont(size=12, weight="bold"),
+    width=200,
+    height=45,
+    text_color="#ffffff",
+    corner_radius=25,
+    fg_color="#ff5555",
+    bg_color="#1a1a2e",
+    hover_color="#ffaa00",
+    border_width=3,
+    border_color="#ffffff",
+    command=calculate_interest)
+button_calculate_interest.place(relx=0.2, rely=0.8, anchor=tk.CENTER)
+button_clean6 = ctk.CTkButton(
+    frame_input6,
+    text="CLEAN",
+    font=ctk.CTkFont(size=12, weight="bold"),
+    width=200,
+    height=45,
+    text_color="#cccccc",
+    corner_radius=25,
+    fg_color="#555577",
+    bg_color="#1a1a2e",
+    hover_color="#444466",
+    border_width=3,
+    border_color="#8888ff",
+    command=clean_text_interest)
+button_clean6.place(relx=0.8, rely=0.8, anchor=tk.CENTER)
+
+# Results panel
+frame_results6 = ctk.CTkFrame(
+    pages["simple_interest_calculator_page"], 
+    width=600, height=150,
+    fg_color="#1a1a2e",
+    border_color="#ffaa00",
+    border_width=3,
+    corner_radius=10)
+frame_results6.place(relx=0.5, rely=0.66, anchor=tk.CENTER)
+# Title
+title_results_interest = ctk.CTkLabel(
+    frame_results6, 
+    text="Results Panel", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#ffaa00", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+title_results_interest.place(relx=0.5, rely=0.15,anchor=tk.CENTER)
+
+# Interest Earned results
+interest = ctk.CTkLabel(
+    frame_results6, 
+    text="The interest earned is:", 
+    font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"), 
+    text_color="#ffaa00",
+    width=160,
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+interest.place(relx=0.17, rely=0.43, anchor=tk.CENTER)
+
+interest_results = ctk.CTkLabel(
+    frame_results6,
+    text="00.00$",
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#ffaa00", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+interest_results.place(relx=0.52, rely=0.43, anchor=tk.CENTER)
+
+button_copy_interest = ctk.CTkButton(
+    frame_results6,
+    text="COPY",
+    font=ctk.CTkFont(size=12, weight="bold"),
+    width=200,
+    height=45,
+    text_color="#ffaa66",
+    corner_radius=25,
+    fg_color="transparent",
+    bg_color="#1a1a2e",
+    hover_color="#332211",
+    border_width=3,
+    border_color="#ff8844",
+    command=copy_results_interest1)
+button_copy_interest.place(relx=0.8, rely=0.43, anchor=tk.CENTER)
+
+# Total Amount results
+amount = ctk.CTkLabel(
+    frame_results6, 
+    text="The total amount to be paid is:", 
+    font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"), 
+    text_color="#66aaff",
+    width=200,
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+amount.place(relx=0.22, rely=0.80, anchor=tk.CENTER)
+
+amount_results = ctk.CTkLabel(
+    frame_results6,
+    text="00.00$",
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#4488ff", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+amount_results.place(relx=0.52, rely=0.80, anchor=tk.CENTER)
+
+button_copy_interest2 = ctk.CTkButton(
+    frame_results6,
+    text="COPY",
+    font=ctk.CTkFont(size=12, weight="bold"),
+    width=200,
+    height=45,
+    text_color="#66aaff",
+    corner_radius=25,
+    fg_color="transparent",
+    bg_color="#1a1a2e",
+    hover_color="#112233",
+    border_width=3,
+    border_color="#4488ff",
+    command=copy_results_interest2)
+button_copy_interest2.place(relx=0.8, rely=0.80, anchor=tk.CENTER)
+
+# Return to menu
+return_button6 = ctk.CTkButton(
+    pages["simple_interest_calculator_page"],
+    text="Back to menu",
+    font=ctk.CTkFont(size=15, weight="bold"),
+    width=195,
+    height=45,
+    text_color="#ffaa00",
+    corner_radius=25,
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    hover_color="#0e0e3d",
+    border_width=3,
+    border_color="#ffaa00",
+    command=lambda: show_page("menu_page"))
+return_button6.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
 
 show_page("initial_page")
 
