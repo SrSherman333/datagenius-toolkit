@@ -15,6 +15,20 @@ ctk.set_default_color_theme("dark-blue")
 app = ctk.CTk()
 app.geometry("640x480")
 app.title("Datagenius Toolkit")
+app.resizable(False, False)
+
+# Configuration of the scroll in the scrolleableframe
+def on_mouse_wheel(event, frame):
+    if event.num == 4 or event.delta > 0:
+        frame._parent_canvas.yview_scroll(-1, "units")
+    elif event.num == 5 or event.delta < 0:
+        frame._parent_canvas.yview_scroll(1, "units")
+    
+app.bind("<MouseWheel>", lambda e: on_mouse_wheel(e, scrollable_frame))
+
+app.bind("<Button-4>", lambda e: on_mouse_wheel(e, scrollable_frame))
+app.bind("<Button-5>", lambda e: on_mouse_wheel(e, scrollable_frame))
+
 
 # Creation of the pages
 pages = {}
@@ -2302,6 +2316,291 @@ return_button7 = ctk.CTkButton(
     border_color="#55ffff",
     command=lambda: show_page("menu_page"))
 return_button7.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
+
+
+# BODY MASS INDEX CALCULATOR PAGE CONTENT-----------------------
+# Functions
+import body_mass_index_calculator
+def calculate_index():
+    try:
+        p = float(entry_index1.get())
+        h = float(entry_index2.get())
+    except ValueError as v:
+        errors_index.configure(text="")
+        errors_index.configure(text=f"Error: {v}")
+        app.after(3000, lambda:errors_index.configure(text=""))
+        return
+    
+    if not 15 <= p <= 635:
+        errors_index.configure(text="Error: Weight must be between 15 and 635 kg")
+        app.after(3000, lambda:errors_index.configure(text=""))
+        return
+    
+    if not 0.5 <= h <= 2.72:
+        errors_index.configure(text="Height must be between 0.5 and 2.72 m")
+        app.after(3000, lambda:errors_index.configure(text=""))
+        return
+    
+    l = ["Underweight",  "Normal Weight", "Overweight", "Obesity"]
+    
+    imc = body_mass_index_calculator.calculate_imc(p, h)
+    results = body_mass_index_calculator.results_imc(l, imc)
+    
+    bodymi_results.configure(text=f"{imc:.2f} | {results}")
+    
+    entry_index1.delete(0, "end")
+    entry_index2.delete(0, "end")
+    entry_index1.focus()
+    
+def clean_text_index():
+    entry_index1.delete(0, "end")
+    entry_index2.delete(0, "end")
+    entry_index1.focus()
+    bodymi_results.configure(text="00.00 | Category")
+    
+def copy_results_index1():
+    copy = bodymi_results.cget("text")
+    app.clipboard_clear()
+    app.clipboard_append(copy)
+    app.update()
+    button_copy_index1.configure(text="COPIED TEXT")
+    app.after(2000, lambda:button_copy_index1.configure(text="COPY"))
+    
+def copy_results_index2():
+    copy = table_results.cget("text")
+    app.clipboard_clear()
+    app.clipboard_append(copy)
+    app.update()
+    button_copy_index2.configure(text="COPIED TEXT")
+    app.after(2000, lambda:button_copy_index2.configure(text="COPY"))
+
+# Title
+title8 = ctk.CTkLabel(
+    pages["body_mass_index_calculator_page"], 
+    text="BODY MASS INDEX CALCULATOR", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=28, weight="bold"), 
+    text_color="#5555ff", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+title8.place(relx=0.5, rely=0.06, anchor=tk.CENTER)
+
+# Input Section
+frame_input8 = ctk.CTkFrame(
+    pages["body_mass_index_calculator_page"],
+    width=600, height=170,
+    border_color="#5555ff",
+    border_width=3,
+    corner_radius=10,
+    fg_color="#1a1a2e"
+)
+frame_input8.place(relx=0.5, rely=0.3, anchor=tk.CENTER)
+
+# Title
+title_input8 = ctk.CTkLabel(
+    frame_input8, 
+    text="Input Section", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#5555ff", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+title_input8.place(relx=0.5, rely=0.13,anchor=tk.CENTER)
+
+# Label for errors
+errors_index = ctk.CTkLabel(
+    frame_input8, 
+    text="",
+    width=150, height=100,
+    font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"),
+    wraplength=140,
+    justify=tk.LEFT,
+    text_color="#5555ff", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=10)
+errors_index.place(relx=0.80, rely=0.34, anchor=tk.CENTER)
+
+# Orders
+order_index1 = ctk.CTkLabel(
+    frame_input8, 
+    text="Enter the weight in kilograms(kg):", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#5555ff", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+order_index1.place(relx=0.23, rely=0.33, anchor=tk.CENTER)
+order_index2 = ctk.CTkLabel(
+    frame_input8, 
+    text="Enter the height in meters(m):", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#5555ff", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+order_index2.place(relx=0.21, rely=0.53, anchor=tk.CENTER)
+# Entrys orders
+entry_index1 = ctk.CTkEntry(
+    frame_input8, 
+    placeholder_text="0.0",
+    width=60,
+    fg_color="#0a0a2a",                 
+    text_color="#ffffff",               
+    border_color="#5555ff",             
+    placeholder_text_color="#8888ff")
+entry_index1.place(relx=0.51, rely=0.33, anchor=tk.CENTER)
+entry_index2 = ctk.CTkEntry(
+    frame_input8, 
+    placeholder_text="0.0",
+    width=60,
+    fg_color="#0a0a2a",                 
+    text_color="#ffffff",               
+    border_color="#5555ff",             
+    placeholder_text_color="#8888ff")
+entry_index2.place(relx=0.51, rely=0.53, anchor=tk.CENTER)
+# Button calculate and clean
+button_calculate_index = ctk.CTkButton(
+    frame_input8,
+    text="CALCULATE",
+    font=ctk.CTkFont(size=12, weight="bold"),
+    width=200,
+    height=45,
+    text_color="#ffffff",
+    corner_radius=25,
+    fg_color="#ff5555",
+    bg_color="#1a1a2e",
+    hover_color="#5555ff",
+    border_width=3,
+    border_color="#ffffff",
+    command=calculate_index)
+button_calculate_index.place(relx=0.2, rely=0.8, anchor=tk.CENTER)
+button_clean8 = ctk.CTkButton(
+    frame_input8,
+    text="CLEAN",
+    font=ctk.CTkFont(size=12, weight="bold"),
+    width=200,
+    height=45,
+    text_color="#cccccc",
+    corner_radius=25,
+    fg_color="#555577",
+    bg_color="#1a1a2e",
+    hover_color="#444466",
+    border_width=3,
+    border_color="#8888ff",
+    command=clean_text_index)
+button_clean8.place(relx=0.8, rely=0.8, anchor=tk.CENTER)
+
+# Results panel
+frame_results8 = ctk.CTkFrame(
+    pages["body_mass_index_calculator_page"], 
+    width=600, height=150,
+    fg_color="#1a1a2e",
+    border_color="#5555ff",
+    border_width=3,
+    corner_radius=10)
+frame_results8.place(relx=0.5, rely=0.66, anchor=tk.CENTER)
+# Title
+title_results_index = ctk.CTkLabel(
+    frame_results8, 
+    text="Results Panel", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#5555ff", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+title_results_index.place(relx=0.5, rely=0.15,anchor=tk.CENTER)
+
+# IMC km/h results
+bodymi = ctk.CTkLabel(
+    frame_results8, 
+    text="The Body Mass Index is:", 
+    font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"), 
+    text_color="#5555ff",
+    width=160,
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+bodymi.place(relx=0.17, rely=0.43, anchor=tk.CENTER)
+
+bodymi_results = ctk.CTkLabel(
+    frame_results8,
+    text="00.00 | Category",
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#5555ff", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+bodymi_results.place(relx=0.49, rely=0.43, anchor=tk.CENTER)
+
+button_copy_index1 = ctk.CTkButton(
+    frame_results8,
+    text="COPY",
+    font=ctk.CTkFont(size=12, weight="bold"),
+    width=200,
+    height=45,
+    text_color="#ffaa66",
+    corner_radius=25,
+    fg_color="transparent",
+    bg_color="#1a1a2e",
+    hover_color="#332211",
+    border_width=3,
+    border_color="#ff8844",
+    command=copy_results_index1)
+button_copy_index1.place(relx=0.82, rely=0.43, anchor=tk.CENTER)
+
+# Table results
+table_results = ctk.CTkLabel(
+    frame_results8,
+    text=f"IMC Table: \nUnderweight: < 18.5 | Normal weight: 18.5 - 24.9 Overweight: 25.0 - 29.9 | Obesity: ≥ 30.0",
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    wraplength=340,
+    justify="left",
+    text_color="#5555ff", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+table_results.place(relx=0.31, rely=0.79, anchor=tk.CENTER)
+
+button_copy_index2 = ctk.CTkButton(
+    frame_results8,
+    text="COPY",
+    font=ctk.CTkFont(size=12, weight="bold"),
+    width=200,
+    height=45,
+    text_color="#66aaff",
+    corner_radius=25,
+    fg_color="transparent",
+    bg_color="#1a1a2e",
+    hover_color="#112233",
+    border_width=3,
+    border_color="#4488ff",
+    command=copy_results_index2)
+button_copy_index2.place(relx=0.82, rely=0.80, anchor=tk.CENTER)
+
+# Return to menu
+return_button8 = ctk.CTkButton(
+    pages["body_mass_index_calculator_page"],
+    text="Back to menu",
+    font=ctk.CTkFont(size=15, weight="bold"),
+    width=195,
+    height=45,
+    text_color="#5555ff",
+    corner_radius=25,
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    hover_color="#0e0e3d",
+    border_width=3,
+    border_color="#5555ff",
+    command=lambda: show_page("menu_page"))
+return_button8.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
 
 show_page("initial_page")
 
