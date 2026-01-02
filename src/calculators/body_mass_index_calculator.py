@@ -30,11 +30,11 @@ def main():
     print("Error: Enter only numbers, not letter or symbols")
     return
 
-  if not 0 <= p <= 635:
-    print("Error: Weight must be between 0 and 635 kg")
+  if not 15 <= p <= 635:
+    print("Error: Weight must be between 15 and 635 kg")
     return
-  if not 0 <= h <= 2.72:
-    print("Height must be between 0 and 2.72 m")
+  if not 0.5 <= h <= 2.72:
+    print("Height must be between 0.5 and 2.72 m")
     return
   
   # Process
