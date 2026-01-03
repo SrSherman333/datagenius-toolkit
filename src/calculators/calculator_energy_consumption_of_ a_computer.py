@@ -14,10 +14,10 @@ def main():
     print("Error: Enter only numbers, not letters or symbols")
     return
 
-  if not 0 <= h <= 24:
+  if not 0 < h <= 24:
     print("Error: Hours per day cannot exceed 24 (using 24 for calculation)")
     return
-  if p <= 0:
+  if not 0 < p <= 2500:
     print("Error: Enter only values upper than zero")
     return
   
