@@ -301,7 +301,7 @@ title_input = ctk.CTkLabel(
     text="Input Section", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#ff5555", 
+    text_color="#ffffff", 
     fg_color="#0a0a2a",
     bg_color="#1a1a2e",
     corner_radius=50)
@@ -315,7 +315,7 @@ errors_cloud1 = ctk.CTkLabel(
     font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"),
     wraplength=150,
     justify=tk.LEFT,
-    text_color="#aa55ff", 
+    text_color="#ffffff", 
     fg_color="#0a0a2a",
     bg_color="#1a1a2e",
     corner_radius=10)
@@ -327,7 +327,7 @@ order = ctk.CTkLabel(
     text="Enter temperature in Celsius:", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#ffaa66", 
+    text_color="#ffffff", 
     fg_color="#0a0a2a",
     bg_color="#1a1a2e",
     corner_radius=50)
@@ -336,10 +336,10 @@ order.place(relx=0.2, rely=0.43, anchor=tk.CENTER)
 entry = ctk.CTkEntry(
     frame_input, 
     placeholder_text="0.0",
-    fg_color="#0a0a2a",                 
+    fg_color="#441111",                 
     text_color="#ffffff",               
-    border_color="#ffaa66",             
-    placeholder_text_color="#8888ff")
+    border_color="#ff5555",             
+    placeholder_text_color="#ffffff")
 entry.place(relx=0.55, rely=0.43, anchor=tk.CENTER)
 # Buttons order
 button_convert = ctk.CTkButton(
@@ -352,9 +352,9 @@ button_convert = ctk.CTkButton(
     corner_radius=25,
     fg_color="#ff5555",
     bg_color="#1a1a2e",
-    hover_color="#ff3333",
+    hover_color="#ff8888",
     border_width=3,
-    border_color="#ffffff",
+    border_color="#ff5555",
     command=calculate_values)
 button_convert.place(relx=0.2, rely=0.8, anchor=tk.CENTER)
 button_clean = ctk.CTkButton(
@@ -363,13 +363,13 @@ button_clean = ctk.CTkButton(
     font=ctk.CTkFont(size=12, weight="bold"),
     width=200,
     height=45,
-    text_color="#cccccc",
+    text_color="#ffffff",
     corner_radius=25,
     fg_color="#555577",
     bg_color="#1a1a2e",
     hover_color="#444466",
     border_width=3,
-    border_color="#8888ff",
+    border_color="#555577",
     command=clean)
 button_clean.place(relx=0.8, rely=0.8, anchor=tk.CENTER)
 
@@ -378,7 +378,7 @@ frame_results = ctk.CTkFrame(
     pages["temperature_conversion_page"], 
     width=600, height=150,
     fg_color="#1a1a2e",
-    border_color="#333355",
+    border_color="#555577",
     border_width=3,
     corner_radius=10)
 frame_results.place(relx=0.5, rely=0.66, anchor=tk.CENTER)
@@ -388,7 +388,7 @@ title_input = ctk.CTkLabel(
     text="Results Panel", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#00ccff", 
+    text_color="#ffffff", 
     fg_color="#0a0a2a",
     bg_color="#1a1a2e",
     corner_radius=50)
@@ -399,7 +399,7 @@ fahrenheit_title = ctk.CTkLabel(
     frame_results, 
     text="The temperature in Fahrenheit is:", 
     font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"), 
-    text_color="#ffaa66",
+    text_color="#ffffff",
     width=200,
     fg_color="#0a0a2a",
     bg_color="#1a1a2e",
@@ -411,7 +411,7 @@ fahrenheit_results = ctk.CTkLabel(
     text="00.00°F",
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#ffaa44", 
+    text_color="#ff5555", 
     fg_color="#0a0a2a",
     bg_color="#1a1a2e",
     corner_radius=50)
@@ -423,13 +423,13 @@ button_copy1 = ctk.CTkButton(
     font=ctk.CTkFont(size=12, weight="bold"),
     width=200,
     height=45,
-    text_color="#ffaa66",
+    text_color="#ffffff",
     corner_radius=25,
-    fg_color="transparent",
+    fg_color="#ff5555",
     bg_color="#1a1a2e",
-    hover_color="#332211",
+    hover_color="#ff8888",
     border_width=3,
-    border_color="#ff8844",
+    border_color="#ff5555",
     command=copy_text_fahrenheit)
 button_copy1.place(relx=0.8, rely=0.43, anchor=tk.CENTER)
 
@@ -438,7 +438,7 @@ kelvin_title = ctk.CTkLabel(
     frame_results, 
     text="The temperature in Kelvin is:", 
     font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"), 
-    text_color="#66aaff",
+    text_color="#ffffff",
     width=200,
     fg_color="#0a0a2a",
     bg_color="#1a1a2e",
@@ -450,7 +450,7 @@ kelvin_results = ctk.CTkLabel(
     text="00.00K",
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#4488ff", 
+    text_color="#ff5555", 
     fg_color="#0a0a2a",
     bg_color="#1a1a2e",
     corner_radius=50)
@@ -462,13 +462,13 @@ button_copy2 = ctk.CTkButton(
     font=ctk.CTkFont(size=12, weight="bold"),
     width=200,
     height=45,
-    text_color="#66aaff",
+    text_color="#ffffff",
     corner_radius=25,
-    fg_color="transparent",
+    fg_color="#555577",
     bg_color="#1a1a2e",
-    hover_color="#112233",
+    hover_color="#444466",
     border_width=3,
-    border_color="#4488ff",
+    border_color="#555577",
     command=copy_text_kelvin)
 button_copy2.place(relx=0.8, rely=0.80, anchor=tk.CENTER)
 
@@ -2601,6 +2601,299 @@ return_button8 = ctk.CTkButton(
     border_color="#5555ff",
     command=lambda: show_page("menu_page"))
 return_button8.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
+
+
+# CALCULATOR ENERGY CONSUMPTION OF A COMPUTER PAGE CONTENT-----------------------
+# Functions
+import calculator_energy_consumption_of_a_computer
+def calculate_energy():
+    try:
+        h = float(entry_energy1.get())
+        p = float(entry_energy2.get())
+    except ValueError as v:
+        errors_energy.configure(text="")
+        errors_energy.configure(text=f"Error: {v}")
+        app.after(3000, lambda:errors_energy.configure(text=""))
+        return
+    
+    if not 0 < h <= 24:
+        errors_energy.configure(text="Error: Hours must be between 0 and 24")
+        app.after(3000, lambda:errors_energy.configure(text=""))
+        return
+    
+    if not 0 < p <= 2500:
+        errors_energy.configure(text="Error: Enter a realistic power value (between 1W and 2500W)")
+        app.after(3000, lambda:errors_energy.configure(text=""))
+        return
+    
+    dailyp_results.configure(text=f"{h}h | {p}W")
+    consumption_results.configure(text=f"{calculator_energy_consumption_of_a_computer.energy_consumption(p, h):.2f}kWh")
+    
+    entry_energy1.delete(0, "end")
+    entry_energy2.delete(0, "end")
+    entry_energy1.focus()
+    
+def clean_text_energy():
+    entry_energy1.delete(0, "end")
+    entry_energy2.delete(0, "end")
+    entry_energy1.focus()
+    dailyp_results.configure(text="00.00h | 00.00W")
+    consumption_results.configure(text="00.00kWh")
+    
+def copy_results_energy1():
+    copy = dailyp_results.cget("text")
+    app.clipboard_clear()
+    app.clipboard_append(copy)
+    app.update()
+    button_copy_energy1.configure(text="COPIED TEXT")
+    app.after(2000, lambda:button_copy_energy1.configure(text="COPY"))
+    
+def copy_results_energy2():
+    copy = consumption_results.cget("text")
+    app.clipboard_clear()
+    app.clipboard_append(copy)
+    app.update()
+    button_copy_energy2.configure(text="COPIED TEXT")
+    app.after(2000, lambda:button_copy_energy2.configure(text="COPY"))
+
+# Title
+title9 = ctk.CTkLabel(
+    pages["energy_consumption_page"], 
+    text="ENERGY CONSUMPTION OF A COMPUTER", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=26, weight="bold"), 
+    text_color="#aaff55", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+title9.place(relx=0.5, rely=0.06, anchor=tk.CENTER)
+
+# Input Section
+frame_input9 = ctk.CTkFrame(
+    pages["energy_consumption_page"],
+    width=600, height=170,
+    border_color="#aaff55",
+    border_width=3,
+    corner_radius=10,
+    fg_color="#1a1a2e"
+)
+frame_input9.place(relx=0.5, rely=0.3, anchor=tk.CENTER)
+
+# Title
+title_input9 = ctk.CTkLabel(
+    frame_input9, 
+    text="Input Section", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#ffffff", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+title_input9.place(relx=0.5, rely=0.13,anchor=tk.CENTER)
+
+# Label for errors
+errors_energy = ctk.CTkLabel(
+    frame_input9, 
+    text="",
+    width=150, height=100,
+    font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"),
+    wraplength=140,
+    justify=tk.LEFT,
+    text_color="#ffffff", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=10)
+errors_energy.place(relx=0.86, rely=0.34, anchor=tk.CENTER)
+
+# Orders
+order_energy1 = ctk.CTkLabel(
+    frame_input9, 
+    text="Enter the hours of the computer operates a day:", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#ffffff", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+order_energy1.place(relx=0.31, rely=0.33, anchor=tk.CENTER)
+order_energy2 = ctk.CTkLabel(
+    frame_input9, 
+    text="Enter the value of the power of the computer (W):", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#ffffff", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+order_energy2.place(relx=0.32, rely=0.53, anchor=tk.CENTER)
+# Entrys orders
+entry_energy1 = ctk.CTkEntry(
+    frame_input9, 
+    placeholder_text="0.0",
+    width=60,
+    fg_color="#223311",                 
+    text_color="#ffffff",               
+    border_color="#aaff55",             
+    placeholder_text_color="#ffffff")
+entry_energy1.place(relx=0.67, rely=0.33, anchor=tk.CENTER)
+entry_energy2 = ctk.CTkEntry(
+    frame_input9, 
+    placeholder_text="0.0",
+    width=60,
+    fg_color="#223311",                 
+    text_color="#ffffff",               
+    border_color="#aaff55",             
+    placeholder_text_color="#ffffff")
+entry_energy2.place(relx=0.68, rely=0.53, anchor=tk.CENTER)
+# Button calculate and clean
+button_calculate_energy = ctk.CTkButton(
+    frame_input9,
+    text="CALCULATE",
+    font=ctk.CTkFont(size=12, weight="bold"),
+    width=200,
+    height=45,
+    text_color="#0a0a2a",
+    corner_radius=25,
+    fg_color="#aaff55",
+    bg_color="#1a1a2e",
+    hover_color="#ccff99",
+    border_width=3,
+    border_color="#1a1a2e",
+    command=calculate_energy)
+button_calculate_energy.place(relx=0.2, rely=0.8, anchor=tk.CENTER)
+button_clean9 = ctk.CTkButton(
+    frame_input9,
+    text="CLEAN",
+    font=ctk.CTkFont(size=12, weight="bold"),
+    width=200,
+    height=45,
+    text_color="#ffffff",
+    corner_radius=25,
+    fg_color="#555577",
+    bg_color="#1a1a2e",
+    hover_color="#444466",
+    border_width=3,
+    border_color="#555577",
+    command=clean_text_energy)
+button_clean9.place(relx=0.8, rely=0.8, anchor=tk.CENTER)
+
+# Results panel
+frame_results9 = ctk.CTkFrame(
+    pages["energy_consumption_page"], 
+    width=600, height=150,
+    fg_color="#1a1a2e",
+    border_color="#555577",
+    border_width=3,
+    corner_radius=10)
+frame_results9.place(relx=0.5, rely=0.66, anchor=tk.CENTER)
+# Title
+title_results_energy = ctk.CTkLabel(
+    frame_results9, 
+    text="Results Panel", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#ffffff", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+title_results_energy.place(relx=0.5, rely=0.15,anchor=tk.CENTER)
+
+# Daily usage and Power consumption results
+dailyp = ctk.CTkLabel(
+    frame_results9, 
+    text="Daily usage | Power consumption:", 
+    font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"), 
+    text_color="#ffffff",
+    width=160,
+    wraplength=150,
+    justify="left",
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+dailyp.place(relx=0.15, rely=0.43, anchor=tk.CENTER)
+
+dailyp_results = ctk.CTkLabel(
+    frame_results9,
+    text="00.00h | 00.00W",
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#aaff55", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+dailyp_results.place(relx=0.47, rely=0.43, anchor=tk.CENTER)
+
+button_copy_energy1 = ctk.CTkButton(
+    frame_results9,
+    text="COPY",
+    font=ctk.CTkFont(size=12, weight="bold"),
+    width=200,
+    height=45,
+    text_color="#1a1a2e",
+    corner_radius=25,
+    fg_color="#aaff55",
+    bg_color="#1a1a2e",
+    hover_color="#ccff99",
+    border_width=3,
+    border_color="#aaff55",
+    command=copy_results_energy1)
+button_copy_energy1.place(relx=0.82, rely=0.43, anchor=tk.CENTER)
+
+# Monthly consumption results
+consumption = ctk.CTkLabel(
+    frame_results9, 
+    text="The monthly consumption is:", 
+    font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"), 
+    text_color="#ffffff",
+    width=160,
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+consumption.place(relx=0.20, rely=0.80, anchor=tk.CENTER)
+
+consumption_results = ctk.CTkLabel(
+    frame_results9,
+    text="00.00kWh",
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"),
+    text_color="#aaff55", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+consumption_results.place(relx=0.52, rely=0.79, anchor=tk.CENTER)
+
+button_copy_energy2 = ctk.CTkButton(
+    frame_results9,
+    text="COPY",
+    font=ctk.CTkFont(size=12, weight="bold"),
+    width=200,
+    height=45,
+    text_color="#ffffff",
+    corner_radius=25,
+    fg_color="#555577",
+    bg_color="#1a1a2e",
+    hover_color="#444466",
+    border_width=3,
+    border_color="#555577",
+    command=copy_results_energy2)
+button_copy_energy2.place(relx=0.82, rely=0.80, anchor=tk.CENTER)
+
+# Return to menu
+return_button9 = ctk.CTkButton(
+    pages["energy_consumption_page"],
+    text="Back to menu",
+    font=ctk.CTkFont(size=15, weight="bold"),
+    width=195,
+    height=45,
+    text_color="#aaff55",
+    corner_radius=25,
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    hover_color="#0e0e3d",
+    border_width=3,
+    border_color="#aaff55",
+    command=lambda: show_page("menu_page"))
+return_button9.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
 
 show_page("initial_page")
 
