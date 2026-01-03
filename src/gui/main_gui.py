@@ -2895,6 +2895,321 @@ return_button9 = ctk.CTkButton(
     command=lambda: show_page("menu_page"))
 return_button9.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
 
+
+# CURRENCY CONVERSION PAGE CONTENT-----------------------
+# Functions
+import currency_conversion
+def calculate_currency():
+    try:
+        m = float(entry_currency1.get())
+        t_usd = float(entry_currency2.get())
+        t_eur = float(entry_currency3.get())
+    except ValueError as v:
+        errors_currency.configure(text="")
+        errors_currency.configure(text=f"Error: {v}")
+        app.after(3000, lambda:errors_currency.configure(text=""))
+        return
+    
+    if m <= 0 or t_usd <= 0 or t_eur <= 0:
+        errors_currency.configure(text="Error: All values must be greater than zero")
+        app.after(3000, lambda:errors_currency.configure(text=""))
+        return
+    
+    if t_usd > 10 or t_eur > 10:
+        errors_currency.configure(text="Warning: Exchange rates seem unusually high (> 10)")
+        app.after(3000, lambda:errors_currency.configure(text=""))
+        return
+    
+    local_results.configure(text=f"{m:.2f}")
+    dollaeur_results.configure(text=f"{currency_conversion.calculate_usd(m, t_usd):.2f}$ | {currency_conversion.calculate_eur(m, t_eur):.2f}€")
+    
+    entry_currency1.delete(0, "end")
+    entry_currency2.delete(0, "end")
+    entry_currency3.delete(0, "end")
+    entry_currency1.focus()
+    
+def clean_text_currency():
+    entry_currency1.delete(0, "end")
+    entry_currency2.delete(0, "end")
+    entry_currency3.delete(0, "end")
+    entry_currency1.focus()
+    local_results.configure(text="00.00")
+    dollaeur_results.configure(text="00.00$ | 00.00€")
+    
+def copy_results_currency1():
+    copy = local_results.cget("text")
+    app.clipboard_clear()
+    app.clipboard_append(copy)
+    app.update()
+    button_copy_currency1.configure(text="COPIED TEXT")
+    app.after(2000, lambda:button_copy_currency1.configure(text="COPY"))
+    
+def copy_results_currency2():
+    copy = dollaeur_results.cget("text")
+    app.clipboard_clear()
+    app.clipboard_append(copy)
+    app.update()
+    button_copy_currency2.configure(text="COPIED TEXT")
+    app.after(2000, lambda:button_copy_currency2.configure(text="COPY"))
+
+# Title
+title10 = ctk.CTkLabel(
+    pages["currency_conversion_page"], 
+    text="CURRENCY CONVERSION", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=28, weight="bold"), 
+    text_color="#aaff00", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+title10.place(relx=0.5, rely=0.06, anchor=tk.CENTER)
+
+# Input Section
+frame_input10 = ctk.CTkFrame(
+    pages["currency_conversion_page"],
+    width=600, height=170,
+    border_color="#aaff00",
+    border_width=3,
+    corner_radius=10,
+    fg_color="#1a1a2e"
+)
+frame_input10.place(relx=0.5, rely=0.3, anchor=tk.CENTER)
+
+# Title
+title_input10 = ctk.CTkLabel(
+    frame_input10, 
+    text="Input Section", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#ffffff", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+title_input10.place(relx=0.5, rely=0.13,anchor=tk.CENTER)
+
+# Label for errors
+errors_currency = ctk.CTkLabel(
+    frame_input10, 
+    text="",
+    width=150, height=100,
+    font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"),
+    wraplength=140,
+    justify=tk.LEFT,
+    text_color="#ffffff", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=10)
+errors_currency.place(relx=0.86, rely=0.34, anchor=tk.CENTER)
+
+# Orders
+order_currency1 = ctk.CTkLabel(
+    frame_input10, 
+    text="Local currency:", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#ffffff", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+order_currency1.place(relx=0.12, rely=0.33, anchor=tk.CENTER)
+order_currency2 = ctk.CTkLabel(
+    frame_input10, 
+    text="USD rate(e.g., 0.05):", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#ffffff", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+order_currency2.place(relx=0.15, rely=0.53, anchor=tk.CENTER)
+order_currency3 = ctk.CTkLabel(
+    frame_input10, 
+    text="EUR rate(e.g., 0.045):", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#ffffff", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+order_currency3.place(relx=0.48, rely=0.33, anchor=tk.CENTER)
+# Entrys orders
+entry_currency1 = ctk.CTkEntry(
+    frame_input10, 
+    placeholder_text="0.0",
+    width=60,
+    fg_color="#223300",                 
+    text_color="#ffffff",               
+    border_color="#aaff00",             
+    placeholder_text_color="#ffffff")
+entry_currency1.place(relx=0.28, rely=0.33, anchor=tk.CENTER)
+entry_currency2 = ctk.CTkEntry(
+    frame_input10, 
+    placeholder_text="0.0",
+    width=60,
+    fg_color="#223311",                 
+    text_color="#ffffff",               
+    border_color="#aaff00",             
+    placeholder_text_color="#ffffff")
+entry_currency2.place(relx=0.34, rely=0.53, anchor=tk.CENTER)
+entry_currency3 = ctk.CTkEntry(
+    frame_input10, 
+    placeholder_text="0.0",
+    width=60,
+    fg_color="#223311",                 
+    text_color="#ffffff",               
+    border_color="#aaff00",             
+    placeholder_text_color="#ffffff")
+entry_currency3.place(relx=0.68, rely=0.33, anchor=tk.CENTER)
+# Button calculate and clean
+button_calculate_currency = ctk.CTkButton(
+    frame_input10,
+    text="CALCULATE",
+    font=ctk.CTkFont(size=12, weight="bold"),
+    width=200,
+    height=45,
+    text_color="#0a0a2a",
+    corner_radius=25,
+    fg_color="#aaff00",
+    bg_color="#1a1a2e",
+    hover_color="#ccff66",
+    border_width=3,
+    border_color="#aaff00",
+    command=calculate_currency)
+button_calculate_currency.place(relx=0.2, rely=0.8, anchor=tk.CENTER)
+button_clean10 = ctk.CTkButton(
+    frame_input10,
+    text="CLEAN",
+    font=ctk.CTkFont(size=12, weight="bold"),
+    width=200,
+    height=45,
+    text_color="#ffffff",
+    corner_radius=25,
+    fg_color="#555577",
+    bg_color="#1a1a2e",
+    hover_color="#444466",
+    border_width=3,
+    border_color="#555577",
+    command=clean_text_currency)
+button_clean10.place(relx=0.8, rely=0.8, anchor=tk.CENTER)
+
+# Results panel
+frame_results10 = ctk.CTkFrame(
+    pages["currency_conversion_page"], 
+    width=600, height=150,
+    fg_color="#1a1a2e",
+    border_color="#555577",
+    border_width=3,
+    corner_radius=10)
+frame_results10.place(relx=0.5, rely=0.66, anchor=tk.CENTER)
+# Title
+title_results_currency = ctk.CTkLabel(
+    frame_results10, 
+    text="Results Panel", 
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#ffffff", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+title_results_currency.place(relx=0.5, rely=0.15,anchor=tk.CENTER)
+
+# Local amount results
+local = ctk.CTkLabel(
+    frame_results10, 
+    text="Local Amount:", 
+    font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"), 
+    text_color="#ffffff",
+    width=160,
+    wraplength=150,
+    justify="left",
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+local.place(relx=0.15, rely=0.43, anchor=tk.CENTER)
+
+local_results = ctk.CTkLabel(
+    frame_results10,
+    text="00.00",
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"), 
+    text_color="#aaff00", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+local_results.place(relx=0.47, rely=0.43, anchor=tk.CENTER)
+
+button_copy_currency1 = ctk.CTkButton(
+    frame_results10,
+    text="COPY",
+    font=ctk.CTkFont(size=12, weight="bold"),
+    width=200,
+    height=45,
+    text_color="#1a1a2e",
+    corner_radius=25,
+    fg_color="#aaff00",
+    bg_color="#1a1a2e",
+    hover_color="#ccff66",
+    border_width=3,
+    border_color="#aaff00",
+    command=copy_results_currency1)
+button_copy_currency1.place(relx=0.82, rely=0.43, anchor=tk.CENTER)
+
+# Dollars and Euros results
+dollaeur = ctk.CTkLabel(
+    frame_results10, 
+    text="Dollars | Euros:", 
+    font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"), 
+    text_color="#ffffff",
+    width=160,
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+dollaeur.place(relx=0.15, rely=0.80, anchor=tk.CENTER)
+
+dollaeur_results = ctk.CTkLabel(
+    frame_results10,
+    text="00.00$ | 00.00€",
+    font=ctk.CTkFont(family="OCR A Extended", 
+    size=12, weight="bold"),
+    text_color="#aaff00", 
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    corner_radius=50)
+dollaeur_results.place(relx=0.47, rely=0.79, anchor=tk.CENTER)
+
+button_copy_currency2 = ctk.CTkButton(
+    frame_results10,
+    text="COPY",
+    font=ctk.CTkFont(size=12, weight="bold"),
+    width=200,
+    height=45,
+    text_color="#ffffff",
+    corner_radius=25,
+    fg_color="#555577",
+    bg_color="#1a1a2e",
+    hover_color="#444466",
+    border_width=3,
+    border_color="#555577",
+    command=copy_results_currency2)
+button_copy_currency2.place(relx=0.82, rely=0.80, anchor=tk.CENTER)
+
+# Return to menu
+return_button10 = ctk.CTkButton(
+    pages["currency_conversion_page"],
+    text="Back to menu",
+    font=ctk.CTkFont(size=15, weight="bold"),
+    width=195,
+    height=45,
+    text_color="#aaff00",
+    corner_radius=25,
+    fg_color="#0a0a2a",
+    bg_color="#1a1a2e",
+    hover_color="#0e0e3d",
+    border_width=3,
+    border_color="#aaff00",
+    command=lambda: show_page("menu_page"))
+return_button10.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
+
 show_page("initial_page")
 
 app.mainloop()
