@@ -40,7 +40,7 @@ def show_page(page_name):
     if page_name in pages:
         pages[page_name].place(relwidth=1, relheight=1)
     else:
-        print(f"Error: La página '{page_name}' no existe.")
+        print(f"Error: The page '{page_name}' doesn't exist.")
 
 page_names_list = [
     "initial_page",
@@ -277,8 +277,6 @@ def calculate_values():
         return
     fahrenheit_results.configure(text=f"{temperature_conversion.celsius_to_fahrenheit(value):.2f}°F")
     kelvin_results.configure(text=f"{temperature_conversion.celsius_to_kelvin(value):.2f}K")
-    entry.delete(0, "end")
-    entry.focus()
 
 def clean():
     entry.delete(0, "end")
@@ -532,10 +530,6 @@ def calculate_cost():
     cm = cloud_storage_cost.monthly_cost(gb, c)
     montly_cost_results.configure(text=f"{cm:.2f}$")
     anual_cost_results.configure(text=f"{cloud_storage_cost.annual_cost(cm):.2f}$")
-    
-    entry_cloud1.delete(0, "end")
-    entry_cloud1.focus()
-    entry_cloud2.delete(0, "end")
     
 def clean_text_cloud():
     entry_cloud1.delete(0, "end")
@@ -811,10 +805,6 @@ def calculate_execution():
     time_seconds_results.configure(text=f"{ts:.2f}s")
     time_minutes_results.configure(text=f"{execution_time_calculator.time_minutes(ts):.2f}min")
     
-    entry_exe1.delete(0, "end")
-    entry_exe1.focus()
-    entry_exe2.delete(0, "end")
-    
 def clean_text_exe():
     entry_exe1.delete(0, "end")
     entry_exe1.focus()
@@ -1085,12 +1075,6 @@ def calculate_euclidean():
     
     coordinates_results.configure(text=f"(P1: {entry_euclidean1.get()}, {entry_euclidean2.get()} | P2: {entry_euclidean3.get()}, {entry_euclidean4.get()})")
     euclidean_distance_results.configure(text=f"{euclidean_distance_calculator.euclidean_distance(x1, y1, x2, y2):.2f}")
-    
-    entry_euclidean1.delete(0, "end")
-    entry_euclidean2.delete(0, "end")
-    entry_euclidean3.delete(0, "end")
-    entry_euclidean4.delete(0, "end")
-    entry_euclidean1.focus()
     
 def clean_text_euclidean():
     entry_euclidean1.delete(0, "end")
@@ -1407,12 +1391,6 @@ def calculate_grades():
     
     grades_results.configure(text=f"(G1: {entry_grade1.get()}| G2: {entry_grade2.get()}| G3: {entry_grade3.get()}| G4: {entry_grade4.get()})")
     average_grade_results.configure(text=f"{average_grade.calculate_average(n1, n2, n3, n4):.2f}")
-    
-    entry_grade1.delete(0, "end")
-    entry_grade2.delete(0, "end")
-    entry_grade3.delete(0, "end")
-    entry_grade4.delete(0, "end")
-    entry_grade1.focus()
     
 def clean_text_grade():
     entry_grade1.delete(0, "end")
@@ -1732,11 +1710,6 @@ def calculate_interest():
     interest_results.configure(text=f"{m-c:.2f}$")
     amount_results.configure(text=f"{m:.2f}$")
     
-    entry_interest1.delete(0, "end")
-    entry_interest2.delete(0, "end")
-    entry_interest3.delete(0, "end")
-    entry_interest1.focus()
-    
 def clean_text_interest():
     entry_interest1.delete(0, "end")
     entry_interest2.delete(0, "end")
@@ -2033,10 +2006,6 @@ def calculate_speed():
     kmh_results.configure(text=f"{vkm:.2f}km/h")
     ms_results.configure(text=f"{average_speed_of_a_drone.speed_ms(vkm):.2f}m/s")
     
-    entry_speed1.delete(0, "end")
-    entry_speed2.delete(0, "end")
-    entry_speed1.focus()
-    
 def clean_text_speed():
     entry_speed1.delete(0, "end")
     entry_speed2.delete(0, "end")
@@ -2320,10 +2289,6 @@ def calculate_index():
     
     bodymi_results.configure(text=f"{imc:.2f} | {results}")
     
-    entry_index1.delete(0, "end")
-    entry_index2.delete(0, "end")
-    entry_index1.focus()
-    
 def clean_text_index():
     entry_index1.delete(0, "end")
     entry_index2.delete(0, "end")
@@ -2592,10 +2557,6 @@ def calculate_energy():
     
     dailyp_results.configure(text=f"{h}h | {p}W")
     consumption_results.configure(text=f"{calculator_energy_consumption_of_a_computer.energy_consumption(p, h):.2f}kWh")
-    
-    entry_energy1.delete(0, "end")
-    entry_energy2.delete(0, "end")
-    entry_energy1.focus()
     
 def clean_text_energy():
     entry_energy1.delete(0, "end")
@@ -2878,11 +2839,6 @@ def calculate_currency():
     
     local_results.configure(text=f"{m:.2f}")
     dollaeur_results.configure(text=f"{currency_conversion.calculate_usd(m, t_usd):.2f}$ | {currency_conversion.calculate_eur(m, t_eur):.2f}€")
-    
-    entry_currency1.delete(0, "end")
-    entry_currency2.delete(0, "end")
-    entry_currency3.delete(0, "end")
-    entry_currency1.focus()
     
 def clean_text_currency():
     entry_currency1.delete(0, "end")
