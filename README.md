@@ -11,7 +11,6 @@
 </div>
 
 ## Key Features
-
 - **10 specialized scientific** calculators
 - **Modern graphical interface** with CustomTkinter
 - **Console version** for quick use
@@ -21,7 +20,6 @@
 - **Modular** and well-documented code
 
 ## Calculators Included
-
 | # | Calculator | Description | Icon |
 |---|-------------|-------------|-------|
 | 1 | Temperature Conversion | Conversion between Celsius, Fahrenheit and Kelvin | [![Icon1](https://github.com/SrSherman333/datagenius-toolkit/blob/main/docs/images/icon1.jpg?raw=true)](https://github.com/SrSherman333/datagenius-toolkit/tree/main) |
@@ -34,3 +32,93 @@
 | 8 | Body Mass Index Calculator | BMI calculation | [![Icon8](https://github.com/SrSherman333/datagenius-toolkit/blob/main/docs/images/icon8.jpg?raw=true)](https://github.com/SrSherman333/datagenius-toolkit/tree/main) |
 | 9 | Energy Consumption of a Computer | Computer kWh consumption | [![Icon9](https://github.com/SrSherman333/datagenius-toolkit/blob/main/docs/images/icon9.jpg?raw=true)](https://github.com/SrSherman333/datagenius-toolkit/tree/main) |
 | 10| Currency Conversor | Conversion to USD and EUR | [![Icon10](https://github.com/SrSherman333/datagenius-toolkit/blob/main/docs/images/icon10.jpg?raw=true)](https://github.com/SrSherman333/datagenius-toolkit/tree/main) |
+
+## Galery
+<div align="center">
+  <img src="docs/screenshots/main_screenshot.png" width="45%" alt="Main interface"><p>Main Interface</p>
+  <img src="docs/screenshots/screenshot_menu.png" width="45%" alt="Menu Interface"><p>Menu Interface</p>
+  <img src="docs/screenshots/screenshot_calculator.png" width="45%" alt="Example calculator results interface"><p>Example Calculator Results Interface</p>
+  <img src="docs/screenshots/screenshot_tooltip.png" width="45%" alt="Tootil"><p>Tooltip (Menu Interface)</p>
+  <img src="docs/screenshots/screenshot_error.png" width="45%" alt="Error message"><p>Error Message (In each calculator interface)</p>
+  <br>
+</div>
+
+## Installation and use
+### Prerequisites
+- Python 3.8 or higher
+- pip (python package manager)
+
+### Installation
+Clone the repository
+```bash
+git clone https://github.com/SrSherman333/datagenius-toolkit
+cd datagenius-toolkit
+```
+Install dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### Execution
+Version with graphical interface (recommended)
+```bash
+python src/gui/main_gui.py
+```
+Console version
+```bash
+python src/main.py
+```
+
+## Project Structure
+```text
+datagenius-toolkit/
+├── src/
+│   ├── calculators/     # 10 modules with the logic of each calculator
+│   ├── gui/            # Graphic interface with CustomTkinter
+│   └── main.py         # Console Version
+├── docs/               # Icons and screenshots
+├── .gitignore          # Files ignored by Git
+├── LICENSE             # MIT license
+├── requirements.txt    # Dependencies
+└── README.md           # This file
+```
+
+## Development
+### Run in development mode
+Install in development mode
+
+```text
+pip install -e .
+```
+### Main dependencies
+<ul>
+  <li><b>customtkinter:</b> For the modern graphical interface</li>
+  <li><b>Standard Python:</b> math, sys, os, etc</li>
+</ul>
+
+## Upcoming Improvements
+<ul>
+  <li>Add unit tests</li>
+  <li>Create an executable .exe</li>
+  <li>Implement dark/light mode</li>
+  <li>Add calculation history</li>
+  <li>Internationalization (Spanish/English)</li>
+  <li>Advanced scientific calculators</li>
+</ul>
+
+## Autor
+<b>Dereck Misael Tandazo Brito</b> - Student of Data Science and AI - UTMACH
+<ul>
+  <li><b>GitHub:</b> @SrSherman333</li>
+  <li><b>Portafolio:</b> Academic Portfolio</li>
+</ul>
+
+## Subject
+<b>Programming Fundamentals</b> - First Semester
+Career in Data Science and Artificial Intelligence
+Technical University of Machala (UTMACH) - 2025 - 2026
+
+## License
+This project is licensed under the MIT License - see the LICENSE file for details
+
+<div align="center">😄</div>
