@@ -58,7 +58,7 @@ page_names_list = [
 ]
 
 for name in page_names_list:
-    frame = ctk.CTkFrame(app, fg_color=("#0a0a2a", "#1a1a2e"))
+    frame = ctk.CTkFrame(app, fg_color= ("#F0F2F5","#1a1a2e"))
     pages[name] = frame
 
 
@@ -69,9 +69,9 @@ title_label = ctk.CTkLabel(
     text="DATAGENIUS TOOLKIT", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=42, weight="bold"), 
-    text_color="#00ccff", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#007799","#00ccff"), 
+    fg_color=("#F0F2F5","#1a1a2e"),
+    bg_color=("#F0F2F5","#1a1a2e"),
     corner_radius=50)
 title_label.place(relx=0.5, rely=0.1, anchor=tk.CENTER) 
 
@@ -80,8 +80,8 @@ subtitle_label = ctk.CTkLabel(
     pages["initial_page"],
     text="Calculation toolset",
     font=ctk.CTkFont(size=16),
-    text_color="#8888ff",
-    bg_color="#1a1a2e")
+    text_color=("#5555CC", "#8888FF"),
+    bg_color=("#F0F2F5","#1a1a2e"))
 subtitle_label.place(relx=0.5, rely=0.2, anchor=tk.CENTER)
 
 # Decoration ring 
@@ -90,26 +90,27 @@ central_device = ctk.CTkFrame(
     width=180,
     height=180,
     corner_radius=90,
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    fg_color=("#F0F2F5","#1a1a2e"),
+    bg_color=("#F0F2F5","#1a1a2e"),
     border_width=4,
-    border_color="#00ffaa")
+    border_color=("#00B377", "#00FFAA"))
 central_device.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
 
 # Icon inside of the central_device
 # Possible errors
 try:
-    device_image_original = Image.open("docs/images/icon_firstframe.jpg")
-    device_photo = ctk.CTkImage(light_image=device_image_original, size=(160, 160))
+    devicedark_image_original = Image.open("docs/images/icon_firstframe_dark.jpg")
+    devicelight_image_original = Image.open("docs/images/icon_firstframe_light.png")
+    device_photo = ctk.CTkImage(light_image=devicelight_image_original, dark_image=devicedark_image_original, size=(160, 160))
 except Exception as e:
     print(f"Error loading image: {e}. Using text icon.")
     device_photo = None
 # Image/Icon placement
 if device_photo:
-    device_label = ctk.CTkLabel(central_device, text="", image=device_photo, bg_color="#1a1a2e")
+    device_label = ctk.CTkLabel(central_device, text="", image=device_photo, bg_color=("#F0F2F5","#1a1a2e"))
     device_label.image = device_photo
 else:
-    device_label = ctk.CTkLabel(central_device, text="⚙️", font=ctk.CTkFont(size=64), text_color="#00ffaa")
+    device_label = ctk.CTkLabel(central_device, text="⚙️", font=ctk.CTkFont(size=64), text_color=("#00B377", "#00FFAA"))
 device_label.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
 
 # Principal button
@@ -119,15 +120,43 @@ start_button = ctk.CTkButton(
     font=ctk.CTkFont(size=20, weight="bold"),
     width=200,
     height=50,
-    text_color="#00ccff",
+    text_color=("#007799", "#00CCFF"),
     corner_radius=25,
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
-    hover_color="#0e0e3d",
+    fg_color=("#F0F2F5", "#1A1A2E"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
+    hover_color=("#D1D9E6", "#0E0E3D"),
     border_width=3,
-    border_color="#00ccff",
+    border_color=("#007799", "#00CCFF"),
     command=lambda: show_page("menu_page"))
 start_button.place(relx=0.5, rely=0.85, anchor=tk.CENTER)
+
+try:
+    dark_mode_image_original = Image.open("docs/images/icon_darkmode.png")
+    light_mode_image_original = Image.open("docs/images/icon_lightmode.png")
+    theme_mode_photo = ctk.CTkImage(light_image=light_mode_image_original, dark_image=dark_mode_image_original, size=(80, 80))
+except Exception as e:
+    print(f"Error loading image: {e}. Using text icon.")
+    theme_mode_photo = None
+
+def theme_control():
+    if ctk.get_appearance_mode() == "Dark":
+        ctk.set_appearance_mode("light")
+    else:
+        ctk.set_appearance_mode("dark")
+
+theme_mode = ctk.CTkButton(
+    pages["initial_page"],
+    text="",
+    width=80,
+    height=80,
+    corner_radius=5,
+    image=theme_mode_photo,
+    fg_color=("#F0F2F5", "#1A1A2E"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
+    hover_color=("#D1D9E6", "#0E0E3D"),
+    command=theme_control
+)
+theme_mode.place(relx=0.1, rely=0.85, anchor=tk.CENTER)
 
 # MENU PAGE CONTENT--------------------------------------------
 # Title
