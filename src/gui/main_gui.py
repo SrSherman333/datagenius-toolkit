@@ -99,8 +99,8 @@ central_device.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
 # Icon inside of the central_device
 # Possible errors
 try:
-    devicedark_image_original = Image.open("docs/images/icon_firstframe_dark.jpg")
-    devicelight_image_original = Image.open("docs/images/icon_firstframe_light.png")
+    devicedark_image_original = Image.open("docs/images/Dark/icon_firstframe_dark.jpg")
+    devicelight_image_original = Image.open("docs/images/Light/icon_firstframe_light.png")
     device_photo = ctk.CTkImage(light_image=devicelight_image_original, dark_image=devicedark_image_original, size=(160, 160))
 except Exception as e:
     print(f"Error loading image: {e}. Using text icon.")
@@ -131,8 +131,8 @@ start_button = ctk.CTkButton(
 start_button.place(relx=0.5, rely=0.85, anchor=tk.CENTER)
 
 try:
-    dark_mode_image_original = Image.open("docs/images/icon_darkmode.png")
-    light_mode_image_original = Image.open("docs/images/icon_lightmode.png")
+    dark_mode_image_original = Image.open("docs/images/Dark/icon_darkmode.png")
+    light_mode_image_original = Image.open("docs/images/Light/icon_lightmode.png")
     theme_mode_photo = ctk.CTkImage(light_image=light_mode_image_original, dark_image=dark_mode_image_original, size=(80, 80))
 except Exception as e:
     print(f"Error loading image: {e}. Using text icon.")
@@ -165,11 +165,33 @@ title_label = ctk.CTkLabel(
     text="MENU", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=28, weight="bold"), 
-    text_color="#00ccff", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#007799", "#00CCFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 title_label.place(relx=0.5, rely=0.1, anchor=tk.CENTER) 
+
+try:
+    dark_mode_image_original = Image.open("docs/images/Dark/icon_darkmode.png")
+    light_mode_image_original = Image.open("docs/images/Light/icon_lightmode.png")
+    theme_mode_photo = ctk.CTkImage(light_image=light_mode_image_original, dark_image=dark_mode_image_original, size=(60,60))
+except Exception as e:
+    print(f"Error loading image: {e}. Using text icon.")
+    theme_mode_photo = None
+
+theme_mode = ctk.CTkButton(
+    pages["menu_page"],
+    text="",
+    width=60,
+    height=60,
+    corner_radius=5,
+    image=theme_mode_photo,
+    fg_color=("#F0F2F5", "#1A1A2E"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
+    hover_color=("#D1D9E6", "#0E0E3D"),
+    command=theme_control
+)
+theme_mode.place(relx=0.1, rely=0.1, anchor=tk.CENTER)
 
 # Button to return
 return_button = ctk.CTkButton(
@@ -178,13 +200,13 @@ return_button = ctk.CTkButton(
     font=ctk.CTkFont(size=15, weight="bold"),
     width=195,
     height=45,
-    text_color="#00ccff",
+    text_color=("#007799", "#00CCFF"),
     corner_radius=25,
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
-    hover_color="#0e0e3d",
+    fg_color=("#F0F2F5", "#1A1A2E"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
+    hover_color=("#D1D9E6", "#0E0E3D"),
     border_width=3,
-    border_color="#00ccff",
+    border_color=("#007799", "#00CCFF"),
     command=lambda: show_page("initial_page"))
 return_button.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
 
@@ -192,8 +214,8 @@ return_button.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
 scrollable_frame = ctk.CTkScrollableFrame(
     pages["menu_page"], 
     width=600, height=300,
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",)
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"))
 scrollable_frame.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
 
 scrollable_frame.columnconfigure(0, weight=1, uniform="group1")
@@ -208,9 +230,9 @@ information = ctk.CTkLabel(
     font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"),
     wraplength=370,
     justify=tk.LEFT,
-    text_color="#ffffff", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("black","#ffffff"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=10
 )
 information.place(relx=0.67, rely=0.91, anchor=tk.CENTER)
@@ -223,17 +245,26 @@ def on_leave():
 
 # Program 1
 buttons_config = [
-    {"text":"Temperature", "description":"Calculate the equivalent temperature in degrees Fahrenheit and Kelvin from a temperature in Celsius", "image":"docs/images/icon1.jpg", "color":"#ff5555", "command": lambda: show_page("temperature_conversion_page")},
-    {"text":"Cloud Storage Cost", "description":"Determine the total monthly and annual cost of cloud storage, based on the GB stored and the unit price", "image":"docs/images/icon2.jpg", "color":"#aa55ff", "command": lambda: show_page("cloud_storage_cost_page")},
-    {"text":"Execution Time", "description":"Calculate the total time (in seconds and minutes) that a program takes to execute, given its operations and execution speed", "image":"docs/images/icon3.jpg", "color":"#ffff55", "command": lambda: show_page("execution_time_calculator_page")},
-    {"text":"Euclidean Distance", "description":"Calculate the Euclidean distance between two points on a Cartesian plane, using their coordinates (x1, y1) and (x2, y2)", "image":"docs/images/icon4.jpg", "color":"#55ff55", "command": lambda: show_page("euclidean_distance_calculator_page")},
-    {"text":"Average Grade", "description":"Calculate a student's final average grade from four individual grades", "image":"docs/images/icon5.jpg", "color":"#ff55aa", "command": lambda: show_page("average_grade_page")},
-    {"text":"Simple Interest", "description":"Calculate the final total amount to be paid on a loan, considering the initial capital, the simple interest rate, and the time in years", "image":"docs/images/icon6.jpg", "color":"#ffaa00", "command": lambda: show_page("simple_interest_calculator_page")},
-    {"text":"Average Speed", "description":"Calculate the average speed of a drone in km/h and m/s, given the distance traveled and the time taken", "image":"docs/images/icon7.jpg", "color":"#55ffff", "command": lambda: show_page("average_speed_of_a_drone_page")},
-    {"text":"Body Mass Index", "description":"Calculate a person's BMI (Body Mass Index), requiring their weight in kilograms and their height in meters", "image":"docs/images/icon8.jpg", "color":"#5555ff", "command": lambda: show_page("body_mass_index_calculator_page")},
-    {"text":"Energy Consumption", "description":"Calculate the energy consumption in kWh of a computer during a 30-day month, using its power and the hours of daily use", "image":"docs/images/icon9.jpg", "color":"#aaff55", "command": lambda: show_page("energy_consumption_page")},
-    {"text":"Currency Conversion", "description":"Convert an amount of local currency to its equivalent value in US dollars (USD) and euros (EUR), using given exchange rates", "image":"docs/images/icon10.jpg", "color":"#aaff00", "command": lambda: show_page("currency_conversion_page")},
+    {"text":"Temperature", "description":"Calculate the equivalent temperature in degrees Fahrenheit and Kelvin from a temperature in Celsius", "color":("#CC0000", "#FF5555"), "command": lambda: show_page("temperature_conversion_page")},
+    {"text":"Cloud Storage Cost", "description":"Determine the total monthly and annual cost of cloud storage, based on the GB stored and the unit price", "color": ("#7722CC", "#AA55FF"), "command": lambda: show_page("cloud_storage_cost_page")},
+    {"text":"Execution Time", "description":"Calculate the total time (in seconds and minutes) that a program takes to execute, given its operations and execution speed", "color": ("#888800", "#FFFF55"), "command": lambda: show_page("execution_time_calculator_page")},
+    {"text":"Euclidean Distance", "description":"Calculate the Euclidean distance between two points on a Cartesian plane, using their coordinates (x1, y1) and (x2, y2)", "color": ("#009900", "#55FF55"), "command": lambda: show_page("euclidean_distance_calculator_page")},
+    {"text":"Average Grade", "description":"Calculate a student's final average grade from four individual grades", "color":("#CC0077", "#FF55AA"), "command": lambda: show_page("average_grade_page")},
+    {"text":"Simple Interest", "description":"Calculate the final total amount to be paid on a loan, considering the initial capital, the simple interest rate, and the time in years", "color":("#CC7700", "#FFAA00"), "command": lambda: show_page("simple_interest_calculator_page")},
+    {"text":"Average Speed", "description":"Calculate the average speed of a drone in km/h and m/s, given the distance traveled and the time taken", "color": ("#008888", "#55FFFF"), "command": lambda: show_page("average_speed_of_a_drone_page")},
+    {"text":"Body Mass Index", "description":"Calculate a person's BMI (Body Mass Index), requiring their weight in kilograms and their height in meters", "color": ("#0000CC", "#5555FF"), "command": lambda: show_page("body_mass_index_calculator_page")},
+    {"text":"Energy Consumption", "description":"Calculate the energy consumption in kWh of a computer during a 30-day month, using its power and the hours of daily use", "color": ("#66AA00", "#AAFF55"), "command": lambda: show_page("energy_consumption_page")},
+    {"text":"Currency Conversion", "description":"Convert an amount of local currency to its equivalent value in US dollars (USD) and euros (EUR), using given exchange rates", "color":("#88AA00", "#AAFF00"), "command": lambda: show_page("currency_conversion_page")},
 ]
+for i in range(10):
+    try:
+        dark_icon_image_original = Image.open(f"docs/images/Dark/icon{i+1}.jpg")
+        light_icon_image_original = Image.open(f"docs/images/Light/icon{i+1}.jpg")
+        theme_icon_photo = ctk.CTkImage(light_image=light_icon_image_original, dark_image=dark_icon_image_original, size=(64, 64))
+    except Exception as e:
+        print(f"Error loading image: {e}. Using text icon.")
+        theme_icon_photo = None
+    buttons_config[i]["image"] = theme_icon_photo
 
 
 for i, config in enumerate(buttons_config):
@@ -242,14 +273,8 @@ for i, config in enumerate(buttons_config):
     
     # Icon
     # Possible errors
-    try:
-        icon_original = Image.open(config["image"])
-        icon_photo = ctk.CTkImage(light_image=icon_original, size=(64, 64))
-    except Exception as e:
-        print(f"Error loading image: {e}.")
-        icon_photo = None
 # Icon placement and creation of button
-    if icon_photo:
+    if theme_icon_photo:
         option_button = ctk.CTkButton(
         scrollable_frame,
         text=config["text"],
@@ -258,13 +283,13 @@ for i, config in enumerate(buttons_config):
         height=45,
         text_color=config["color"],
         corner_radius=25,
-        fg_color="#0a0a2a",
-        bg_color="#1a1a2e",
-        hover_color="#0e0e3d",
+        fg_color=("#E1E5F2", "#0A0A2A"),
+        bg_color=("#F0F2F5", "#1A1A2E"),
+        hover_color=("#D1D9E6", "#0E0E3D"),
         border_width=3,
         border_color=config["color"],
         compound="bottom",
-        image=icon_photo,
+        image=config["image"],
         command=config["command"])
     else:
         option_button = ctk.CTkButton(
