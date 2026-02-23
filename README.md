@@ -97,14 +97,12 @@ pip install -e .
 </ul>
 
 ## Upcoming Improvements
-<ul>
-  <input type="checkbox" style="pointer-events: none;"> Add unit tests<br>
-  <input type="checkbox" style="pointer-events: none;"> Create an executable .exe<br>
-  <input type="checkbox" checked style="pointer-events: none;"> Implement dark/light mode<br>
-  <input type="checkbox" style="pointer-events: none;"> Add calculation history<br>
-  <input type="checkbox" style="pointer-events: none;"> Internationalization (Spanish/English)<br>
-  <input type="checkbox" style="pointer-events: none;"> Advanced scientific calculators
-</ul>
+- [ ] Add unit tests
+- [ ] Create an executable .exe
+- [x] Implement dark/light mode
+- [ ] Add calculation history
+- [ ] Internationalization (Spanish/English)
+- [ ] Advanced scientific calculators
 
 ## Autor
 <b>Dereck Misael Tandazo Brito</b> - Student of Data Science and AI - UTMACH
