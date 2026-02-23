@@ -18,6 +18,7 @@
 - **Button to copy results** to clipboard
 - **Robust error handling** and input validation
 - **Modular** and well-documented code
+- **Dark/light** mode
 
 ## Calculators Included
 | # | Calculator | Description | Icon |
@@ -37,8 +38,8 @@
 <div align="center">
   <img src="docs/screenshots/main_screenshot.png" width="45%" alt="Main interface"><p>Main Interface</p>
   <img src="docs/screenshots/screenshot_menu.png" width="45%" alt="Menu Interface"><p>Menu Interface</p>
-  <img src="docs/screenshots/screenshot_calculator.png" width="45%" alt="Example calculator results interface"><p>Example Calculator Results Interface</p>
   <img src="docs/screenshots/screenshot_tooltip.png" width="45%" alt="Tootil"><p>Tooltip (Menu Interface)</p>
+  <img src="docs/screenshots/screenshot_calculator.png" width="45%" alt="Example calculator results interface"><p>Example Calculator Results Interface</p>
   <img src="docs/screenshots/screenshot_error.png" width="45%" alt="Error message"><p>Error Message (In each calculator interface)</p>
   <br>
 </div>
