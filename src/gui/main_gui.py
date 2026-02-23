@@ -300,9 +300,9 @@ for i, config in enumerate(buttons_config):
         height=45,
         text_color=config["color"],
         corner_radius=25,
-        fg_color="#0a0a2a",
-        bg_color="#1a1a2e",
-        hover_color="#0e0e3d",
+        fg_color=("#E1E5F2", "#0A0A2A"),
+        bg_color=("#F0F2F5", "#1A1A2E"),
+        hover_color=("#D1D9E6", "#0E0E3D"),
         border_width=3,
         border_color=config["color"],
         command=config["command"])
@@ -978,7 +978,7 @@ button_calculate_exe = ctk.CTkButton(
     font=ctk.CTkFont(size=12, weight="bold"),
     width=200,
     height=45,
-    text_color="#1a1a2e",
+    text_color=("#FFFFFF", "#1A1A2E"),
     corner_radius=25,
     fg_color=("#A18800", "#FFFF55"),
     bg_color=("#F0F2F5", "#1A1A2E"),
@@ -1049,7 +1049,7 @@ button_copy_exe = ctk.CTkButton(
     font=ctk.CTkFont(size=12, weight="bold"),
     width=200,
     height=45,
-    text_color="#1a1a2e",
+    text_color=("#FFFFFF", "#1A1A2E"),
     corner_radius=25,
     fg_color=("#A18800", "#FFFF55"),
     bg_color=("#F0F2F5", "#1A1A2E"),
@@ -1161,9 +1161,9 @@ title4 = ctk.CTkLabel(
     text="EUCLIDEAN DISTANCE CALCULATOR", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=28, weight="bold"), 
-    text_color="#55ff55", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#008800", "#55FF55"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 title4.place(relx=0.5, rely=0.06, anchor=tk.CENTER)
 
@@ -1171,10 +1171,10 @@ title4.place(relx=0.5, rely=0.06, anchor=tk.CENTER)
 frame_input4 = ctk.CTkFrame(
     pages["euclidean_distance_calculator_page"],
     width=600, height=170,
-    border_color="#55ff55",
+    border_color=("#008800", "#55FF55"),
     border_width=3,
     corner_radius=10,
-    fg_color="#1a1a2e"
+    fg_color=("#F0F2F5", "#1A1A2E")
 )
 frame_input4.place(relx=0.5, rely=0.3, anchor=tk.CENTER)
 
@@ -1184,23 +1184,23 @@ title_input4 = ctk.CTkLabel(
     text="Input Section", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#e6ffe6", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 title_input4.place(relx=0.5, rely=0.13,anchor=tk.CENTER)
 
 # Label for errors
 errors_euclidean = ctk.CTkLabel(
     frame_input4, 
-    text="",
+    text="Any errors will appear here",
     width=150, height=100,
     font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"),
     wraplength=140,
     justify=tk.LEFT,
-    text_color="#e6ffe6", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=10)
 errors_euclidean.place(relx=0.86, rely=0.34, anchor=tk.CENTER)
 
@@ -1210,9 +1210,9 @@ order_euclidean1 = ctk.CTkLabel(
     text="Enter the value of point 1 - x1:", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#e6ffe6", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 order_euclidean1.place(relx=0.21, rely=0.33, anchor=tk.CENTER)
 order_euclidean2 = ctk.CTkLabel(
@@ -1220,9 +1220,9 @@ order_euclidean2 = ctk.CTkLabel(
     text="y1:", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#e6ffe6", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 order_euclidean2.place(relx=0.57, rely=0.33, anchor=tk.CENTER)
 order_euclidean3 = ctk.CTkLabel(
@@ -1230,9 +1230,9 @@ order_euclidean3 = ctk.CTkLabel(
     text="Enter the value of point 2 - x2:", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#e6ffe6", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 order_euclidean3.place(relx=0.21, rely=0.53, anchor=tk.CENTER)
 order_euclidean4 = ctk.CTkLabel(
@@ -1240,9 +1240,9 @@ order_euclidean4 = ctk.CTkLabel(
     text="y2:", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#e6ffe6", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 order_euclidean4.place(relx=0.57, rely=0.53, anchor=tk.CENTER)
 # Entrys orders
@@ -1250,37 +1250,37 @@ entry_euclidean1 = ctk.CTkEntry(
     frame_input4, 
     placeholder_text="0.0",
     width=60,
-    fg_color="#113311",                 
-    text_color="#e6ffe6",               
-    border_color="#55ff55",             
-    placeholder_text_color="#e6ffe6")
+    fg_color=("#E6FFE6", "#113311"),
+    text_color=("#004400", "#E6FFE6"),
+    border_color=("#008800", "#55FF55"),
+    placeholder_text_color=("#558855", "#E6FFE6"))
 entry_euclidean1.place(relx=0.47, rely=0.33, anchor=tk.CENTER)
 entry_euclidean2 = ctk.CTkEntry(
     frame_input4, 
     placeholder_text="0.0",
     width=60,
-    fg_color="#113311",                 
-    text_color="#e6ffe6",               
-    border_color="#55ff55",             
-    placeholder_text_color="#e6ffe6")
+    fg_color=("#E6FFE6", "#113311"),                 
+    text_color=("#004400", "#E6FFE6"),               
+    border_color=("#008800", "#55FF55"),             
+    placeholder_text_color=("#558855", "#E6FFE6"))           
 entry_euclidean2.place(relx=0.67, rely=0.33, anchor=tk.CENTER)
 entry_euclidean3 = ctk.CTkEntry(
     frame_input4, 
     placeholder_text="0.0",
     width=60,
-    fg_color="#113311",                 
-    text_color="#e6ffe6",               
-    border_color="#55ff55",             
-    placeholder_text_color="#e6ffe6")
+    fg_color=("#E6FFE6", "#113311"),
+    text_color=("#004400", "#E6FFE6"),
+    border_color=("#008800", "#55FF55"),
+    placeholder_text_color=("#558855", "#E6FFE6"))
 entry_euclidean3.place(relx=0.47, rely=0.53, anchor=tk.CENTER)
 entry_euclidean4 = ctk.CTkEntry(
     frame_input4, 
     placeholder_text="0.0",
     width=60,
-    fg_color="#113311",                 
-    text_color="#e6ffe6",               
-    border_color="#55ff55",             
-    placeholder_text_color="#e6ffe6")
+    fg_color=("#E6FFE6", "#113311"),
+    text_color=("#004400", "#E6FFE6"),
+    border_color=("#008800", "#55FF55"),
+    placeholder_text_color=("#558855", "#E6FFE6"))
 entry_euclidean4.place(relx=0.67, rely=0.53, anchor=tk.CENTER)
 # Button calculate and clean
 button_calculate_euclidean = ctk.CTkButton(
@@ -1289,11 +1289,11 @@ button_calculate_euclidean = ctk.CTkButton(
     font=ctk.CTkFont(size=12, weight="bold"),
     width=200,
     height=45,
-    text_color="#1a1a2e",
+    text_color=("#FFFFFF", "#1A1A2E"),
     corner_radius=25,
-    fg_color="#55ff55",
-    bg_color="#1a1a2e",
-    hover_color="#99ff99",
+    fg_color=("#008800", "#55FF55"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
+    hover_color=("#006600", "#99FF99"),
     command=calculate_euclidean)
 button_calculate_euclidean.place(relx=0.2, rely=0.8, anchor=tk.CENTER)
 button_clean4 = ctk.CTkButton(
@@ -1304,9 +1304,9 @@ button_clean4 = ctk.CTkButton(
     height=45,
     text_color="#e6ffe6",
     corner_radius=25,
-    fg_color="#555577",
-    bg_color="#1a1a2e",
-    hover_color="#444466",
+    fg_color=("#555577", "#555577"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
+    hover_color=("#444466", "#444466"),
     command=clean_text_euclidean)
 button_clean4.place(relx=0.8, rely=0.8, anchor=tk.CENTER)
 
@@ -1314,8 +1314,8 @@ button_clean4.place(relx=0.8, rely=0.8, anchor=tk.CENTER)
 frame_results4 = ctk.CTkFrame(
     pages["euclidean_distance_calculator_page"], 
     width=600, height=150,
-    fg_color="#1a1a2e",
-    border_color="#555577",
+    fg_color=("#F0F2F5", "#1A1A2E"),
+    border_color=("#D1D1D1", "#555577"),
     border_width=3,
     corner_radius=10)
 frame_results4.place(relx=0.5, rely=0.66, anchor=tk.CENTER)
@@ -1325,9 +1325,9 @@ title_results_euclidean = ctk.CTkLabel(
     text="Results Panel", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#e6ffe6", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 title_results_euclidean.place(relx=0.5, rely=0.15,anchor=tk.CENTER)
 
@@ -1336,10 +1336,10 @@ coordinates = ctk.CTkLabel(
     frame_results4, 
     text="Coordinates:", 
     font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"), 
-    text_color="#e6ffe6",
+    text_color=("#1A1A2E", "#FFFFFF"),
     width=160,
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 coordinates.place(relx=0.15, rely=0.43, anchor=tk.CENTER)
 
@@ -1348,9 +1348,9 @@ coordinates_results = ctk.CTkLabel(
     text="(P1: 0, 0 | P2: 0, 0)",
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#55ff55", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#008800", "#55FF55"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 coordinates_results.place(relx=0.46, rely=0.43, anchor=tk.CENTER)
 
@@ -1360,11 +1360,11 @@ button_copy_euclidean = ctk.CTkButton(
     font=ctk.CTkFont(size=12, weight="bold"),
     width=200,
     height=45,
-    text_color="#1a1a2e",
+    text_color=("#FFFFFF", "#1A1A2E"),
     corner_radius=25,
-    fg_color="#55ff55",
-    bg_color="#1a1a2e",
-    hover_color="#99ff99",
+    fg_color=("#008800", "#55FF55"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
+    hover_color=("#006600", "#99FF99"),
     command=copy_results_euclidean1)
 button_copy_euclidean.place(relx=0.8, rely=0.43, anchor=tk.CENTER)
 
@@ -1373,10 +1373,10 @@ euclidean_distance = ctk.CTkLabel(
     frame_results4, 
     text="The Euclidean distance is:", 
     font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"), 
-    text_color="#e6ffe6",
+    text_color=("#1A1A2E", "#FFFFFF"),
     width=200,
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 euclidean_distance.place(relx=0.19, rely=0.80, anchor=tk.CENTER)
 
@@ -1385,9 +1385,9 @@ euclidean_distance_results = ctk.CTkLabel(
     text="00.00",
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#55ff55", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#008800", "#55FF55"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 euclidean_distance_results.place(relx=0.50, rely=0.80, anchor=tk.CENTER)
 
@@ -1399,9 +1399,9 @@ button_copy_euclidean2 = ctk.CTkButton(
     height=45,
     text_color="#e6ffe6",
     corner_radius=25,
-    fg_color="#555577",
-    bg_color="#1a1a2e",
-    hover_color="#444466",
+    fg_color=("#555577", "#555577"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
+    hover_color=("#444466", "#444466"),
     command=copy_results_euclidean2)
 button_copy_euclidean2.place(relx=0.8, rely=0.80, anchor=tk.CENTER)
 
@@ -1412,13 +1412,13 @@ return_button4 = ctk.CTkButton(
     font=ctk.CTkFont(size=15, weight="bold"),
     width=195,
     height=45,
-    text_color="#55ff55",
+    text_color=("#008800", "#55FF55"),
     corner_radius=25,
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
-    hover_color="#0e0e3d",
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
+    hover_color=("#D1D9E6", "#0E0E3D"),
     border_width=3,
-    border_color="#55ff55",
+    border_color=("#008800", "#55FF55"),
     command=lambda: show_page("menu_page"))
 return_button4.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
 
@@ -1477,9 +1477,9 @@ title5 = ctk.CTkLabel(
     text="AVERAGE GRADE CALCULATOR", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=28, weight="bold"), 
-    text_color="#ff55aa", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#D60073", "#FF55AA"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 title5.place(relx=0.5, rely=0.06, anchor=tk.CENTER)
 
@@ -1487,10 +1487,10 @@ title5.place(relx=0.5, rely=0.06, anchor=tk.CENTER)
 frame_input5 = ctk.CTkFrame(
     pages["average_grade_page"],
     width=600, height=170,
-    border_color="#ff55aa",
+    border_color=("#D60073", "#FF55AA"),
     border_width=3,
     corner_radius=10,
-    fg_color="#1a1a2e"
+    fg_color=("#F0F2F5", "#1A1A2E")
 )
 frame_input5.place(relx=0.5, rely=0.3, anchor=tk.CENTER)
 
@@ -1500,23 +1500,23 @@ title_input5 = ctk.CTkLabel(
     text="Input Section", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#ffffff", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 title_input5.place(relx=0.5, rely=0.13,anchor=tk.CENTER)
 
 # Label for errors
 errors_grade = ctk.CTkLabel(
     frame_input5, 
-    text="",
+    text="Any errors will appear here",
     width=150, height=100,
     font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"),
     wraplength=140,
     justify=tk.LEFT,
-    text_color="#ffffff", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=10)
 errors_grade.place(relx=0.86, rely=0.34, anchor=tk.CENTER)
 
@@ -1526,9 +1526,9 @@ order_grade1 = ctk.CTkLabel(
     text="Enter the value of the grade 1:", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#ffffff", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 order_grade1.place(relx=0.21, rely=0.33, anchor=tk.CENTER)
 order_grade2 = ctk.CTkLabel(
@@ -1536,9 +1536,9 @@ order_grade2 = ctk.CTkLabel(
     text="2:", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#ffffff", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 order_grade2.place(relx=0.57, rely=0.33, anchor=tk.CENTER)
 order_grade3 = ctk.CTkLabel(
@@ -1546,9 +1546,9 @@ order_grade3 = ctk.CTkLabel(
     text="Enter the value of the grade 3:", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#ffffff", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 order_grade3.place(relx=0.21, rely=0.53, anchor=tk.CENTER)
 order_grade4 = ctk.CTkLabel(
@@ -1556,9 +1556,9 @@ order_grade4 = ctk.CTkLabel(
     text="4:", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#ffffff", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 order_grade4.place(relx=0.57, rely=0.53, anchor=tk.CENTER)
 # Entrys orders
@@ -1566,37 +1566,37 @@ entry_grade1 = ctk.CTkEntry(
     frame_input5, 
     placeholder_text="0.0",
     width=60,
-    fg_color="#44112b",                 
-    text_color="#ffffff",               
-    border_color="#ff55aa",             
-    placeholder_text_color="#ffffff")
+    fg_color=("#FFF0F6", "#44112B"),                 
+    text_color=("#1A1A2E", "#FFFFFF"),               
+    border_color=("#D60073", "#FF55AA") ,             
+    placeholder_text_color=("#884466", "#FFFFFF"))
 entry_grade1.place(relx=0.47, rely=0.33, anchor=tk.CENTER)
 entry_grade2 = ctk.CTkEntry(
     frame_input5, 
     placeholder_text="0.0",
     width=60,
-    fg_color="#44112b",                 
-    text_color="#ffffff",               
-    border_color="#ff55aa",             
-    placeholder_text_color="#ffffff")
+    fg_color=("#FFF0F6", "#44112B"),                 
+    text_color=("#1A1A2E", "#FFFFFF"),               
+    border_color=("#D60073", "#FF55AA") ,             
+    placeholder_text_color=("#884466", "#FFFFFF"))
 entry_grade2.place(relx=0.67, rely=0.33, anchor=tk.CENTER)
 entry_grade3 = ctk.CTkEntry(
     frame_input5, 
     placeholder_text="0.0",
     width=60,
-    fg_color="#44112b",                 
-    text_color="#ffffff",               
-    border_color="#ff55aa",             
-    placeholder_text_color="#ffffff")
+    fg_color=("#FFF0F6", "#44112B"),                 
+    text_color=("#1A1A2E", "#FFFFFF"),               
+    border_color=("#D60073", "#FF55AA") ,             
+    placeholder_text_color=("#884466", "#FFFFFF"))
 entry_grade3.place(relx=0.47, rely=0.53, anchor=tk.CENTER)
 entry_grade4 = ctk.CTkEntry(
     frame_input5, 
     placeholder_text="0.0",
     width=60,
-    fg_color="#44112b",                 
-    text_color="#ffffff",               
-    border_color="#ff55aa",             
-    placeholder_text_color="#ffffff")
+    fg_color=("#FFF0F6", "#44112B"),                 
+    text_color=("#1A1A2E", "#FFFFFF"),               
+    border_color=("#D60073", "#FF55AA") ,             
+    placeholder_text_color=("#884466", "#FFFFFF"))
 entry_grade4.place(relx=0.67, rely=0.53, anchor=tk.CENTER)
 # Button calculate and clean
 button_calculate_grade = ctk.CTkButton(
@@ -1605,11 +1605,11 @@ button_calculate_grade = ctk.CTkButton(
     font=ctk.CTkFont(size=12, weight="bold"),
     width=200,
     height=45,
-    text_color="#1a1a2e",
+    text_color=("#FFFFFF", "#1A1A2E"),
     corner_radius=25,
-    fg_color="#ff55aa",
-    bg_color="#1a1a2e",
-    hover_color="#ff99cc",
+    fg_color=("#D60073", "#FF55AA"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
+    hover_color=("#B30060", "#FF99CC"),
     command=calculate_grades)
 button_calculate_grade.place(relx=0.2, rely=0.8, anchor=tk.CENTER)
 button_clean5 = ctk.CTkButton(
@@ -1620,9 +1620,9 @@ button_clean5 = ctk.CTkButton(
     height=45,
     text_color="#ffffff",
     corner_radius=25,
-    fg_color="#555577",
-    bg_color="#1a1a2e",
-    hover_color="#444466",
+    fg_color=("#555577", "#555577"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
+    hover_color=("#444466", "#444466"),
     command=clean_text_grade)
 button_clean5.place(relx=0.8, rely=0.8, anchor=tk.CENTER)
 
@@ -1630,8 +1630,8 @@ button_clean5.place(relx=0.8, rely=0.8, anchor=tk.CENTER)
 frame_results5 = ctk.CTkFrame(
     pages["average_grade_page"], 
     width=600, height=150,
-    fg_color="#1a1a2e",
-    border_color="#555577",
+    fg_color=("#F0F2F5", "#1A1A2E"),
+    border_color=("#D1D1D1", "#555577"),
     border_width=3,
     corner_radius=10)
 frame_results5.place(relx=0.5, rely=0.66, anchor=tk.CENTER)
@@ -1641,9 +1641,9 @@ title_results_grade = ctk.CTkLabel(
     text="Results Panel", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#ffffff", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 title_results_grade.place(relx=0.5, rely=0.15,anchor=tk.CENTER)
 
@@ -1652,10 +1652,10 @@ grades = ctk.CTkLabel(
     frame_results5, 
     text="Grades:", 
     font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"), 
-    text_color="#ffffff",
+    text_color=("#1A1A2E", "#FFFFFF"),
     width=160,
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 grades.place(relx=0.15, rely=0.43, anchor=tk.CENTER)
 
@@ -1664,9 +1664,9 @@ grades_results = ctk.CTkLabel(
     text="(G1: 0| G2: 0| G3: 0| G4: 0)",
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#ff55aa", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#D60073", "#FF55AA"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 grades_results.place(relx=0.46, rely=0.43, anchor=tk.CENTER)
 
@@ -1676,11 +1676,11 @@ button_copy_grades = ctk.CTkButton(
     font=ctk.CTkFont(size=12, weight="bold"),
     width=200,
     height=45,
-    text_color="#1a1a2e",
+    text_color=("#FFFFFF", "#1A1A2E"),
     corner_radius=25,
-    fg_color="#ff55aa",
-    bg_color="#1a1a2e",
-    hover_color="#ff99cc",
+    fg_color=("#D60073", "#FF55AA"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
+    hover_color=("#B30060", "#FF99CC"),
     command=copy_results_grade1)
 button_copy_grades.place(relx=0.8, rely=0.43, anchor=tk.CENTER)
 
@@ -1689,10 +1689,10 @@ average = ctk.CTkLabel(
     frame_results5, 
     text="The average grade is:", 
     font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"), 
-    text_color="#ffffff",
+    text_color=("#1A1A2E", "#FFFFFF"),
     width=200,
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 average.place(relx=0.19, rely=0.80, anchor=tk.CENTER)
 
@@ -1701,9 +1701,9 @@ average_grade_results = ctk.CTkLabel(
     text="00.00",
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#ff55aa", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#D60073", "#FF55AA"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 average_grade_results.place(relx=0.50, rely=0.80, anchor=tk.CENTER)
 
@@ -1715,9 +1715,9 @@ button_copy_grades2 = ctk.CTkButton(
     height=45,
     text_color="#ffffff",
     corner_radius=25,
-    fg_color="#555577",
-    bg_color="#1a1a2e",
-    hover_color="#444466",
+    fg_color=("#555577", "#555577"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
+    hover_color=("#444466", "#444466"),
     command=copy_results_grade2)
 button_copy_grades2.place(relx=0.8, rely=0.80, anchor=tk.CENTER)
 
@@ -1728,13 +1728,13 @@ return_button5 = ctk.CTkButton(
     font=ctk.CTkFont(size=15, weight="bold"),
     width=195,
     height=45,
-    text_color="#ff55aa",
+    text_color=("#D60073", "#FF55AA"),
     corner_radius=25,
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
-    hover_color="#0e0e3d",
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
+    hover_color=("#D1D9E6", "#0E0E3D"),
     border_width=3,
-    border_color="#ff55aa",
+    border_color=("#D60073", "#FF55AA"),
     command=lambda: show_page("menu_page"))
 return_button5.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
 
@@ -1794,9 +1794,9 @@ title6 = ctk.CTkLabel(
     text="SIMPLE INTEREST CALCULATOR", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=28, weight="bold"), 
-    text_color="#ffaa00", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#E67E00", "#FFAA00"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 title6.place(relx=0.5, rely=0.06, anchor=tk.CENTER)
 
@@ -1804,10 +1804,10 @@ title6.place(relx=0.5, rely=0.06, anchor=tk.CENTER)
 frame_input6 = ctk.CTkFrame(
     pages["simple_interest_calculator_page"],
     width=600, height=170,
-    border_color="#ffaa00",
+    border_color=("#E67E00", "#FFAA00"),
     border_width=3,
     corner_radius=10,
-    fg_color="#1a1a2e"
+    fg_color=("#F0F2F5", "#1A1A2E")
 )
 frame_input6.place(relx=0.5, rely=0.3, anchor=tk.CENTER)
 
@@ -1817,23 +1817,23 @@ title_input6 = ctk.CTkLabel(
     text="Input Section", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#fff5e6", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 title_input6.place(relx=0.5, rely=0.13,anchor=tk.CENTER)
 
 # Label for errors
 errors_interest = ctk.CTkLabel(
     frame_input6, 
-    text="",
+    text="Any errors will appear here",
     width=150, height=100,
     font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"),
     wraplength=140,
     justify=tk.LEFT,
-    text_color="#fff5e6", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=10)
 errors_interest.place(relx=0.86, rely=0.34, anchor=tk.CENTER)
 
@@ -1843,9 +1843,9 @@ order_interest1 = ctk.CTkLabel(
     text="Enter the initial capital:", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#fff5e6", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 order_interest1.place(relx=0.17, rely=0.33, anchor=tk.CENTER)
 order_interest2 = ctk.CTkLabel(
@@ -1853,9 +1853,9 @@ order_interest2 = ctk.CTkLabel(
     text="Years:", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#fff5e6", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 order_interest2.place(relx=0.55, rely=0.33, anchor=tk.CENTER)
 order_interest3 = ctk.CTkLabel(
@@ -1863,9 +1863,9 @@ order_interest3 = ctk.CTkLabel(
     text="Enter the annual interest rate (%):", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#fff5e6", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 order_interest3.place(relx=0.23, rely=0.53, anchor=tk.CENTER)
 # Entrys orders
@@ -1873,28 +1873,28 @@ entry_interest1 = ctk.CTkEntry(
     frame_input6, 
     placeholder_text="0.0",
     width=60,
-    fg_color="#442d00",                 
-    text_color="#fff5e6",               
-    border_color="#ffaa00",             
-    placeholder_text_color="#fff5e6")
+    fg_color=("#FFF4E5","#442d00"),                 
+    text_color=("#1A1A2E", "#FFFFFF"),               
+    border_color=("#E67E00", "#FFAA00"),             
+    placeholder_text_color=("#996633","#fff5e6"))
 entry_interest1.place(relx=0.39, rely=0.33, anchor=tk.CENTER)
 entry_interest2 = ctk.CTkEntry(
     frame_input6, 
     placeholder_text="0.0",
     width=60,
-    fg_color="#442d00",                 
-    text_color="#fff5e6",               
-    border_color="#ffaa00",             
-    placeholder_text_color="#fff5e6")
+    fg_color=("#FFF4E5","#442d00"),                 
+    text_color=("#1A1A2E", "#FFFFFF"),               
+    border_color=("#E67E00", "#FFAA00"),             
+    placeholder_text_color=("#996633","#fff5e6"))
 entry_interest2.place(relx=0.67, rely=0.33, anchor=tk.CENTER)
 entry_interest3 = ctk.CTkEntry(
     frame_input6, 
     placeholder_text="0.0",
     width=60,
-    fg_color="#442d00",                 
-    text_color="#fff5e6",               
-    border_color="#ffaa00",             
-    placeholder_text_color="#fff5e6")
+    fg_color=("#FFF4E5","#442d00"),                 
+    text_color=("#1A1A2E", "#FFFFFF"),               
+    border_color=("#E67E00", "#FFAA00"),             
+    placeholder_text_color=("#996633","#fff5e6"))
 entry_interest3.place(relx=0.51, rely=0.53, anchor=tk.CENTER)
 # Button calculate and clean
 button_calculate_interest = ctk.CTkButton(
@@ -1903,11 +1903,11 @@ button_calculate_interest = ctk.CTkButton(
     font=ctk.CTkFont(size=12, weight="bold"),
     width=200,
     height=45,
-    text_color="#1a1a2e",
+    text_color=("#FFFFFF", "#1A1A2E"),
     corner_radius=25,
-    fg_color="#ffaa00",
-    bg_color="#1a1a2e",
-    hover_color="#ffcc66",
+    fg_color=("#E67E00", "#FFAA00"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
+    hover_color=("#CC7000", "#FFCC66"),
     command=calculate_interest)
 button_calculate_interest.place(relx=0.2, rely=0.8, anchor=tk.CENTER)
 button_clean6 = ctk.CTkButton(
@@ -1918,9 +1918,9 @@ button_clean6 = ctk.CTkButton(
     height=45,
     text_color="#fff5e6",
     corner_radius=25,
-    fg_color="#555577",
-    bg_color="#1a1a2e",
-    hover_color="#444466",
+    fg_color=("#555577", "#555577"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
+    hover_color=("#444466", "#444466"),
     command=clean_text_interest)
 button_clean6.place(relx=0.8, rely=0.8, anchor=tk.CENTER)
 
@@ -1928,8 +1928,8 @@ button_clean6.place(relx=0.8, rely=0.8, anchor=tk.CENTER)
 frame_results6 = ctk.CTkFrame(
     pages["simple_interest_calculator_page"], 
     width=600, height=150,
-    fg_color="#1a1a2e",
-    border_color="#555577",
+    fg_color=("#F0F2F5", "#1A1A2E"),
+    border_color=("#D1D1D1", "#555577"),
     border_width=3,
     corner_radius=10)
 frame_results6.place(relx=0.5, rely=0.66, anchor=tk.CENTER)
@@ -1939,9 +1939,9 @@ title_results_interest = ctk.CTkLabel(
     text="Results Panel", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#fff5e6", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 title_results_interest.place(relx=0.5, rely=0.15,anchor=tk.CENTER)
 
@@ -1950,10 +1950,10 @@ interest = ctk.CTkLabel(
     frame_results6, 
     text="The interest earned is:", 
     font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"), 
-    text_color="#fff5e6",
+    text_color=("#1A1A2E", "#FFFFFF"),
     width=160,
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 interest.place(relx=0.17, rely=0.43, anchor=tk.CENTER)
 
@@ -1962,9 +1962,9 @@ interest_results = ctk.CTkLabel(
     text="00.00$",
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#ffaa00", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#E67E00", "#FFAA00"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 interest_results.place(relx=0.52, rely=0.43, anchor=tk.CENTER)
 
@@ -1974,11 +1974,11 @@ button_copy_interest = ctk.CTkButton(
     font=ctk.CTkFont(size=12, weight="bold"),
     width=200,
     height=45,
-    text_color="#1a1a2e",
+    text_color=("#FFFFFF", "#1A1A2E"),
     corner_radius=25,
-    fg_color="#ffaa00",
-    bg_color="#1a1a2e",
-    hover_color="#ffcc66",
+    fg_color=("#E67E00", "#FFAA00"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
+    hover_color=("#CC7000", "#FFCC66"),
     command=copy_results_interest1)
 button_copy_interest.place(relx=0.8, rely=0.43, anchor=tk.CENTER)
 
@@ -1987,10 +1987,10 @@ amount = ctk.CTkLabel(
     frame_results6, 
     text="The total amount to be paid is:", 
     font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"), 
-    text_color="#fff5e6",
+    text_color=("#1A1A2E", "#FFFFFF"),
     width=200,
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 amount.place(relx=0.22, rely=0.80, anchor=tk.CENTER)
 
@@ -1999,9 +1999,9 @@ amount_results = ctk.CTkLabel(
     text="00.00$",
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#ffaa00", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#E67E00", "#FFAA00"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 amount_results.place(relx=0.52, rely=0.80, anchor=tk.CENTER)
 
@@ -2013,9 +2013,9 @@ button_copy_interest2 = ctk.CTkButton(
     height=45,
     text_color="#fff5e6",
     corner_radius=25,
-    fg_color="#555577",
-    bg_color="#1a1a2e",
-    hover_color="#444466",
+    fg_color=("#555577", "#555577"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
+    hover_color=("#444466", "#444466"),
     command=copy_results_interest2)
 button_copy_interest2.place(relx=0.8, rely=0.80, anchor=tk.CENTER)
 
@@ -2026,13 +2026,13 @@ return_button6 = ctk.CTkButton(
     font=ctk.CTkFont(size=15, weight="bold"),
     width=195,
     height=45,
-    text_color="#ffaa00",
+    text_color=("#E67E00", "#FFAA00"),
     corner_radius=25,
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
-    hover_color="#0e0e3d",
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
+    hover_color=("#D1D9E6", "#0E0E3D"),
     border_width=3,
-    border_color="#ffaa00",
+    border_color=("#E67E00", "#FFAA00"),
     command=lambda: show_page("menu_page"))
 return_button6.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
 
@@ -2089,9 +2089,9 @@ title7 = ctk.CTkLabel(
     text="AVERAGE SPEED OF A DRONE", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=28, weight="bold"), 
-    text_color="#55ffff", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#008B8B", "#55FFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 title7.place(relx=0.5, rely=0.06, anchor=tk.CENTER)
 
@@ -2099,10 +2099,10 @@ title7.place(relx=0.5, rely=0.06, anchor=tk.CENTER)
 frame_input7 = ctk.CTkFrame(
     pages["average_speed_of_a_drone_page"],
     width=600, height=170,
-    border_color="#55ffff",
+    border_color=("#008B8B", "#55FFFF"),
     border_width=3,
     corner_radius=10,
-    fg_color="#1a1a2e"
+    fg_color=("#F0F2F5", "#1A1A2E")
 )
 frame_input7.place(relx=0.5, rely=0.3, anchor=tk.CENTER)
 
@@ -2112,23 +2112,23 @@ title_input7 = ctk.CTkLabel(
     text="Input Section", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#ffffff", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 title_input7.place(relx=0.5, rely=0.13,anchor=tk.CENTER)
 
 # Label for errors
 errors_speed = ctk.CTkLabel(
     frame_input7, 
-    text="",
+    text="Any errors will appear here",
     width=150, height=100,
     font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"),
     wraplength=140,
     justify=tk.LEFT,
-    text_color="#ffffff", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=10)
 errors_speed.place(relx=0.80, rely=0.34, anchor=tk.CENTER)
 
@@ -2138,9 +2138,9 @@ order_speed1 = ctk.CTkLabel(
     text="Enter the distance traveled (km):", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#ffffff", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 order_speed1.place(relx=0.23, rely=0.33, anchor=tk.CENTER)
 order_speed2 = ctk.CTkLabel(
@@ -2148,9 +2148,9 @@ order_speed2 = ctk.CTkLabel(
     text="Enter the time taken (hours):", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#ffffff", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 order_speed2.place(relx=0.21, rely=0.53, anchor=tk.CENTER)
 # Entrys orders
@@ -2158,19 +2158,19 @@ entry_speed1 = ctk.CTkEntry(
     frame_input7, 
     placeholder_text="0.0",
     width=60,
-    fg_color="#113333",                 
-    text_color="#ffffff",               
-    border_color="#55ffff",             
-    placeholder_text_color="#ffffff")
+    fg_color=("#E0FFFF", "#113333"),              
+    text_color=("#1A1A2E", "#FFFFFF"),               
+    border_color=("#008B8B", "#55FFFF"),             
+    placeholder_text_color=("#558888","#ffffff"))
 entry_speed1.place(relx=0.51, rely=0.33, anchor=tk.CENTER)
 entry_speed2 = ctk.CTkEntry(
     frame_input7, 
     placeholder_text="0.0",
     width=60,
-    fg_color="#113333",                 
-    text_color="#ffffff",               
-    border_color="#55ffff",             
-    placeholder_text_color="#ffffff")
+    fg_color=("#E0FFFF", "#113333"),              
+    text_color=("#1A1A2E", "#FFFFFF"),               
+    border_color=("#008B8B", "#55FFFF"),             
+    placeholder_text_color=("#558888","#ffffff"))
 entry_speed2.place(relx=0.51, rely=0.53, anchor=tk.CENTER)
 # Button calculate and clean
 button_calculate_speed = ctk.CTkButton(
@@ -2179,11 +2179,11 @@ button_calculate_speed = ctk.CTkButton(
     font=ctk.CTkFont(size=12, weight="bold"),
     width=200,
     height=45,
-    text_color="#1a1a2e",
+    text_color=("#FFFFFF", "#1A1A2E"),
     corner_radius=25,
-    fg_color="#55ffff",
-    bg_color="#1a1a2e",
-    hover_color="#a2ffff",
+    fg_color=("#008B8B", "#55FFFF"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
+    hover_color=("#006D6D","#a2ffff"),
     command=calculate_speed)
 button_calculate_speed.place(relx=0.2, rely=0.8, anchor=tk.CENTER)
 button_clean7 = ctk.CTkButton(
@@ -2194,9 +2194,9 @@ button_clean7 = ctk.CTkButton(
     height=45,
     text_color="#ffffff",
     corner_radius=25,
-    fg_color="#555577",
-    bg_color="#1a1a2e",
-    hover_color="#444466",
+    fg_color=("#555577", "#555577"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
+    hover_color=("#444466", "#444466"),
     command=clean_text_speed)
 button_clean7.place(relx=0.8, rely=0.8, anchor=tk.CENTER)
 
@@ -2204,8 +2204,8 @@ button_clean7.place(relx=0.8, rely=0.8, anchor=tk.CENTER)
 frame_results7 = ctk.CTkFrame(
     pages["average_speed_of_a_drone_page"], 
     width=600, height=150,
-    fg_color="#1a1a2e",
-    border_color="#555577",
+    fg_color=("#F0F2F5", "#1A1A2E"),
+    border_color=("#D1D1D1", "#555577"),
     border_width=3,
     corner_radius=10)
 frame_results7.place(relx=0.5, rely=0.66, anchor=tk.CENTER)
@@ -2215,9 +2215,9 @@ title_results_speed = ctk.CTkLabel(
     text="Results Panel", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#ffffff", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 title_results_speed.place(relx=0.5, rely=0.15,anchor=tk.CENTER)
 
@@ -2226,10 +2226,10 @@ kmh = ctk.CTkLabel(
     frame_results7, 
     text="Average speed in km/h:", 
     font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"), 
-    text_color="#ffffff",
+    text_color=("#1A1A2E", "#FFFFFF"),
     width=160,
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 kmh.place(relx=0.18, rely=0.43, anchor=tk.CENTER)
 
@@ -2238,9 +2238,9 @@ kmh_results = ctk.CTkLabel(
     text="00.00km/h",
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#55ffff", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#008B8B", "#55FFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 kmh_results.place(relx=0.50, rely=0.43, anchor=tk.CENTER)
 
@@ -2250,11 +2250,11 @@ button_copy_speed = ctk.CTkButton(
     font=ctk.CTkFont(size=12, weight="bold"),
     width=200,
     height=45,
-    text_color="#1a1a2e",
+    text_color=("#FFFFFF","#1A1A2E"),
     corner_radius=25,
-    fg_color="#55ffff",
-    bg_color="#1a1a2e",
-    hover_color="#a2ffff",
+    fg_color=("#008B8B", "#55FFFF"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
+    hover_color=("#006D6D","#a2ffff"),
     command=copy_results_speed1)
 button_copy_speed.place(relx=0.8, rely=0.43, anchor=tk.CENTER)
 
@@ -2263,10 +2263,10 @@ ms = ctk.CTkLabel(
     frame_results7, 
     text="Average speed in m/s:", 
     font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"), 
-    text_color="#ffffff",
+    text_color=("#1A1A2E", "#FFFFFF"),
     width=200,
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 ms.place(relx=0.19, rely=0.80, anchor=tk.CENTER)
 
@@ -2275,9 +2275,9 @@ ms_results = ctk.CTkLabel(
     text="00.00m/s",
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#55ffff", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#008B8B", "#55FFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 ms_results.place(relx=0.50, rely=0.80, anchor=tk.CENTER)
 
@@ -2289,9 +2289,9 @@ button_copy_speed2 = ctk.CTkButton(
     height=45,
     text_color="#ffffff",
     corner_radius=25,
-    fg_color="#555577",
-    bg_color="#1a1a2e",
-    hover_color="#444466",
+    fg_color=("#555577", "#555577"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
+    hover_color=("#444466", "#444466"),
     command=copy_results_speed2)
 button_copy_speed2.place(relx=0.8, rely=0.80, anchor=tk.CENTER)
 
@@ -2302,13 +2302,13 @@ return_button7 = ctk.CTkButton(
     font=ctk.CTkFont(size=15, weight="bold"),
     width=195,
     height=45,
-    text_color="#55ffff",
+    text_color=("#008B8B", "#55FFFF"),
     corner_radius=25,
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
-    hover_color="#0e0e3d",
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
+    hover_color=("#D1D9E6", "#0E0E3D"),
     border_width=3,
-    border_color="#55ffff",
+    border_color=("#008B8B", "#55FFFF"),
     command=lambda: show_page("menu_page"))
 return_button7.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
 
@@ -2371,9 +2371,9 @@ title8 = ctk.CTkLabel(
     text="BODY MASS INDEX CALCULATOR", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=28, weight="bold"), 
-    text_color="#5555ff", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#3333CC", "#5555FF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 title8.place(relx=0.5, rely=0.06, anchor=tk.CENTER)
 
@@ -2381,10 +2381,10 @@ title8.place(relx=0.5, rely=0.06, anchor=tk.CENTER)
 frame_input8 = ctk.CTkFrame(
     pages["body_mass_index_calculator_page"],
     width=600, height=170,
-    border_color="#5555ff",
+    border_color=("#3333CC", "#5555FF"),
     border_width=3,
     corner_radius=10,
-    fg_color="#1a1a2e"
+    fg_color=("#F0F2F5", "#1A1A2E")
 )
 frame_input8.place(relx=0.5, rely=0.3, anchor=tk.CENTER)
 
@@ -2394,23 +2394,23 @@ title_input8 = ctk.CTkLabel(
     text="Input Section", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#e6e6ff", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 title_input8.place(relx=0.5, rely=0.13,anchor=tk.CENTER)
 
 # Label for errors
 errors_index = ctk.CTkLabel(
     frame_input8, 
-    text="",
+    text="Any errors will appear here",
     width=150, height=100,
     font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"),
     wraplength=140,
     justify=tk.LEFT,
-    text_color="#e6e6ff", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=10)
 errors_index.place(relx=0.80, rely=0.34, anchor=tk.CENTER)
 
@@ -2420,9 +2420,9 @@ order_index1 = ctk.CTkLabel(
     text="Enter the weight in kilograms(kg):", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#e6e6ff", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 order_index1.place(relx=0.23, rely=0.33, anchor=tk.CENTER)
 order_index2 = ctk.CTkLabel(
@@ -2430,9 +2430,9 @@ order_index2 = ctk.CTkLabel(
     text="Enter the height in meters(m):", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#e6e6ff", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 order_index2.place(relx=0.21, rely=0.53, anchor=tk.CENTER)
 # Entrys orders
@@ -2440,19 +2440,19 @@ entry_index1 = ctk.CTkEntry(
     frame_input8, 
     placeholder_text="0.0",
     width=60,
-    fg_color="#111144",                 
-    text_color="#e6e6ff",               
-    border_color="#5555ff",             
-    placeholder_text_color="#e6e6ff")
+    fg_color=("#E6E6FF", "#111144"),                 
+    text_color=("#1A1A2E", "#FFFFFF"),               
+    border_color=("#3333CC", "#5555FF"),             
+    placeholder_text_color=	("#666699","#e6e6ff"))
 entry_index1.place(relx=0.51, rely=0.33, anchor=tk.CENTER)
 entry_index2 = ctk.CTkEntry(
     frame_input8, 
     placeholder_text="0.0",
     width=60,
-    fg_color="#111144",                 
-    text_color="#e6e6ff",               
-    border_color="#5555ff",             
-    placeholder_text_color="#e6e6ff")
+    fg_color=("#E6E6FF", "#111144"),                 
+    text_color=("#1A1A2E", "#FFFFFF"),               
+    border_color=("#3333CC", "#5555FF"),             
+    placeholder_text_color=	("#666699","#e6e6ff"))
 entry_index2.place(relx=0.51, rely=0.53, anchor=tk.CENTER)
 # Button calculate and clean
 button_calculate_index = ctk.CTkButton(
@@ -2461,11 +2461,11 @@ button_calculate_index = ctk.CTkButton(
     font=ctk.CTkFont(size=12, weight="bold"),
     width=200,
     height=45,
-    text_color="#1a1a2e",
+    text_color=("#FFFFFF", "#1A1A2E"),
     corner_radius=25,
-    fg_color="#5555ff",
-    bg_color="#1a1a2e",
-    hover_color="#9999ff",
+    fg_color=("#3333CC", "#5555FF"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
+    hover_color=("#222299","#9999ff"),
     command=calculate_index)
 button_calculate_index.place(relx=0.2, rely=0.8, anchor=tk.CENTER)
 button_clean8 = ctk.CTkButton(
@@ -2476,9 +2476,9 @@ button_clean8 = ctk.CTkButton(
     height=45,
     text_color="#e6e6ff",
     corner_radius=25,
-    fg_color="#555577",
-    bg_color="#1a1a2e",
-    hover_color="#444466",
+    fg_color=("#555577", "#555577"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
+    hover_color=("#444466", "#444466"),
     command=clean_text_index)
 button_clean8.place(relx=0.8, rely=0.8, anchor=tk.CENTER)
 
@@ -2486,8 +2486,8 @@ button_clean8.place(relx=0.8, rely=0.8, anchor=tk.CENTER)
 frame_results8 = ctk.CTkFrame(
     pages["body_mass_index_calculator_page"], 
     width=600, height=150,
-    fg_color="#1a1a2e",
-    border_color="#555577",
+    fg_color=("#F0F2F5", "#1A1A2E"),
+    border_color=("#D1D1D1", "#555577"),
     border_width=3,
     corner_radius=10)
 frame_results8.place(relx=0.5, rely=0.66, anchor=tk.CENTER)
@@ -2497,9 +2497,9 @@ title_results_index = ctk.CTkLabel(
     text="Results Panel", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#e6e6ff", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 title_results_index.place(relx=0.5, rely=0.15,anchor=tk.CENTER)
 
@@ -2508,10 +2508,10 @@ bodymi = ctk.CTkLabel(
     frame_results8, 
     text="The Body Mass Index is:", 
     font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"), 
-    text_color="#e6e6ff",
+    text_color=("#1A1A2E", "#FFFFFF"),
     width=160,
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 bodymi.place(relx=0.17, rely=0.43, anchor=tk.CENTER)
 
@@ -2520,9 +2520,9 @@ bodymi_results = ctk.CTkLabel(
     text="00.00 | Category",
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#5555ff", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#3333CC", "#5555FF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 bodymi_results.place(relx=0.49, rely=0.43, anchor=tk.CENTER)
 
@@ -2532,11 +2532,11 @@ button_copy_index1 = ctk.CTkButton(
     font=ctk.CTkFont(size=12, weight="bold"),
     width=200,
     height=45,
-    text_color="#1a1a2e",
+    text_color=("#FFFFFF", "#1A1A2E"),
     corner_radius=25,
-    fg_color="#5555ff",
-    bg_color="#1a1a2e",
-    hover_color="#9999ff",
+    fg_color=("#3333CC", "#5555FF"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
+    hover_color=("#222299","#9999ff"),
     command=copy_results_index1)
 button_copy_index1.place(relx=0.82, rely=0.43, anchor=tk.CENTER)
 
@@ -2548,9 +2548,9 @@ table_results = ctk.CTkLabel(
     size=12, weight="bold"), 
     wraplength=340,
     justify="left",
-    text_color="#e6e6ff", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 table_results.place(relx=0.31, rely=0.79, anchor=tk.CENTER)
 
@@ -2562,9 +2562,9 @@ button_copy_index2 = ctk.CTkButton(
     height=45,
     text_color="#e6e6ff",
     corner_radius=25,
-    fg_color="#555577",
-    bg_color="#1a1a2e",
-    hover_color="#444466",
+    fg_color=("#555577", "#555577"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
+    hover_color=("#444466", "#444466"),
     command=copy_results_index2)
 button_copy_index2.place(relx=0.82, rely=0.80, anchor=tk.CENTER)
 
@@ -2575,13 +2575,13 @@ return_button8 = ctk.CTkButton(
     font=ctk.CTkFont(size=15, weight="bold"),
     width=195,
     height=45,
-    text_color="#5555ff",
+    text_color=("#3333CC", "#5555FF"),
     corner_radius=25,
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
-    hover_color="#0e0e3d",
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
+    hover_color=("#D1D9E6", "#0E0E3D"),
     border_width=3,
-    border_color="#5555ff",
+    border_color=("#3333CC", "#5555FF"),
     command=lambda: show_page("menu_page"))
 return_button8.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
 
@@ -2641,9 +2641,9 @@ title9 = ctk.CTkLabel(
     text="ENERGY CONSUMPTION OF A COMPUTER", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=26, weight="bold"), 
-    text_color="#aaff55", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#669900", "#AAFF55"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 title9.place(relx=0.5, rely=0.06, anchor=tk.CENTER)
 
@@ -2651,10 +2651,10 @@ title9.place(relx=0.5, rely=0.06, anchor=tk.CENTER)
 frame_input9 = ctk.CTkFrame(
     pages["energy_consumption_page"],
     width=600, height=170,
-    border_color="#aaff55",
+    border_color=("#669900", "#AAFF55"),
     border_width=3,
     corner_radius=10,
-    fg_color="#1a1a2e"
+    fg_color=("#F0F2F5", "#1A1A2E")
 )
 frame_input9.place(relx=0.5, rely=0.3, anchor=tk.CENTER)
 
@@ -2664,23 +2664,23 @@ title_input9 = ctk.CTkLabel(
     text="Input Section", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#ffffff", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 title_input9.place(relx=0.5, rely=0.13,anchor=tk.CENTER)
 
 # Label for errors
 errors_energy = ctk.CTkLabel(
     frame_input9, 
-    text="",
+    text="Any errors will appear here",
     width=150, height=100,
     font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"),
     wraplength=140,
     justify=tk.LEFT,
-    text_color="#ffffff", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=10)
 errors_energy.place(relx=0.86, rely=0.34, anchor=tk.CENTER)
 
@@ -2690,9 +2690,9 @@ order_energy1 = ctk.CTkLabel(
     text="Enter the hours of the computer operates a day:", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#ffffff", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 order_energy1.place(relx=0.31, rely=0.33, anchor=tk.CENTER)
 order_energy2 = ctk.CTkLabel(
@@ -2700,9 +2700,9 @@ order_energy2 = ctk.CTkLabel(
     text="Enter the value of the power of the computer (W):", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#ffffff", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 order_energy2.place(relx=0.32, rely=0.53, anchor=tk.CENTER)
 # Entrys orders
@@ -2710,19 +2710,19 @@ entry_energy1 = ctk.CTkEntry(
     frame_input9, 
     placeholder_text="0.0",
     width=60,
-    fg_color="#223311",                 
-    text_color="#ffffff",               
-    border_color="#aaff55",             
-    placeholder_text_color="#ffffff")
+    fg_color=("#F4FFE6", "#223311"),                 
+    text_color=("#1A1A2E", "#FFFFFF"),               
+    border_color=("#669900", "#AAFF55"),             
+    placeholder_text_color=("#778855","#ffffff"))
 entry_energy1.place(relx=0.67, rely=0.33, anchor=tk.CENTER)
 entry_energy2 = ctk.CTkEntry(
     frame_input9, 
     placeholder_text="0.0",
     width=60,
-    fg_color="#223311",                 
-    text_color="#ffffff",               
-    border_color="#aaff55",             
-    placeholder_text_color="#ffffff")
+    fg_color=("#F4FFE6", "#223311"),                 
+    text_color=("#1A1A2E", "#FFFFFF"),               
+    border_color=("#669900", "#AAFF55"),             
+    placeholder_text_color=("#778855","#ffffff"))
 entry_energy2.place(relx=0.68, rely=0.53, anchor=tk.CENTER)
 # Button calculate and clean
 button_calculate_energy = ctk.CTkButton(
@@ -2731,11 +2731,11 @@ button_calculate_energy = ctk.CTkButton(
     font=ctk.CTkFont(size=12, weight="bold"),
     width=200,
     height=45,
-    text_color="#0a0a2a",
+    text_color=("#FFFFFF","#1A1A2E"),
     corner_radius=25,
-    fg_color="#aaff55",
-    bg_color="#1a1a2e",
-    hover_color="#ccff99",
+    fg_color=("#669900", "#AAFF55"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
+    hover_color=("#4D7300", "#CCFF99"),
     command=calculate_energy)
 button_calculate_energy.place(relx=0.2, rely=0.8, anchor=tk.CENTER)
 button_clean9 = ctk.CTkButton(
@@ -2746,9 +2746,9 @@ button_clean9 = ctk.CTkButton(
     height=45,
     text_color="#ffffff",
     corner_radius=25,
-    fg_color="#555577",
-    bg_color="#1a1a2e",
-    hover_color="#444466",
+    fg_color=("#555577", "#555577"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
+    hover_color=("#444466", "#444466"),
     command=clean_text_energy)
 button_clean9.place(relx=0.8, rely=0.8, anchor=tk.CENTER)
 
@@ -2756,8 +2756,8 @@ button_clean9.place(relx=0.8, rely=0.8, anchor=tk.CENTER)
 frame_results9 = ctk.CTkFrame(
     pages["energy_consumption_page"], 
     width=600, height=150,
-    fg_color="#1a1a2e",
-    border_color="#555577",
+    fg_color=("#F0F2F5", "#1A1A2E"),
+    border_color=("#D1D1D1", "#555577"),
     border_width=3,
     corner_radius=10)
 frame_results9.place(relx=0.5, rely=0.66, anchor=tk.CENTER)
@@ -2767,9 +2767,9 @@ title_results_energy = ctk.CTkLabel(
     text="Results Panel", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#ffffff", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 title_results_energy.place(relx=0.5, rely=0.15,anchor=tk.CENTER)
 
@@ -2778,12 +2778,12 @@ dailyp = ctk.CTkLabel(
     frame_results9, 
     text="Daily usage | Power consumption:", 
     font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"), 
-    text_color="#ffffff",
+    text_color=("#1A1A2E", "#FFFFFF"),
     width=160,
     wraplength=150,
     justify="left",
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 dailyp.place(relx=0.15, rely=0.43, anchor=tk.CENTER)
 
@@ -2792,9 +2792,9 @@ dailyp_results = ctk.CTkLabel(
     text="00.00h | 00.00W",
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#aaff55", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#669900", "#AAFF55"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 dailyp_results.place(relx=0.47, rely=0.43, anchor=tk.CENTER)
 
@@ -2804,11 +2804,11 @@ button_copy_energy1 = ctk.CTkButton(
     font=ctk.CTkFont(size=12, weight="bold"),
     width=200,
     height=45,
-    text_color="#1a1a2e",
+    text_color=("#FFFFFF", "#1A1A2E"),
     corner_radius=25,
-    fg_color="#aaff55",
-    bg_color="#1a1a2e",
-    hover_color="#ccff99",
+    fg_color=("#669900", "#AAFF55"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
+    hover_color=("#4D7300", "#CCFF99"),
     command=copy_results_energy1)
 button_copy_energy1.place(relx=0.82, rely=0.43, anchor=tk.CENTER)
 
@@ -2817,10 +2817,10 @@ consumption = ctk.CTkLabel(
     frame_results9, 
     text="The monthly consumption is:", 
     font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"), 
-    text_color="#ffffff",
+    text_color=("#1A1A2E", "#FFFFFF"),
     width=160,
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 consumption.place(relx=0.20, rely=0.80, anchor=tk.CENTER)
 
@@ -2829,9 +2829,9 @@ consumption_results = ctk.CTkLabel(
     text="00.00kWh",
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"),
-    text_color="#aaff55", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#669900", "#AAFF55"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 consumption_results.place(relx=0.52, rely=0.79, anchor=tk.CENTER)
 
@@ -2843,9 +2843,9 @@ button_copy_energy2 = ctk.CTkButton(
     height=45,
     text_color="#ffffff",
     corner_radius=25,
-    fg_color="#555577",
-    bg_color="#1a1a2e",
-    hover_color="#444466",
+    fg_color=("#555577", "#555577"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
+    hover_color=("#444466", "#444466"),
     command=copy_results_energy2)
 button_copy_energy2.place(relx=0.82, rely=0.80, anchor=tk.CENTER)
 
@@ -2856,13 +2856,13 @@ return_button9 = ctk.CTkButton(
     font=ctk.CTkFont(size=15, weight="bold"),
     width=195,
     height=45,
-    text_color="#aaff55",
+    text_color=("#669900", "#AAFF55"),
     corner_radius=25,
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
-    hover_color="#0e0e3d",
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
+    hover_color=("#D1D9E6", "#0E0E3D"),
     border_width=3,
-    border_color="#aaff55",
+    border_color=("#669900", "#AAFF55"),
     command=lambda: show_page("menu_page"))
 return_button9.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
 
@@ -2924,9 +2924,9 @@ title10 = ctk.CTkLabel(
     text="CURRENCY CONVERSION", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=28, weight="bold"), 
-    text_color="#aaff00", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#778800", "#AAFF00"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 title10.place(relx=0.5, rely=0.06, anchor=tk.CENTER)
 
@@ -2934,10 +2934,10 @@ title10.place(relx=0.5, rely=0.06, anchor=tk.CENTER)
 frame_input10 = ctk.CTkFrame(
     pages["currency_conversion_page"],
     width=600, height=170,
-    border_color="#aaff00",
+    border_color=("#778800", "#AAFF00"),
     border_width=3,
     corner_radius=10,
-    fg_color="#1a1a2e"
+    fg_color=("#F0F2F5", "#1A1A2E")
 )
 frame_input10.place(relx=0.5, rely=0.3, anchor=tk.CENTER)
 
@@ -2947,23 +2947,23 @@ title_input10 = ctk.CTkLabel(
     text="Input Section", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#ffffff", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 title_input10.place(relx=0.5, rely=0.13,anchor=tk.CENTER)
 
 # Label for errors
 errors_currency = ctk.CTkLabel(
     frame_input10, 
-    text="",
+    text="Any errors will appear here",
     width=150, height=100,
     font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"),
     wraplength=140,
     justify=tk.LEFT,
-    text_color="#ffffff", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=10)
 errors_currency.place(relx=0.86, rely=0.34, anchor=tk.CENTER)
 
@@ -2973,9 +2973,9 @@ order_currency1 = ctk.CTkLabel(
     text="Local currency:", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#ffffff", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 order_currency1.place(relx=0.12, rely=0.33, anchor=tk.CENTER)
 order_currency2 = ctk.CTkLabel(
@@ -2983,9 +2983,9 @@ order_currency2 = ctk.CTkLabel(
     text="USD rate(e.g., 0.05):", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#ffffff", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 order_currency2.place(relx=0.15, rely=0.53, anchor=tk.CENTER)
 order_currency3 = ctk.CTkLabel(
@@ -2993,9 +2993,9 @@ order_currency3 = ctk.CTkLabel(
     text="EUR rate(e.g., 0.045):", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#ffffff", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 order_currency3.place(relx=0.48, rely=0.33, anchor=tk.CENTER)
 # Entrys orders
@@ -3003,28 +3003,28 @@ entry_currency1 = ctk.CTkEntry(
     frame_input10, 
     placeholder_text="0.0",
     width=60,
-    fg_color="#223300",                 
-    text_color="#ffffff",               
-    border_color="#aaff00",             
-    placeholder_text_color="#ffffff")
+    fg_color=("#F9FFE0","#223300"),          
+    text_color=("#1A1A2E", "#FFFFFF"),               
+    border_color=("#778800", "#AAFF00"),             
+    placeholder_text_color=("#777744","#ffffff"))
 entry_currency1.place(relx=0.28, rely=0.33, anchor=tk.CENTER)
 entry_currency2 = ctk.CTkEntry(
     frame_input10, 
     placeholder_text="0.0",
     width=60,
-    fg_color="#223311",                 
-    text_color="#ffffff",               
-    border_color="#aaff00",             
-    placeholder_text_color="#ffffff")
+    fg_color=("#F9FFE0","#223300"),          
+    text_color=("#1A1A2E", "#FFFFFF"),               
+    border_color=("#778800", "#AAFF00"),             
+    placeholder_text_color=("#777744","#ffffff"))
 entry_currency2.place(relx=0.34, rely=0.53, anchor=tk.CENTER)
 entry_currency3 = ctk.CTkEntry(
     frame_input10, 
     placeholder_text="0.0",
     width=60,
-    fg_color="#223311",                 
-    text_color="#ffffff",               
-    border_color="#aaff00",             
-    placeholder_text_color="#ffffff")
+    fg_color=("#F9FFE0","#223300"),          
+    text_color=("#1A1A2E", "#FFFFFF"),               
+    border_color=("#778800", "#AAFF00"),             
+    placeholder_text_color=("#777744","#ffffff"))
 entry_currency3.place(relx=0.68, rely=0.33, anchor=tk.CENTER)
 # Button calculate and clean
 button_calculate_currency = ctk.CTkButton(
@@ -3033,11 +3033,11 @@ button_calculate_currency = ctk.CTkButton(
     font=ctk.CTkFont(size=12, weight="bold"),
     width=200,
     height=45,
-    text_color="#0a0a2a",
+    text_color=("#FFFFFF", "#1A1A2E"),
     corner_radius=25,
-    fg_color="#aaff00",
-    bg_color="#1a1a2e",
-    hover_color="#ccff66",
+    fg_color=("#778800", "#AAFF00"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
+    hover_color=("#556600", "#CCFF33"),
     command=calculate_currency)
 button_calculate_currency.place(relx=0.2, rely=0.8, anchor=tk.CENTER)
 button_clean10 = ctk.CTkButton(
@@ -3048,9 +3048,9 @@ button_clean10 = ctk.CTkButton(
     height=45,
     text_color="#ffffff",
     corner_radius=25,
-    fg_color="#555577",
-    bg_color="#1a1a2e",
-    hover_color="#444466",
+    fg_color=("#555577", "#555577"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
+    hover_color=("#444466", "#444466"),
     command=clean_text_currency)
 button_clean10.place(relx=0.8, rely=0.8, anchor=tk.CENTER)
 
@@ -3058,8 +3058,8 @@ button_clean10.place(relx=0.8, rely=0.8, anchor=tk.CENTER)
 frame_results10 = ctk.CTkFrame(
     pages["currency_conversion_page"], 
     width=600, height=150,
-    fg_color="#1a1a2e",
-    border_color="#555577",
+    fg_color=("#F0F2F5", "#1A1A2E"),
+    border_color=("#D1D1D1", "#555577"),
     border_width=3,
     corner_radius=10)
 frame_results10.place(relx=0.5, rely=0.66, anchor=tk.CENTER)
@@ -3069,9 +3069,9 @@ title_results_currency = ctk.CTkLabel(
     text="Results Panel", 
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#ffffff", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#1A1A2E", "#FFFFFF"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 title_results_currency.place(relx=0.5, rely=0.15,anchor=tk.CENTER)
 
@@ -3080,12 +3080,12 @@ local = ctk.CTkLabel(
     frame_results10, 
     text="Local Amount:", 
     font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"), 
-    text_color="#ffffff",
+    text_color=("#1A1A2E", "#FFFFFF"),
     width=160,
     wraplength=150,
     justify="left",
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 local.place(relx=0.15, rely=0.43, anchor=tk.CENTER)
 
@@ -3094,9 +3094,9 @@ local_results = ctk.CTkLabel(
     text="00.00",
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
-    text_color="#aaff00", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#778800", "#AAFF00"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 local_results.place(relx=0.47, rely=0.43, anchor=tk.CENTER)
 
@@ -3106,11 +3106,11 @@ button_copy_currency1 = ctk.CTkButton(
     font=ctk.CTkFont(size=12, weight="bold"),
     width=200,
     height=45,
-    text_color="#1a1a2e",
+    text_color=("#FFFFFF", "#1A1A2E"),
     corner_radius=25,
-    fg_color="#aaff00",
-    bg_color="#1a1a2e",
-    hover_color="#ccff66",
+    fg_color=("#778800", "#AAFF00"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
+    hover_color=("#556600", "#CCFF33"),
     command=copy_results_currency1)
 button_copy_currency1.place(relx=0.82, rely=0.43, anchor=tk.CENTER)
 
@@ -3119,10 +3119,10 @@ dollaeur = ctk.CTkLabel(
     frame_results10, 
     text="Dollars | Euros:", 
     font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"), 
-    text_color="#ffffff",
+    text_color=("#1A1A2E", "#FFFFFF"),
     width=160,
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 dollaeur.place(relx=0.15, rely=0.80, anchor=tk.CENTER)
 
@@ -3131,9 +3131,9 @@ dollaeur_results = ctk.CTkLabel(
     text="00.00$ | 00.00€",
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"),
-    text_color="#aaff00", 
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
+    text_color=("#778800", "#AAFF00"), 
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
 dollaeur_results.place(relx=0.47, rely=0.79, anchor=tk.CENTER)
 
@@ -3145,9 +3145,9 @@ button_copy_currency2 = ctk.CTkButton(
     height=45,
     text_color="#ffffff",
     corner_radius=25,
-    fg_color="#555577",
-    bg_color="#1a1a2e",
-    hover_color="#444466",
+    fg_color=("#555577", "#555577"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
+    hover_color=("#444466", "#444466"),
     command=copy_results_currency2)
 button_copy_currency2.place(relx=0.82, rely=0.80, anchor=tk.CENTER)
 
@@ -3158,13 +3158,13 @@ return_button10 = ctk.CTkButton(
     font=ctk.CTkFont(size=15, weight="bold"),
     width=195,
     height=45,
-    text_color="#aaff00",
+    text_color=("#778800", "#AAFF00"),
     corner_radius=25,
-    fg_color="#0a0a2a",
-    bg_color="#1a1a2e",
-    hover_color="#0e0e3d",
+    fg_color=("#E1E5F2", "#0A0A2A"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
+    hover_color=("#D1D9E6", "#0E0E3D"),
     border_width=3,
-    border_color="#aaff00",
+    border_color=("#778800", "#AAFF00"),
     command=lambda: show_page("menu_page"))
 return_button10.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
 
