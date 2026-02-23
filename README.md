@@ -98,12 +98,12 @@ pip install -e .
 
 ## Upcoming Improvements
 <ul>
-  <li>Add unit tests</li>
-  <li>Create an executable .exe</li>
-  <li>Implement dark/light mode</li>
-  <li>Add calculation history</li>
-  <li>Internationalization (Spanish/English)</li>
-  <li>Advanced scientific calculators</li>
+  <input type="checkbox" style="pointer-events: none;"> Add unit tests<br>
+  <input type="checkbox" style="pointer-events: none;"> Create an executable .exe<br>
+  <input type="checkbox" checked style="pointer-events: none;"> Implement dark/light mode<br>
+  <input type="checkbox" style="pointer-events: none;"> Add calculation history<br>
+  <input type="checkbox" style="pointer-events: none;"> Internationalization (Spanish/English)<br>
+  <input type="checkbox" style="pointer-events: none;"> Advanced scientific calculators
 </ul>
 
 ## Autor
