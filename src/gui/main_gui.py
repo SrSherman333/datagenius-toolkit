@@ -3170,4 +3170,62 @@ return_button10.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
 
 show_page("initial_page")
 
+
+"""
+CALCULATION HISTORY SECTION
+"""
+clicks = 0
+actual_width = 0
+def record_logic():
+    global clicks
+    clicks += 1
+    target_width=320
+    initial_width = 0
+    
+    def increase():
+        frame_record.place(relx=0.002, rely=0.5, anchor=tk.W)
+        global actual_width
+        if actual_width < target_width:
+            actual_width += 10
+            frame_record.configure(width=actual_width)
+            app.after(5, lambda: increase())
+            
+    def decrease():
+        global actual_width
+        global clicks
+        if actual_width > initial_width:
+            actual_width -= 10
+            frame_record.configure(width=actual_width)
+            app.after(5, lambda: decrease())
+        else:
+            frame_record.place_forget()
+            clicks = 0
+    
+    if clicks == 1:
+        increase()
+    else:
+        decrease()
+
+try:
+    record_dark_original = Image.open("docs/images/Dark/icon_record_dark.png")
+    record_light_original = Image.open("docs/images/Light/icon_record_light.png")
+    record_photo = ctk.CTkImage(light_image=record_light_original, dark_image=record_dark_original, size=(70, 70))
+except Exception as e:
+    print(f"Error loading image: {e}")
+    record_photo = None
+
+frame_record = ctk.CTkScrollableFrame(
+    app, height=480, width=0)
+
+lst_buttons_record = []
+for i, value in enumerate(page_names_list):
+    if i > 1:
+        btn_record = ctk.CTkButton(
+            pages[value], text="",image=record_photo, width=70, height=70, corner_radius=5,
+            fg_color=("#F0F2F5", "#1A1A2E"), bg_color=("#F0F2F5", "#1A1A2E"), 
+            hover_color=("#D1D9E6", "#0E0E3D"), command=lambda:record_logic()
+        )
+        lst_buttons_record.append(btn_record)
+        btn_record.place(relx=0.9, rely=0.9, anchor=tk.CENTER)
+
 app.mainloop()
