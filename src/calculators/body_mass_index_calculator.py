@@ -1,5 +1,8 @@
 def calculate_imc(p,h):
-  return p / h**2
+  if h == 0:
+    raise ValueError("The height cannot be zero")
+  else:
+    return p / h**2
 
 def results_imc(l, imc):
   if imc < 18.5:

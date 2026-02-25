@@ -19,6 +19,7 @@
 - **Robust error handling** and input validation
 - **Modular** and well-documented code
 - **Dark/light** mode
+- **Added** unit tests
 
 ## Calculators Included
 | # | Calculator | Description | Icon |
@@ -79,6 +80,7 @@ datagenius-toolkit/
 │   └── main.py         # Console Version
 ├── docs/               # Icons and screenshots
 ├── .gitignore          # Files ignored by Git
+├── tests/              # Test files with pytest
 ├── LICENSE             # MIT license
 ├── requirements.txt    # Dependencies
 └── README.md           # This file
@@ -98,7 +100,7 @@ pip install -e .
 </ul>
 
 ## Upcoming Improvements
-- [ ] Add unit tests
+- [x] Add unit tests
 - [ ] Create an executable .exe
 - [x] Implement dark/light mode
 - [ ] Add calculation history

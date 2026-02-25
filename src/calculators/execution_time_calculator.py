@@ -1,5 +1,8 @@
 def time_seconds(n, v):
-  return n/v
+  if v == 0:
+    raise ValueError("Velocity cannot be zero")
+  else:
+    return n/v
 
 def time_minutes(ts):
   return ts/60

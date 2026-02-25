@@ -1,5 +1,8 @@
 def speed_kmh(d,t):
-  return d/t
+  if t == 0:
+    raise ValueError("Time cannot be zero")
+  else:
+    return d/t
 
 def speed_ms(vkm):
   return vkm/3.6
