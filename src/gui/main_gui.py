@@ -61,6 +61,10 @@ for name in page_names_list:
     frame = ctk.CTkFrame(app, fg_color= ("#F0F2F5","#1a1a2e"))
     pages[name] = frame
 
+frame_record = ctk.CTkScrollableFrame(
+    app, height=480, width=0, fg_color= ("#F0F2F5","#1a1a2e"))
+
+histories = {name: [] for name in page_names_list[2:]}
 
 # INITIAL PAGE CONTENT-------------------------------------------------
 # Title
@@ -331,6 +335,12 @@ def calculate_values():
         return
     fahrenheit_results.configure(text=f"{temperature_conversion.celsius_to_fahrenheit(value):.2f}°F")
     kelvin_results.configure(text=f"{temperature_conversion.celsius_to_kelvin(value):.2f}K")
+    
+    histories["temperature_conversion_page"].insert(0, {
+        "Celsius":value,
+        "In_Fahrenheit":f"{temperature_conversion.celsius_to_fahrenheit(value):.2f}°F",
+        "In_Kelvin":f"{temperature_conversion.celsius_to_kelvin(value):.2f}K"
+    })
 
 def clean():
     entry.delete(0, "end")
@@ -584,6 +594,13 @@ def calculate_cost():
     cm = cloud_storage_cost.monthly_cost(gb, c)
     montly_cost_results.configure(text=f"{cm:.2f}$")
     anual_cost_results.configure(text=f"{cloud_storage_cost.annual_cost(cm):.2f}$")
+    
+    histories["cloud_storage_cost_page"].insert(0, {
+        "GB":gb,
+        "Cost per GB":c,
+        "Monthly cost":f"{cm:.2f}$",
+        "Annual cost":f"{cloud_storage_cost.annual_cost(cm):.2f}$"
+    })
     
 def clean_text_cloud():
     entry_cloud1.delete(0, "end")
@@ -858,6 +875,13 @@ def calculate_execution():
     ts = execution_time_calculator.time_seconds(n,v)
     time_seconds_results.configure(text=f"{ts:.2f}s")
     time_minutes_results.configure(text=f"{execution_time_calculator.time_minutes(ts):.2f}min")
+    
+    histories["execution_time_calculator_page"].insert(0, {
+        "Number of operations":n,
+        "Execution speed":v,
+        "Time in seconds":f"{ts:.2f}s",
+        "Time in minutes":f"{execution_time_calculator.time_minutes(ts):.2f}min"
+    })
     
 def clean_text_exe():
     entry_exe1.delete(0, "end")
@@ -3176,7 +3200,7 @@ CALCULATION HISTORY SECTION
 """
 clicks = 0
 actual_width = 0
-def record_logic():
+def record_logic(button_pressed):
     global clicks
     clicks += 1
     target_width=320
@@ -3203,6 +3227,29 @@ def record_logic():
     
     if clicks == 1:
         increase()
+        for widget in frame_record.winfo_children():
+            widget.destroy()
+        if str(button_pressed) == ".!ctkframe3.!ctkbutton2":
+            for i, value in enumerate(histories["temperature_conversion_page"]):
+                text = "\n".join(f"{c}: {v}" for c, v in value.items())
+                history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#CC0000", "#ff5555"),
+                corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
+                hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#CC0000", "#ff5555"))
+                history.grid(row=i, column=0, pady=5)
+        elif str(button_pressed) == ".!ctkframe4.!ctkbutton2":
+            for i, value in enumerate(histories["cloud_storage_cost_page"]):
+                text = "\n".join(f"{c}: {v}" for c, v in value.items())
+                history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#7722CC", "#AA55FF"),
+                corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
+                hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#7722CC", "#AA55FF"))
+                history.grid(row=i, column=0, pady=5)
+        elif str(button_pressed) == ".!ctkframe5.!ctkbutton2":
+            for i, value in enumerate(histories["execution_time_calculator_page"]):
+                text = "\n".join(f"{c}: {v}" for c, v in value.items())
+                history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#A18800", "#FFFF55"),
+                corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
+                hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#A18800", "#FFFF55"))
+                history.grid(row=i, column=0, pady=5)
     else:
         decrease()
 
@@ -3214,17 +3261,15 @@ except Exception as e:
     print(f"Error loading image: {e}")
     record_photo = None
 
-frame_record = ctk.CTkScrollableFrame(
-    app, height=480, width=0)
-
 lst_buttons_record = []
 for i, value in enumerate(page_names_list):
     if i > 1:
         btn_record = ctk.CTkButton(
             pages[value], text="",image=record_photo, width=70, height=70, corner_radius=5,
             fg_color=("#F0F2F5", "#1A1A2E"), bg_color=("#F0F2F5", "#1A1A2E"), 
-            hover_color=("#D1D9E6", "#0E0E3D"), command=lambda:record_logic()
+            hover_color=("#D1D9E6", "#0E0E3D")
         )
+        btn_record.configure(command=lambda b=btn_record:record_logic(b))
         lst_buttons_record.append(btn_record)
         btn_record.place(relx=0.9, rely=0.9, anchor=tk.CENTER)
 
