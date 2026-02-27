@@ -2,7 +2,8 @@
 
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Status](https://img.shields.io/badge/Status-Active-brightgreen.svg)](https://github.com/tuusuario/datagenius-toolkit)
+[![Status](https://img.shields.io/badge/Status-Active-brightgreen.svg)](https://github.com/SrSherman333/datagenius-toolkit)
+[![GitHub commits](https://badgen.net/github/commits/SrSherman333/datagenius-toolkit)](https://github.com/SrSherman333/datagenius-toolkit/commits/main)
 
 **Suite of 10 scientific calculators developed in Python for Programming Fundamentals - UTMACH CDIA**
 
@@ -19,21 +20,21 @@
 - **Robust error handling** and input validation
 - **Modular** and well-documented code
 - **Dark/light** mode
-- **Added** unit tests
+- **Calculation history** for each calculator
 
 ## Calculators Included
 | # | Calculator | Description | Icon |
 |---|-------------|-------------|-------|
-| 1 | Temperature Conversion | Conversion between Celsius, Fahrenheit and Kelvin | <a href="https://github.com/SrSherman333/datagenius-toolkit/tree/main"><img src="https://github.com/SrSherman333/datagenius-toolkit/blob/main/docs/images/icon1.jpg?raw=true" alt="Icon1" width="50"></a> |
-| 2 | Cloud Storage Cost | Calculation of monthly/annual costs per GB | <a href="https://github.com/SrSherman333/datagenius-toolkit/tree/main"><img src="https://github.com/SrSherman333/datagenius-toolkit/blob/main/docs/images/icon2.jpg?raw=true" alt="Icon1" width="50"></a> |
-| 3 | Execution Time Calculator | Time in seconds/minutes to complete operations | <a href="https://github.com/SrSherman333/datagenius-toolkit/tree/main"><img src="https://github.com/SrSherman333/datagenius-toolkit/blob/main/docs/images/icon3.jpg?raw=true" alt="Icon1" width="50"></a> |
-| 4 | Euclidean Distance Calculator | Distance between two points on the plane | <a href="https://github.com/SrSherman333/datagenius-toolkit/tree/main"><img src="https://github.com/SrSherman333/datagenius-toolkit/blob/main/docs/images/icon4.jpg?raw=true" alt="Icon1" width="50"></a> |
-| 5 | Average Grade | Average of 4 grades | <a href="https://github.com/SrSherman333/datagenius-toolkit/tree/main"><img src="https://github.com/SrSherman333/datagenius-toolkit/blob/main/docs/images/icon5.jpg?raw=true" alt="Icon1" width="50"></a> |
-| 6 | Simple Interest Calculator | Total amount with simple interest | <a href="https://github.com/SrSherman333/datagenius-toolkit/tree/main"><img src="https://github.com/SrSherman333/datagenius-toolkit/blob/main/docs/images/icon6.jpg?raw=true" alt="Icon1" width="50"></a> |
-| 7 | Average Speed of a Drone | Average speed in km/h and m/s | <a href="https://github.com/SrSherman333/datagenius-toolkit/tree/main"><img src="https://github.com/SrSherman333/datagenius-toolkit/blob/main/docs/images/icon7.jpg?raw=true" alt="Icon1" width="50"></a> |
-| 8 | Body Mass Index Calculator | BMI calculation | <a href="https://github.com/SrSherman333/datagenius-toolkit/tree/main"><img src="https://github.com/SrSherman333/datagenius-toolkit/blob/main/docs/images/icon8.jpg?raw=true" alt="Icon1" width="50"></a> |
-| 9 | Energy Consumption of a Computer | Computer kWh consumption | <a href="https://github.com/SrSherman333/datagenius-toolkit/tree/main"><img src="https://github.com/SrSherman333/datagenius-toolkit/blob/main/docs/images/icon9.jpg?raw=true" alt="Icon1" width="50"></a> |
-| 10| Currency Conversor | Conversion to USD and EUR | <a href="https://github.com/SrSherman333/datagenius-toolkit/tree/main"><img src="https://github.com/SrSherman333/datagenius-toolkit/blob/main/docs/images/icon10.jpg?raw=true" alt="Icon1" width="50"></a> |
+| 1 | Temperature Conversion | Conversion between Celsius, Fahrenheit and Kelvin | <img src="https://github.com/SrSherman333/datagenius-toolkit/blob/main/docs/images/Dark/icon1.jpg?raw=true" alt="Icon1" width="50"></a> |
+| 2 | Cloud Storage Cost | Calculation of monthly/annual costs per GB | <img src="https://github.com/SrSherman333/datagenius-toolkit/blob/main/docs/images/Dark/icon2.jpg?raw=true" alt="Icon1" width="50"></a> |
+| 3 | Execution Time Calculator | Time in seconds/minutes to complete operations | <img src="https://github.com/SrSherman333/datagenius-toolkit/blob/main/docs/images/Dark/icon3.jpg?raw=true" alt="Icon1" width="50"></a> |
+| 4 | Euclidean Distance Calculator | Distance between two points on the plane | <img src="https://github.com/SrSherman333/datagenius-toolkit/blob/main/docs/images/Dark/icon4.jpg?raw=true" alt="Icon1" width="50"></a> |
+| 5 | Average Grade | Average of 4 grades | <img src="https://github.com/SrSherman333/datagenius-toolkit/blob/main/docs/images/Dark/icon5.jpg?raw=true" alt="Icon1" width="50"></a> |
+| 6 | Simple Interest Calculator | Total amount with simple interest | <img src="https://github.com/SrSherman333/datagenius-toolkit/blob/main/docs/images/Dark/icon6.jpg?raw=true" alt="Icon1" width="50"></a> |
+| 7 | Average Speed of a Drone | Average speed in km/h and m/s | <img src="https://github.com/SrSherman333/datagenius-toolkit/blob/main/docs/images/Dark/icon7.jpg?raw=true" alt="Icon1" width="50"></a> |
+| 8 | Body Mass Index Calculator | BMI calculation | <img src="https://github.com/SrSherman333/datagenius-toolkit/blob/main/docs/images/Dark/icon8.jpg?raw=true" alt="Icon1" width="50"></a> |
+| 9 | Energy Consumption of a Computer | Computer kWh consumption | <img src="https://github.com/SrSherman333/datagenius-toolkit/blob/main/docs/images/Dark/icon9.jpg?raw=true" alt="Icon1" width="50"></a> |
+| 10| Currency Conversor | Conversion to USD and EUR | <img src="https://github.com/SrSherman333/datagenius-toolkit/blob/main/docs/images/Dark/icon10.jpg?raw=true" alt="Icon1" width="50"></a> |
 
 ## Galery
 <div align="center">
@@ -42,6 +43,7 @@
   <img src="docs/screenshots/screenshot_tooltip.png" width="45%" alt="Tootil"><p>Tooltip (Menu Interface)</p>
   <img src="docs/screenshots/screenshot_calculator.png" width="45%" alt="Example calculator results interface"><p>Example Calculator Results Interface</p>
   <img src="docs/screenshots/screenshot_error.png" width="45%" alt="Error message"><p>Error Message (In each calculator interface)</p>
+  <img src="docs/screenshots/screenshot_history.png" width="45%" alt="History"><p>Calculation history (in each calculator)</p>
   <br>
 </div>
 
@@ -103,7 +105,7 @@ pip install -e .
 - [x] Add unit tests
 - [ ] Create an executable .exe
 - [x] Implement dark/light mode
-- [ ] Add calculation history
+- [x] Add calculation history
 - [ ] Internationalization (Spanish/English)
 - [ ] Advanced scientific calculators
 

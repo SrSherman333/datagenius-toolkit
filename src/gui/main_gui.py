@@ -29,6 +29,11 @@ app.bind("<MouseWheel>", lambda e: on_mouse_wheel(e, scrollable_frame))
 app.bind("<Button-4>", lambda e: on_mouse_wheel(e, scrollable_frame))
 app.bind("<Button-5>", lambda e: on_mouse_wheel(e, scrollable_frame))
 
+app.bind("<MouseWheel>", lambda e: on_mouse_wheel(e, frame_record))
+
+app.bind("<Button-4>", lambda e: on_mouse_wheel(e, frame_record))
+app.bind("<Button-5>", lambda e: on_mouse_wheel(e, frame_record))
+
 
 # Creation of the pages
 pages = {}
@@ -324,14 +329,12 @@ def calculate_values():
     try:
         value = float(value)
     except ValueError as v:
-        errors_cloud1.configure(text="")
         errors_cloud1.configure(text=f"Error: {v}")
-        app.after(3000, lambda:errors_cloud1.configure(text=""))
+        app.after(3000, lambda:errors_cloud1.configure(text="Any errors will appear here"))
         return
     if value < -273.15:
-        errors_cloud1.configure(text="")
         errors_cloud1.configure(text=f"Error: Temperature cannot be below absolute zero (-273.15°C)")
-        app.after(3000, lambda:errors_cloud1.configure(text=""))
+        app.after(3000, lambda:errors_cloud1.configure(text="Any errors will appear here"))
         return
     fahrenheit_results.configure(text=f"{temperature_conversion.celsius_to_fahrenheit(value):.2f}°F")
     kelvin_results.configure(text=f"{temperature_conversion.celsius_to_kelvin(value):.2f}K")
@@ -582,13 +585,12 @@ def calculate_cost():
     except ValueError as v:
         errors_cloud.configure(text="")
         errors_cloud.configure(text=f"Error: {v}")
-        app.after(3000, lambda:errors_cloud.configure(text=""))
+        app.after(3000, lambda:errors_cloud.configure(text="Any errors will appear here"))
         return
     
     if gb <= 0 or c <= 0:
-        errors_cloud.configure(text="")
         errors_cloud.configure(text=f"Error: Values must be greater than zero")
-        app.after(3000, lambda:errors_cloud.configure(text=""))
+        app.after(3000, lambda:errors_cloud.configure(text="Any errors will appear here"))
         return
     
     cm = cloud_storage_cost.monthly_cost(gb, c)
@@ -861,15 +863,13 @@ def calculate_execution():
         n = float(entry_exe1.get())
         v = float(entry_exe2.get())
     except ValueError as v:
-        errors_exe.configure(text="")
         errors_exe.configure(text=f"Error: {v}")
-        app.after(3000, lambda:errors_exe.configure(text=""))
+        app.after(3000, lambda:errors_exe.configure(text="Any errors will appear here"))
         return
     
     if n <= 0 or v <= 0:
-        errors_exe.configure(text="")
         errors_exe.configure(text=f"Error: Values must be greater than zero")
-        app.after(3000, lambda:errors_exe.configure(text=""))
+        app.after(3000, lambda:errors_exe.configure(text="Any errors will appear here"))
         return
     
     ts = execution_time_calculator.time_seconds(n,v)
@@ -1146,9 +1146,8 @@ def calculate_euclidean():
         x2 = float(entry_euclidean3.get())
         y2 = float(entry_euclidean4.get())
     except ValueError as v:
-        errors_euclidean.configure(text="")
         errors_euclidean.configure(text=f"Error: {v}")
-        app.after(3000, lambda:errors_euclidean.configure(text=""))
+        app.after(3000, lambda:errors_euclidean.configure(text="Any errors will appear here"))
         return
     
     coordinates_results.configure(text=f"(P1: {entry_euclidean1.get()}, {entry_euclidean2.get()} | P2: {entry_euclidean3.get()}, {entry_euclidean4.get()})")
@@ -1464,14 +1463,13 @@ def calculate_grades():
         n3 = float(entry_grade3.get())
         n4 = float(entry_grade4.get())
     except ValueError as v:
-        errors_grade.configure(text="")
         errors_grade.configure(text=f"Error: {v}")
-        app.after(3000, lambda:errors_grade.configure(text=""))
+        app.after(3000, lambda:errors_grade.configure(text="Any errors will appear here"))
         return
     
     if n1 < 0 or n2 < 0 or n3 < 0 or n4 < 0:
         errors_grade.configure(text="Error: Please enter only numbers greater than or equal to zero")
-        app.after(3000, lambda:errors_grade.configure(text=""))
+        app.after(3000, lambda:errors_grade.configure(text="Any errors will appear here"))
         return
     
     grades_results.configure(text=f"(G1: {entry_grade1.get()}| G2: {entry_grade2.get()}| G3: {entry_grade3.get()}| G4: {entry_grade4.get()})")
@@ -1786,14 +1784,13 @@ def calculate_interest():
         i = float(entry_interest3.get())
         t = float(entry_interest2.get())
     except ValueError as v:
-        errors_interest.configure(text="")
         errors_interest.configure(text=f"Error: {v}")
-        app.after(3000, lambda:errors_interest.configure(text=""))
+        app.after(3000, lambda:errors_interest.configure(text="Any errors will appear here"))
         return
     
     if c <= 0 or i <= 0 or t <= 0:
         errors_interest.configure(text="Error: All values must be greater than zero")
-        app.after(3000, lambda:errors_interest.configure(text=""))
+        app.after(3000, lambda:errors_interest.configure(text="Any errors will appear here"))
         return
     
     i = simple_interest_calculator.rate_percentage(i)
@@ -2093,12 +2090,12 @@ def calculate_speed():
     except ValueError as v:
         errors_speed.configure(text="")
         errors_speed.configure(text=f"Error: {v}")
-        app.after(3000, lambda:errors_speed.configure(text=""))
+        app.after(3000, lambda:errors_speed.configure(text="Any errors will appear here"))
         return
     
     if d <= 0 or t <= 0:
         errors_speed.configure(text="Error: All values must be greater than zero")
-        app.after(3000, lambda:errors_speed.configure(text=""))
+        app.after(3000, lambda:errors_speed.configure(text="Any errors will appear here"))
         return
     
     vkm = average_speed_of_a_drone.speed_kmh(d, t)
@@ -2376,17 +2373,17 @@ def calculate_index():
     except ValueError as v:
         errors_index.configure(text="")
         errors_index.configure(text=f"Error: {v}")
-        app.after(3000, lambda:errors_index.configure(text=""))
+        app.after(3000, lambda:errors_index.configure(text="Any errors will appear here"))
         return
     
     if not 15 <= p <= 635:
         errors_index.configure(text="Error: Weight must be between 15 and 635 kg")
-        app.after(3000, lambda:errors_index.configure(text=""))
+        app.after(3000, lambda:errors_index.configure(text="Any errors will appear here"))
         return
     
     if not 0.5 <= h <= 2.72:
         errors_index.configure(text="Height must be between 0.5 and 2.72 m")
-        app.after(3000, lambda:errors_index.configure(text=""))
+        app.after(3000, lambda:errors_index.configure(text="Any errors will appear here"))
         return
     
     l = ["Underweight",  "Normal Weight", "Overweight", "Obesity"]
@@ -2656,17 +2653,17 @@ def calculate_energy():
     except ValueError as v:
         errors_energy.configure(text="")
         errors_energy.configure(text=f"Error: {v}")
-        app.after(3000, lambda:errors_energy.configure(text=""))
+        app.after(3000, lambda:errors_energy.configure(text="Any errors will appear here"))
         return
     
     if not 0 < h <= 24:
         errors_energy.configure(text="Error: Hours must be between 0 and 24")
-        app.after(3000, lambda:errors_energy.configure(text=""))
+        app.after(3000, lambda:errors_energy.configure(text="Any errors will appear here"))
         return
     
     if not 0 < p <= 2500:
         errors_energy.configure(text="Error: Enter a realistic power value (between 1W and 2500W)")
-        app.after(3000, lambda:errors_energy.configure(text=""))
+        app.after(3000, lambda:errors_energy.configure(text="Any errors will appear here"))
         return
     
     dailyp_results.configure(text=f"{h}h | {p}W")
@@ -2945,17 +2942,17 @@ def calculate_currency():
     except ValueError as v:
         errors_currency.configure(text="")
         errors_currency.configure(text=f"Error: {v}")
-        app.after(3000, lambda:errors_currency.configure(text=""))
+        app.after(3000, lambda:errors_currency.configure(text="Any errors will appear here"))
         return
     
     if m <= 0 or t_usd <= 0 or t_eur <= 0:
         errors_currency.configure(text="Error: All values must be greater than zero")
-        app.after(3000, lambda:errors_currency.configure(text=""))
+        app.after(3000, lambda:errors_currency.configure(text="Any errors will appear here"))
         return
     
     if t_usd > 10 or t_eur > 10:
         errors_currency.configure(text="Warning: Exchange rates seem unusually high (> 10)")
-        app.after(3000, lambda:errors_currency.configure(text=""))
+        app.after(3000, lambda:errors_currency.configure(text="Any errors will appear here"))
         return
     
     local_results.configure(text=f"{m:.2f}")
@@ -3248,28 +3245,87 @@ show_page("initial_page")
 """
 CALCULATION HISTORY SECTION
 """
-def access_the_corresponding_history(history, f):
-    actual_history = history.split("\n")
+def access_the_corresponding_history(actual_history, f):
     print(actual_history)
     if str(f) == ".!ctkframe3.!ctkbutton2":
         entry.delete(0, "end")
-        entry.insert(0, actual_history[0][9:])
-        fahrenheit_results.configure(text=actual_history[1][15:])
-        kelvin_results.configure(text=actual_history[2][11:])
+        entry.insert(0, actual_history["Celsius"])
+        fahrenheit_results.configure(text=actual_history["In_Fahrenheit"])
+        kelvin_results.configure(text=actual_history["In_Kelvin"])
     elif str(f) == ".!ctkframe4.!ctkbutton2":
         entry_cloud1.delete(0, "end")
-        entry_cloud1.insert(0, actual_history[0][4:])
+        entry_cloud1.insert(0, actual_history["GB"])
         entry_cloud2.delete(0, "end")
-        entry_cloud2.insert(0, actual_history[1][13:])
-        montly_cost_results.configure(text=actual_history[2][14:])
-        anual_cost_results.configure(text=actual_history[3][13:])
+        entry_cloud2.insert(0, actual_history["Cost per GB"])
+        montly_cost_results.configure(text=actual_history["Monthly cost"])
+        anual_cost_results.configure(text=actual_history["Annual cost"])
     elif str(f) == ".!ctkframe5.!ctkbutton2":
         entry_exe1.delete(0, "end")
-        entry_exe1.insert(0, actual_history[0][22:])
+        entry_exe1.insert(0, actual_history["Number of operations"])
         entry_exe2.delete(0, "end")
-        entry_exe2.insert(0, actual_history[1][17:])
-        time_seconds_results.configure(text=actual_history[2][17:])
-        time_minutes_results.configure(text=actual_history[3][17:])
+        entry_exe2.insert(0, actual_history["Execution speed"])
+        time_seconds_results.configure(text=actual_history["Time in seconds"])
+        time_minutes_results.configure(text=actual_history["Time in minutes"])
+    elif str(f) == ".!ctkframe6.!ctkbutton2":
+        entry_euclidean1.delete(0, "end")
+        entry_euclidean1.insert(0, actual_history["Point 1"][0])
+        entry_euclidean2.delete(0, "end")
+        entry_euclidean2.insert(0, actual_history["Point 1"][1])
+        entry_euclidean3.delete(0, "end")
+        entry_euclidean3.insert(0, actual_history["Point 2"][0])
+        entry_euclidean4.delete(0, "end")
+        entry_euclidean4.insert(0, actual_history["Point 2"][1])
+        coordinates_results.configure(text=actual_history["Coordinates"])
+        euclidean_distance_results.configure(text=actual_history["Euclidean distance"])
+    elif str(f) == ".!ctkframe7.!ctkbutton2":
+        entry_grade1.delete(0, "end")
+        entry_grade1.insert(0, actual_history["Grades 1 and 2"][0])
+        entry_grade2.delete(0, "end")
+        entry_grade2.insert(0, actual_history["Grades 1 and 2"][1])
+        entry_grade3.delete(0, "end")
+        entry_grade3.insert(0, actual_history["Grades 3 and 4"][0])
+        entry_grade4.delete(0, "end")
+        entry_grade4.insert(0, actual_history["Grades 3 and 4"][1])
+        grades_results.configure(text=actual_history["Grades"])
+        average_grade_results.configure(text=actual_history["Average grade"])
+    elif str(f) == ".!ctkframe8.!ctkbutton2":
+        entry_interest1.delete(0, "end")
+        entry_interest1.insert(0, actual_history["Initial capital"])
+        entry_interest2.delete(0, "end")
+        entry_interest2.insert(0, actual_history["Annual interest rate(%)"])
+        entry_interest3.delete(0, "end")
+        entry_interest3.insert(0, actual_history["Years"])
+        interest_results.configure(text=actual_history["Interest earned"])
+        amount_results.configure(text=actual_history["Total amount to be paid"])
+    elif str(f) == ".!ctkframe9.!ctkbutton2":
+        entry_speed1.delete(0, "end")
+        entry_speed1.insert(0, actual_history["Distance traveled (km)"])
+        entry_speed2.delete(0, "end")
+        entry_speed2.insert(0, actual_history["Time taken (hours)"])
+        kmh_results.configure(text=actual_history["Average speed in km/h"])
+        ms_results.configure(text=actual_history["Average speed in m/s"])
+    elif str(f) == ".!ctkframe10.!ctkbutton2":
+        entry_index1.delete(0, "end")
+        entry_index1.insert(0, actual_history["Weight in kilograms(kg)"])
+        entry_index2.delete(0, "end")
+        entry_index2.insert(0, actual_history["Height in meters(m)"])
+        bodymi_results.configure(text=f"{actual_history['Body Mass Index']} | {actual_history['Category']}")
+    elif str(f) == ".!ctkframe11.!ctkbutton2":
+        entry_energy1.delete(0, "end")
+        entry_energy1.insert(0, actual_history["Hours of the computer operates a day"])
+        entry_energy2.delete(0, "end")
+        entry_energy2.insert(0, actual_history["Power of the computer(W)"])
+        dailyp_results.configure(text=actual_history["Daily usage | Power consumption"])
+        consumption_results.configure(text=actual_history["Monthly consumption"])
+    else:
+        entry_currency1.delete(0, "end")
+        entry_currency1.insert(0, actual_history["Local currency"])
+        entry_currency2.delete(0, "end")
+        entry_currency2.insert(0, actual_history["USD rate"])
+        entry_currency3.delete(0, "end")
+        entry_currency3.insert(0, actual_history["EUR rate"])
+        local_results.configure(text=actual_history["Local currency"])
+        dollaeur_results.configure(text=actual_history["Dollars | Euros"])
         
 clicks = 0
 actual_width = 0
@@ -3308,7 +3364,7 @@ def record_logic(button_pressed):
                 history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#CC0000", "#ff5555"),
                 corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
                 hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#CC0000", "#ff5555"))
-                history.configure(command=lambda b=history, f=button_pressed:access_the_corresponding_history(b.cget("text"), f))
+                history.configure(command=lambda actual_history=value, f=button_pressed:access_the_corresponding_history(actual_history, f))
                 history.grid(row=i, column=0, pady=5)
         elif str(button_pressed) == ".!ctkframe4.!ctkbutton2":
             for i, value in enumerate(histories["cloud_storage_cost_page"]):
@@ -3316,7 +3372,7 @@ def record_logic(button_pressed):
                 history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#7722CC", "#AA55FF"),
                 corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
                 hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#7722CC", "#AA55FF"))
-                history.configure(command=lambda b=history, f=button_pressed:access_the_corresponding_history(b.cget("text"), f))
+                history.configure(command=lambda actual_history=value, f=button_pressed:access_the_corresponding_history(actual_history, f))
                 history.grid(row=i, column=0, pady=5)
         elif str(button_pressed) == ".!ctkframe5.!ctkbutton2":
             for i, value in enumerate(histories["execution_time_calculator_page"]):
@@ -3324,7 +3380,7 @@ def record_logic(button_pressed):
                 history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#A18800", "#FFFF55"),
                 corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
                 hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#A18800", "#FFFF55"))
-                history.configure(command=lambda b=history, f=button_pressed:access_the_corresponding_history(b.cget("text"), f))
+                history.configure(command=lambda actual_history=value, f=button_pressed:access_the_corresponding_history(actual_history, f))
                 history.grid(row=i, column=0, pady=5)
         elif str(button_pressed) == ".!ctkframe6.!ctkbutton2":
             for i, value in enumerate(histories["euclidean_distance_calculator_page"]):
@@ -3332,7 +3388,7 @@ def record_logic(button_pressed):
                 history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#008800", "#55FF55"),
                 corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
                 hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#008800", "#55FF55"))
-                history.configure(command=lambda b=history, f=button_pressed:access_the_corresponding_history(b.cget("text"), f))
+                history.configure(command=lambda actual_history=value, f=button_pressed:access_the_corresponding_history(actual_history, f))
                 history.grid(row=i, column=0, pady=5)
         elif str(button_pressed) == ".!ctkframe7.!ctkbutton2":
             for i, value in enumerate(histories["average_grade_page"]):
@@ -3340,7 +3396,7 @@ def record_logic(button_pressed):
                 history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#D60073", "#FF55AA"),
                 corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
                 hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#D60073", "#FF55AA"))
-                history.configure(command=lambda b=history, f=button_pressed:access_the_corresponding_history(b.cget("text"), f))
+                history.configure(command=lambda actual_history=value, f=button_pressed:access_the_corresponding_history(actual_history, f))
                 history.grid(row=i, column=0, pady=5)
         elif str(button_pressed) == ".!ctkframe8.!ctkbutton2":
             for i, value in enumerate(histories["simple_interest_calculator_page"]):
@@ -3348,7 +3404,7 @@ def record_logic(button_pressed):
                 history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#E67E00", "#FFAA00"),
                 corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
                 hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#E67E00", "#FFAA00"))
-                history.configure(command=lambda b=history, f=button_pressed:access_the_corresponding_history(b.cget("text"), f))
+                history.configure(command=lambda actual_history=value, f=button_pressed:access_the_corresponding_history(actual_history, f))
                 history.grid(row=i, column=0, pady=5)
         elif str(button_pressed) == ".!ctkframe9.!ctkbutton2":
             for i, value in enumerate(histories["average_speed_of_a_drone_page"]):
@@ -3356,7 +3412,7 @@ def record_logic(button_pressed):
                 history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#008B8B", "#55FFFF"),
                 corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
                 hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#008B8B", "#55FFFF"))
-                history.configure(command=lambda b=history, f=button_pressed:access_the_corresponding_history(b.cget("text"), f))
+                history.configure(command=lambda actual_history=value, f=button_pressed:access_the_corresponding_history(actual_history, f))
                 history.grid(row=i, column=0, pady=5)
         elif str(button_pressed) == ".!ctkframe10.!ctkbutton2":
             for i, value in enumerate(histories["body_mass_index_calculator_page"]):
@@ -3364,7 +3420,7 @@ def record_logic(button_pressed):
                 history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#3333CC", "#5555FF"),
                 corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
                 hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#3333CC", "#5555FF"))
-                history.configure(command=lambda b=history, f=button_pressed:access_the_corresponding_history(b.cget("text"), f))
+                history.configure(command=lambda actual_history=value, f=button_pressed:access_the_corresponding_history(actual_history, f))
                 history.grid(row=i, column=0, pady=5)
         elif str(button_pressed) == ".!ctkframe11.!ctkbutton2":
             for i, value in enumerate(histories["energy_consumption_page"]):
@@ -3372,7 +3428,7 @@ def record_logic(button_pressed):
                 history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#669900", "#AAFF55"),
                 corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
                 hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#669900", "#AAFF55"))
-                history.configure(command=lambda b=history, f=button_pressed:access_the_corresponding_history(b.cget("text"), f))
+                history.configure(command=lambda actual_history=value, f=button_pressed:access_the_corresponding_history(actual_history, f))
                 history.grid(row=i, column=0, pady=5)
         else:
             for i, value in enumerate(histories["currency_conversion_page"]):
@@ -3380,7 +3436,7 @@ def record_logic(button_pressed):
                 history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#778800", "#AAFF00"),
                 corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
                 hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#778800", "#AAFF00"))
-                history.configure(command=lambda b=history, f=button_pressed:access_the_corresponding_history(b.cget("text"), f))
+                history.configure(command=lambda actual_history=value, f=button_pressed:access_the_corresponding_history(actual_history, f))
                 history.grid(row=i, column=0, pady=5)
         buttons = frame_record.winfo_children()
         if len(buttons) > 10:
