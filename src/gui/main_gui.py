@@ -1154,6 +1154,13 @@ def calculate_euclidean():
     coordinates_results.configure(text=f"(P1: {entry_euclidean1.get()}, {entry_euclidean2.get()} | P2: {entry_euclidean3.get()}, {entry_euclidean4.get()})")
     euclidean_distance_results.configure(text=f"{euclidean_distance_calculator.euclidean_distance(x1, y1, x2, y2):.2f}")
     
+    histories["euclidean_distance_calculator_page"].insert(0, {
+        "Point 1":(x1, y1),
+        "Point 2":(x2, y2),
+        "Coordinates":f"(P1: {entry_euclidean1.get()}, {entry_euclidean2.get()} | P2: {entry_euclidean3.get()}, {entry_euclidean4.get()})",
+        "Euclidean distance":f"{euclidean_distance_calculator.euclidean_distance(x1, y1, x2, y2):.2f}"
+    })
+    
 def clean_text_euclidean():
     entry_euclidean1.delete(0, "end")
     entry_euclidean2.delete(0, "end")
@@ -1470,6 +1477,13 @@ def calculate_grades():
     grades_results.configure(text=f"(G1: {entry_grade1.get()}| G2: {entry_grade2.get()}| G3: {entry_grade3.get()}| G4: {entry_grade4.get()})")
     average_grade_results.configure(text=f"{average_grade.calculate_average(n1, n2, n3, n4):.2f}")
     
+    histories["average_grade_page"].insert(0, {
+        "Grades 1 and 2":(n1, n2),
+        "Grades 3 and 4":(n3, n4),
+        "Grades":f"(G1: {entry_grade1.get()}| G2: {entry_grade2.get()}| G3: {entry_grade3.get()}| G4: {entry_grade4.get()})",
+        "Average grade":f"{average_grade.calculate_average(n1, n2, n3, n4):.2f}"
+    })
+    
 def clean_text_grade():
     entry_grade1.delete(0, "end")
     entry_grade2.delete(0, "end")
@@ -1692,7 +1706,7 @@ grades_results = ctk.CTkLabel(
     fg_color=("#E1E5F2", "#0A0A2A"),
     bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
-grades_results.place(relx=0.46, rely=0.43, anchor=tk.CENTER)
+grades_results.place(relx=0.47, rely=0.43, anchor=tk.CENTER)
 
 button_copy_grades = ctk.CTkButton(
     frame_results5,
@@ -1706,7 +1720,7 @@ button_copy_grades = ctk.CTkButton(
     bg_color=("#F0F2F5", "#1A1A2E"),
     hover_color=("#B30060", "#FF99CC"),
     command=copy_results_grade1)
-button_copy_grades.place(relx=0.8, rely=0.43, anchor=tk.CENTER)
+button_copy_grades.place(relx=0.82, rely=0.43, anchor=tk.CENTER)
 
 # Average grade results
 average = ctk.CTkLabel(
@@ -1743,7 +1757,7 @@ button_copy_grades2 = ctk.CTkButton(
     bg_color=("#F0F2F5", "#1A1A2E"),
     hover_color=("#444466", "#444466"),
     command=copy_results_grade2)
-button_copy_grades2.place(relx=0.8, rely=0.80, anchor=tk.CENTER)
+button_copy_grades2.place(relx=0.82, rely=0.80, anchor=tk.CENTER)
 
 # Return to menu
 return_button5 = ctk.CTkButton(
@@ -1787,6 +1801,14 @@ def calculate_interest():
     
     interest_results.configure(text=f"{m-c:.2f}$")
     amount_results.configure(text=f"{m:.2f}$")
+    
+    histories["simple_interest_calculator_page"].insert(0, {
+        "Initial capital":c,
+        "Years":t,
+        "Annual interest rate(%)":i,
+        "Interest earned":f"{m-c:.2f}$",
+        "Total amount to be paid":f"{m:.2f}$"
+    })
     
 def clean_text_interest():
     entry_interest1.delete(0, "end")
@@ -2084,6 +2106,13 @@ def calculate_speed():
     kmh_results.configure(text=f"{vkm:.2f}km/h")
     ms_results.configure(text=f"{average_speed_of_a_drone.speed_ms(vkm):.2f}m/s")
     
+    histories["average_speed_of_a_drone_page"].insert(0, {
+        "Distance traveled (km)":d,
+        "Time taken (hours)":t,
+        "Average speed in km/h":f"{vkm:.2f}km/h",
+        "Average speed in m/s":f"{average_speed_of_a_drone.speed_ms(vkm):.2f}m/s",
+    })
+    
 def clean_text_speed():
     entry_speed1.delete(0, "end")
     entry_speed2.delete(0, "end")
@@ -2367,6 +2396,13 @@ def calculate_index():
     
     bodymi_results.configure(text=f"{imc:.2f} | {results}")
     
+    histories["body_mass_index_calculator_page"].insert(0, {
+        "Weight in kilograms(kg)":p,
+        "Height in meters(m)":h,
+        "Body Mass Index":f"{imc:.2f}",
+        "Category":results,
+    })
+    
 def clean_text_index():
     entry_index1.delete(0, "end")
     entry_index2.delete(0, "end")
@@ -2635,6 +2671,13 @@ def calculate_energy():
     
     dailyp_results.configure(text=f"{h}h | {p}W")
     consumption_results.configure(text=f"{calculator_energy_consumption_of_a_computer.energy_consumption(p, h):.2f}kWh")
+    
+    histories["energy_consumption_page"].insert(0, {
+        "Hours of the computer operates a day":h,
+        "Power of the computer(W)":p,
+        "Daily usage | Power consumption":f"{h}h | {p}W",
+        "Monthly consumption":f"{calculator_energy_consumption_of_a_computer.energy_consumption(p, h):.2f}kWh",
+    })
     
 def clean_text_energy():
     entry_energy1.delete(0, "end")
@@ -2918,6 +2961,13 @@ def calculate_currency():
     local_results.configure(text=f"{m:.2f}")
     dollaeur_results.configure(text=f"{currency_conversion.calculate_usd(m, t_usd):.2f}$ | {currency_conversion.calculate_eur(m, t_eur):.2f}€")
     
+    histories["currency_conversion_page"].insert(0, {
+        "Local currency":f"{m:.2f}",
+        "USD rate":t_usd,
+        "EUR rate":t_eur,
+        "Dollars | Euros":f"{currency_conversion.calculate_usd(m, t_usd):.2f}$ | {currency_conversion.calculate_eur(m, t_eur):.2f}€",
+    })
+    
 def clean_text_currency():
     entry_currency1.delete(0, "end")
     entry_currency2.delete(0, "end")
@@ -3198,6 +3248,29 @@ show_page("initial_page")
 """
 CALCULATION HISTORY SECTION
 """
+def access_the_corresponding_history(history, f):
+    actual_history = history.split("\n")
+    print(actual_history)
+    if str(f) == ".!ctkframe3.!ctkbutton2":
+        entry.delete(0, "end")
+        entry.insert(0, actual_history[0][9:])
+        fahrenheit_results.configure(text=actual_history[1][15:])
+        kelvin_results.configure(text=actual_history[2][11:])
+    elif str(f) == ".!ctkframe4.!ctkbutton2":
+        entry_cloud1.delete(0, "end")
+        entry_cloud1.insert(0, actual_history[0][4:])
+        entry_cloud2.delete(0, "end")
+        entry_cloud2.insert(0, actual_history[1][13:])
+        montly_cost_results.configure(text=actual_history[2][14:])
+        anual_cost_results.configure(text=actual_history[3][13:])
+    elif str(f) == ".!ctkframe5.!ctkbutton2":
+        entry_exe1.delete(0, "end")
+        entry_exe1.insert(0, actual_history[0][22:])
+        entry_exe2.delete(0, "end")
+        entry_exe2.insert(0, actual_history[1][17:])
+        time_seconds_results.configure(text=actual_history[2][17:])
+        time_minutes_results.configure(text=actual_history[3][17:])
+        
 clicks = 0
 actual_width = 0
 def record_logic(button_pressed):
@@ -3235,6 +3308,7 @@ def record_logic(button_pressed):
                 history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#CC0000", "#ff5555"),
                 corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
                 hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#CC0000", "#ff5555"))
+                history.configure(command=lambda b=history, f=button_pressed:access_the_corresponding_history(b.cget("text"), f))
                 history.grid(row=i, column=0, pady=5)
         elif str(button_pressed) == ".!ctkframe4.!ctkbutton2":
             for i, value in enumerate(histories["cloud_storage_cost_page"]):
@@ -3242,6 +3316,7 @@ def record_logic(button_pressed):
                 history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#7722CC", "#AA55FF"),
                 corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
                 hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#7722CC", "#AA55FF"))
+                history.configure(command=lambda b=history, f=button_pressed:access_the_corresponding_history(b.cget("text"), f))
                 history.grid(row=i, column=0, pady=5)
         elif str(button_pressed) == ".!ctkframe5.!ctkbutton2":
             for i, value in enumerate(histories["execution_time_calculator_page"]):
@@ -3249,9 +3324,71 @@ def record_logic(button_pressed):
                 history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#A18800", "#FFFF55"),
                 corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
                 hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#A18800", "#FFFF55"))
+                history.configure(command=lambda b=history, f=button_pressed:access_the_corresponding_history(b.cget("text"), f))
                 history.grid(row=i, column=0, pady=5)
+        elif str(button_pressed) == ".!ctkframe6.!ctkbutton2":
+            for i, value in enumerate(histories["euclidean_distance_calculator_page"]):
+                text = "\n".join(f"{c}: {v}" for c, v in value.items())
+                history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#008800", "#55FF55"),
+                corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
+                hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#008800", "#55FF55"))
+                history.configure(command=lambda b=history, f=button_pressed:access_the_corresponding_history(b.cget("text"), f))
+                history.grid(row=i, column=0, pady=5)
+        elif str(button_pressed) == ".!ctkframe7.!ctkbutton2":
+            for i, value in enumerate(histories["average_grade_page"]):
+                text = "\n".join(f"{c}: {v}" for c, v in value.items())
+                history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#D60073", "#FF55AA"),
+                corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
+                hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#D60073", "#FF55AA"))
+                history.configure(command=lambda b=history, f=button_pressed:access_the_corresponding_history(b.cget("text"), f))
+                history.grid(row=i, column=0, pady=5)
+        elif str(button_pressed) == ".!ctkframe8.!ctkbutton2":
+            for i, value in enumerate(histories["simple_interest_calculator_page"]):
+                text = "\n".join(f"{c}: {v}" for c, v in value.items())
+                history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#E67E00", "#FFAA00"),
+                corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
+                hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#E67E00", "#FFAA00"))
+                history.configure(command=lambda b=history, f=button_pressed:access_the_corresponding_history(b.cget("text"), f))
+                history.grid(row=i, column=0, pady=5)
+        elif str(button_pressed) == ".!ctkframe9.!ctkbutton2":
+            for i, value in enumerate(histories["average_speed_of_a_drone_page"]):
+                text = "\n".join(f"{c}: {v}" for c, v in value.items())
+                history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#008B8B", "#55FFFF"),
+                corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
+                hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#008B8B", "#55FFFF"))
+                history.configure(command=lambda b=history, f=button_pressed:access_the_corresponding_history(b.cget("text"), f))
+                history.grid(row=i, column=0, pady=5)
+        elif str(button_pressed) == ".!ctkframe10.!ctkbutton2":
+            for i, value in enumerate(histories["body_mass_index_calculator_page"]):
+                text = "\n".join(f"{c}: {v}" for c, v in value.items())
+                history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#3333CC", "#5555FF"),
+                corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
+                hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#3333CC", "#5555FF"))
+                history.configure(command=lambda b=history, f=button_pressed:access_the_corresponding_history(b.cget("text"), f))
+                history.grid(row=i, column=0, pady=5)
+        elif str(button_pressed) == ".!ctkframe11.!ctkbutton2":
+            for i, value in enumerate(histories["energy_consumption_page"]):
+                text = "\n".join(f"{c}: {v}" for c, v in value.items())
+                history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#669900", "#AAFF55"),
+                corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
+                hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#669900", "#AAFF55"))
+                history.configure(command=lambda b=history, f=button_pressed:access_the_corresponding_history(b.cget("text"), f))
+                history.grid(row=i, column=0, pady=5)
+        else:
+            for i, value in enumerate(histories["currency_conversion_page"]):
+                text = "\n".join(f"{c}: {v}" for c, v in value.items())
+                history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#778800", "#AAFF00"),
+                corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
+                hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#778800", "#AAFF00"))
+                history.configure(command=lambda b=history, f=button_pressed:access_the_corresponding_history(b.cget("text"), f))
+                history.grid(row=i, column=0, pady=5)
+        buttons = frame_record.winfo_children()
+        if len(buttons) > 10:
+            buttons[-1].destroy()
     else:
         decrease()
+        for widget in frame_record.winfo_children():
+            widget.destroy()
 
 try:
     record_dark_original = Image.open("docs/images/Dark/icon_record_dark.png")
