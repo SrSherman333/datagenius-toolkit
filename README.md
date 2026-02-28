@@ -8,7 +8,7 @@
 **Suite of 10 scientific calculators developed in Python for Programming Fundamentals - UTMACH CDIA**
 
 <div align="center">
-  <img src="docs/screenshots/main_screenshot.png" width="80%" alt="Captura de pantalla principal">
+  <img src="docs/screenshots/main_interface.gif" width="80%" alt="Captura de pantalla principal">
 </div>
 
 ## Key Features
