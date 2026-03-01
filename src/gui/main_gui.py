@@ -182,12 +182,24 @@ def change_lang():
     global lang
     if lang == "en":
         lang = "es"
-        for key, widget in map_widgets["initial_page"].items():
-            widget.configure(text=TRANSLATIONS["es"]["initial_page"][key])
+        for interface in map_widgets:
+            for key, widget in map_widgets[interface].items():
+                if type(widget) == tuple:
+                    widget[0].configure(text=TRANSLATIONS["es"][interface][key][0])
+                    buttons_config[widget[1]]["description"] = TRANSLATIONS["es"][interface][key][1]
+                else:
+                    widget.configure(text=TRANSLATIONS["es"][interface][key])
+        descriptions_buttons()
     else:
         lang = "en"
-        for key, widget in map_widgets["initial_page"].items():
-            widget.configure(text=TRANSLATIONS["en"]["initial_page"][key])
+        for interface in map_widgets:
+            for key, widget in map_widgets[interface].items():
+                if type(widget) == tuple:
+                    widget[0].configure(text=TRANSLATIONS["en"][interface][key][0])
+                    buttons_config[widget[1]]["description"] = TRANSLATIONS["en"][interface][key][1]
+                else:
+                    widget.configure(text=TRANSLATIONS["en"][interface][key])
+        descriptions_buttons()
 
 languages = ctk.CTkButton(
     pages["initial_page"],
@@ -289,7 +301,11 @@ information.place(relx=0.67, rely=0.91, anchor=tk.CENTER)
 def on_enter(description):
     information.configure(text=description)    
 def on_leave():
-    information.configure(text="Hover your mouse over a button to see its description")
+    global lang
+    if lang == "en":
+        information.configure(text="Hover your mouse over a button to see its description")
+    else:
+        information.configure(text="Pase el ratón sobre un botón para ver su descripción")
 
 # Program 1
 buttons_config = [
@@ -314,7 +330,7 @@ for i in range(10):
         theme_icon_photo = None
     buttons_config[i]["image"] = theme_icon_photo
 
-
+list_buttons_menu = []
 for i, config in enumerate(buttons_config):
     row_val = i // 3
     column_val = i % 3
@@ -354,11 +370,16 @@ for i, config in enumerate(buttons_config):
         border_width=3,
         border_color=config["color"],
         command=config["command"])
+    list_buttons_menu.append(option_button)
     option_button.grid(row=row_val, column=column_val, pady=10,sticky="NSEW")
     
     # Send the corresponding description when the mouse is over a button
-    option_button.bind("<Enter>", lambda event, desc=config["description"]: on_enter(desc), add="+")
-    option_button.bind("<Leave>", lambda event: on_leave(), add="+")
+def descriptions_buttons():    
+    for i, button in enumerate(list_buttons_menu):
+        button.bind("<Enter>", lambda event, desc=buttons_config[i]["description"]: on_enter(desc), add="+")
+        button.bind("<Leave>", lambda event: on_leave(), add="+")
+        
+descriptions_buttons()
 
 # TEMPERATURE CONVERSION PAGE CONTENT-----------------------
 # Functions
@@ -597,7 +618,7 @@ button_copy2 = ctk.CTkButton(
 button_copy2.place(relx=0.8, rely=0.80, anchor=tk.CENTER)
 
 # Return to menu
-return_button = ctk.CTkButton(
+return_button1 = ctk.CTkButton(
     pages["temperature_conversion_page"],
     text="Back to menu",
     font=ctk.CTkFont(size=15, weight="bold"),
@@ -611,7 +632,7 @@ return_button = ctk.CTkButton(
     border_width=3,
     border_color=("#CC0000", "#ff5555"),
     command=lambda: show_page("menu_page"))
-return_button.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
+return_button1.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
 
 
 # CLOUD STORAGE COST PAGE CONTENT-----------------------
@@ -3282,7 +3303,21 @@ show_page("initial_page")
 
 map_widgets = {
     "initial_page":{
-        "subtitle":subtitle_label, "button":start_button, "btn_lang":languages}
+        "subtitle":subtitle_label, "button":start_button, "btn_lang":languages},
+    "menu_page":{
+        "title_menu":title_label2, "lbl_information":information,
+        "btn1":(list_buttons_menu[0], 0), 
+        "btn2":(list_buttons_menu[1], 1), 
+        "btn3":(list_buttons_menu[2], 2),
+        "btn4":(list_buttons_menu[3], 3), 
+        "btn5":(list_buttons_menu[4], 4), 
+        "btn6":(list_buttons_menu[5], 5),
+        "btn7":(list_buttons_menu[6], 6), 
+        "btn8":(list_buttons_menu[7], 7),
+        "btn9":(list_buttons_menu[8], 8), 
+        "btn10":(list_buttons_menu[9], 9),
+        "btn_back":return_button
+    }
 }
 
 """
