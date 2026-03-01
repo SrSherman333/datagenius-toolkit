@@ -2,6 +2,7 @@
 import customtkinter as ctk
 import tkinter as tk
 from PIL import Image, ImageTk
+from src.traductor import TRANSLATIONS
 import sys
 import os
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -11,28 +12,27 @@ sys.path.append(src_dir)
 
 # Configuration of the window
 ctk.set_appearance_mode("dark")
-ctk.set_default_color_theme("dark-blue")
 app = ctk.CTk()
 app.geometry("640x480")
-app.title("Datagenius Toolkit")
+app.title("DataGenius Toolkit")
 app.resizable(False, False)
 
 # Configuration of the scroll in the scrolleableframe
 def on_mouse_wheel(event, frame):
+    canvas = frame._parent_canvas
     if event.num == 4 or event.delta > 0:
-        frame._parent_canvas.yview_scroll(-1, "units")
+        canvas.yview_scroll(-1, "units")
     elif event.num == 5 or event.delta < 0:
-        frame._parent_canvas.yview_scroll(1, "units")
+        canvas.yview_scroll(1, "units")
     
-app.bind("<MouseWheel>", lambda e: on_mouse_wheel(e, scrollable_frame))
-
-app.bind("<Button-4>", lambda e: on_mouse_wheel(e, scrollable_frame))
-app.bind("<Button-5>", lambda e: on_mouse_wheel(e, scrollable_frame))
-
-app.bind("<MouseWheel>", lambda e: on_mouse_wheel(e, frame_record))
-
-app.bind("<Button-4>", lambda e: on_mouse_wheel(e, frame_record))
-app.bind("<Button-5>", lambda e: on_mouse_wheel(e, frame_record))
+def bind_mouse_wheel(frame):
+    frame.bind("<Enter>", lambda _: app.bind_all("<MouseWheel>", lambda e: on_mouse_wheel(e, frame)))
+    frame.bind("<Enter>", lambda _: app.bind_all("<Button-4>", lambda e: on_mouse_wheel(e, frame)), add="+")
+    frame.bind("<Enter>", lambda _: app.bind_all("<Button-5>", lambda e: on_mouse_wheel(e, frame)), add="+")
+    
+    frame.bind("<Leave>", lambda _: app.unbind_all("<MouseWheel>"))
+    frame.bind("<Leave>", lambda _: app.unbind_all("<Button-4>"))
+    frame.bind("<Leave>", lambda _: app.unbind_all("<Button-5>"))
 
 
 # Creation of the pages
@@ -68,12 +68,13 @@ for name in page_names_list:
 
 frame_record = ctk.CTkScrollableFrame(
     app, height=480, width=0, fg_color= ("#F0F2F5","#1a1a2e"))
+bind_mouse_wheel(frame_record)
 
 histories = {name: [] for name in page_names_list[2:]}
 
 # INITIAL PAGE CONTENT-------------------------------------------------
 # Title
-title_label = ctk.CTkLabel(
+title_label1 = ctk.CTkLabel(
     pages["initial_page"], 
     text="DATAGENIUS TOOLKIT", 
     font=ctk.CTkFont(family="OCR A Extended", 
@@ -82,7 +83,7 @@ title_label = ctk.CTkLabel(
     fg_color=("#F0F2F5","#1a1a2e"),
     bg_color=("#F0F2F5","#1a1a2e"),
     corner_radius=50)
-title_label.place(relx=0.5, rely=0.1, anchor=tk.CENTER) 
+title_label1.place(relx=0.5, rely=0.1, anchor=tk.CENTER) 
 
 # Subtitle
 subtitle_label = ctk.CTkLabel(
@@ -167,9 +168,46 @@ theme_mode = ctk.CTkButton(
 )
 theme_mode.place(relx=0.1, rely=0.85, anchor=tk.CENTER)
 
+try:
+    lang_dark_image_original = Image.open("docs/images/Dark/icon_languages.png")
+    lang_light_image_original = Image.open("docs/images/Light/icon_languages.png")
+    lang_photo = ctk.CTkImage(light_image=lang_light_image_original, dark_image=lang_dark_image_original, size=(40, 40))
+except Exception as e:
+    print(f"Error loading image: {e}. Using text icon.")
+    lang_photo = None
+
+lang = "en"
+
+def change_lang():
+    global lang
+    if lang == "en":
+        lang = "es"
+        for key, widget in map_widgets["initial_page"].items():
+            widget.configure(text=TRANSLATIONS["es"]["initial_page"][key])
+    else:
+        lang = "en"
+        for key, widget in map_widgets["initial_page"].items():
+            widget.configure(text=TRANSLATIONS["en"]["initial_page"][key])
+
+languages = ctk.CTkButton(
+    pages["initial_page"],
+    text="Language",
+    compound="top",
+    width=40,
+    height=40,
+    corner_radius=5,
+    image=lang_photo,
+    text_color=("black","#ffffff"),
+    fg_color=("#F0F2F5", "#1A1A2E"),
+    bg_color=("#F0F2F5", "#1A1A2E"),
+    hover_color=("#D1D9E6", "#0E0E3D"),
+    command=change_lang
+)
+languages.place(relx=0.9, rely=0.85, anchor=tk.CENTER)
+
 # MENU PAGE CONTENT--------------------------------------------
 # Title
-title_label = ctk.CTkLabel(
+title_label2 = ctk.CTkLabel(
     pages["menu_page"], 
     text="MENU", 
     font=ctk.CTkFont(family="OCR A Extended", 
@@ -178,7 +216,7 @@ title_label = ctk.CTkLabel(
     fg_color=("#E1E5F2", "#0A0A2A"),
     bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
-title_label.place(relx=0.5, rely=0.1, anchor=tk.CENTER) 
+title_label2.place(relx=0.5, rely=0.1, anchor=tk.CENTER) 
 
 try:
     dark_mode_image_original = Image.open("docs/images/Dark/icon_darkmode.png")
@@ -226,6 +264,7 @@ scrollable_frame = ctk.CTkScrollableFrame(
     fg_color=("#E1E5F2", "#0A0A2A"),
     bg_color=("#F0F2F5", "#1A1A2E"))
 scrollable_frame.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
+bind_mouse_wheel(scrollable_frame)
 
 scrollable_frame.columnconfigure(0, weight=1, uniform="group1")
 scrollable_frame.columnconfigure(1, weight=1, uniform="group1")
@@ -3241,6 +3280,10 @@ return_button10.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
 
 show_page("initial_page")
 
+map_widgets = {
+    "initial_page":{
+        "subtitle":subtitle_label, "button":start_button, "btn_lang":languages}
+}
 
 """
 CALCULATION HISTORY SECTION
@@ -3454,7 +3497,6 @@ except Exception as e:
     print(f"Error loading image: {e}")
     record_photo = None
 
-lst_buttons_record = []
 for i, value in enumerate(page_names_list):
     if i > 1:
         btn_record = ctk.CTkButton(
@@ -3463,7 +3505,6 @@ for i, value in enumerate(page_names_list):
             hover_color=("#D1D9E6", "#0E0E3D")
         )
         btn_record.configure(command=lambda b=btn_record:record_logic(b))
-        lst_buttons_record.append(btn_record)
         btn_record.place(relx=0.9, rely=0.9, anchor=tk.CENTER)
 
 app.mainloop()
