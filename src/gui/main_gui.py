@@ -185,8 +185,12 @@ def change_lang():
         for interface in map_widgets:
             for key, widget in map_widgets[interface].items():
                 if type(widget) == tuple:
-                    widget[0].configure(text=TRANSLATIONS["es"][interface][key][0])
-                    buttons_config[widget[1]]["description"] = TRANSLATIONS["es"][interface][key][1]
+                    if interface == "menu_page":
+                        widget[0].configure(text=TRANSLATIONS["es"][interface][key][0])
+                        buttons_config[widget[1]]["description"] = TRANSLATIONS["es"][interface][key][1]
+                    else:
+                        widget[0].configure(text=TRANSLATIONS["es"][interface][key][0])
+                        widget[1].configure(text=TRANSLATIONS["es"][interface][key][1])
                 else:
                     widget.configure(text=TRANSLATIONS["es"][interface][key])
         descriptions_buttons()
@@ -195,8 +199,12 @@ def change_lang():
         for interface in map_widgets:
             for key, widget in map_widgets[interface].items():
                 if type(widget) == tuple:
-                    widget[0].configure(text=TRANSLATIONS["en"][interface][key][0])
-                    buttons_config[widget[1]]["description"] = TRANSLATIONS["en"][interface][key][1]
+                    if interface == "menu_page":
+                        widget[0].configure(text=TRANSLATIONS["en"][interface][key][0])
+                        buttons_config[widget[1]]["description"] = TRANSLATIONS["en"][interface][key][1]
+                    else:
+                        widget[0].configure(text=TRANSLATIONS["en"][interface][key][0])
+                        widget[1].configure(text=TRANSLATIONS["en"][interface][key][1])
                 else:
                     widget.configure(text=TRANSLATIONS["en"][interface][key])
         descriptions_buttons()
@@ -388,21 +396,29 @@ def calculate_values():
     value = entry.get()
     try:
         value = float(value)
-    except ValueError as v:
-        errors_cloud1.configure(text=f"Error: {v}")
-        app.after(3000, lambda:errors_cloud1.configure(text="Any errors will appear here"))
+    except ValueError:
+        if lang == "en":
+            errors1.configure(text=f"Error: Enter numbers only, no text or symbols")
+            app.after(3000, lambda:errors1.configure(text="Any errors will appear here"))
+        else:
+            errors1.configure(text=f"Error: Ingrese solo numeros, no texto o símbolos")
+            app.after(3000, lambda:errors1.configure(text="Cualquier error aparecerá aquí"))
         return
     if value < -273.15:
-        errors_cloud1.configure(text=f"Error: Temperature cannot be below absolute zero (-273.15°C)")
-        app.after(3000, lambda:errors_cloud1.configure(text="Any errors will appear here"))
+        if lang == "en":
+            errors1.configure(text=f"Error: Temperature cannot be below absolute zero (-273.15°C)")
+            app.after(3000, lambda:errors1.configure(text="Any errors will appear here"))
+        else:
+            errors1.configure(text=f"Error: La temperatura no puede estar por debajo del 0 absoluto (-273.15°C)")
+            app.after(3000, lambda:errors1.configure(text="Cualquier error aparecerá aquí"))
         return
     fahrenheit_results.configure(text=f"{temperature_conversion.celsius_to_fahrenheit(value):.2f}°F")
     kelvin_results.configure(text=f"{temperature_conversion.celsius_to_kelvin(value):.2f}K")
     
     histories["temperature_conversion_page"].insert(0, {
         "Celsius":value,
-        "In_Fahrenheit":f"{temperature_conversion.celsius_to_fahrenheit(value):.2f}°F",
-        "In_Kelvin":f"{temperature_conversion.celsius_to_kelvin(value):.2f}K"
+        "In Fahrenheit":f"{temperature_conversion.celsius_to_fahrenheit(value):.2f}°F",
+        "In Kelvin":f"{temperature_conversion.celsius_to_kelvin(value):.2f}K"
     })
 
 def clean():
@@ -416,16 +432,24 @@ def copy_text_fahrenheit():
     app.clipboard_clear()
     app.clipboard_append(text_copy)
     app.update()
-    button_copy1.configure(text="COPIED TEXT")
-    app.after(2000, lambda: button_copy1.configure(text="COPY"))
+    if lang == "en":
+        button_copy1.configure(text="COPIED TEXT")
+        app.after(2000, lambda: button_copy1.configure(text="COPY"))
+    else:
+        button_copy1.configure(text="TEXTO COPIADO")
+        app.after(2000, lambda: button_copy1.configure(text="COPIAR"))
     
 def copy_text_kelvin():
     text_copy = kelvin_results.cget("text")
     app.clipboard_clear()
     app.clipboard_append(text_copy)
     app.update()
-    button_copy2.configure(text="COPIED TEXT")
-    app.after(2000, lambda: button_copy2.configure(text="COPY"))
+    if lang == "en":
+        button_copy2.configure(text="COPIED TEXT")
+        app.after(2000, lambda: button_copy1.configure(text="COPY"))
+    else:
+        button_copy2.configure(text="TEXTO COPIADO")
+        app.after(2000, lambda: button_copy1.configure(text="COPIAR"))
         
 # Title
 title1 = ctk.CTkLabel(
@@ -449,7 +473,7 @@ frame_input = ctk.CTkFrame(
     corner_radius=15)
 frame_input.place(relx=0.5, rely=0.32, anchor=tk.CENTER)
 # Title
-title_input = ctk.CTkLabel(
+title_input1 = ctk.CTkLabel(
     frame_input, 
     text="Input Section", 
     font=ctk.CTkFont(family="OCR A Extended", 
@@ -458,10 +482,10 @@ title_input = ctk.CTkLabel(
     fg_color=("#E1E5F2", "#0A0A2A"),
     bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
-title_input.place(relx=0.5, rely=0.15,anchor=tk.CENTER)
+title_input1.place(relx=0.5, rely=0.15,anchor=tk.CENTER)
 
 #Label for errors
-errors_cloud1 = ctk.CTkLabel(
+errors1 = ctk.CTkLabel(
     frame_input, 
     text="Any errors will appear here",
     width=150, height=85,
@@ -472,7 +496,7 @@ errors_cloud1 = ctk.CTkLabel(
     fg_color=("#E1E5F2", "#0A0A2A"),
     bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=10)
-errors_cloud1.place(relx=0.83, rely=0.34, anchor=tk.CENTER)
+errors1.place(relx=0.83, rely=0.34, anchor=tk.CENTER)
 
 # Order
 order = ctk.CTkLabel(
@@ -532,7 +556,7 @@ frame_results = ctk.CTkFrame(
     corner_radius=10)
 frame_results.place(relx=0.5, rely=0.66, anchor=tk.CENTER)
 # Title
-title_input = ctk.CTkLabel(
+title_results1 = ctk.CTkLabel(
     frame_results, 
     text="Results Panel", 
     font=ctk.CTkFont(family="OCR A Extended", 
@@ -541,7 +565,7 @@ title_input = ctk.CTkLabel(
     fg_color=("#E1E5F2", "#0A0A2A"),
     bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
-title_input.place(relx=0.5, rely=0.15,anchor=tk.CENTER)
+title_results1.place(relx=0.5, rely=0.15,anchor=tk.CENTER)
 
 # Fahrenheit results
 fahrenheit_title = ctk.CTkLabel(
@@ -812,7 +836,7 @@ frame_results2 = ctk.CTkFrame(
     corner_radius=10)
 frame_results2.place(relx=0.5, rely=0.66, anchor=tk.CENTER)
 # Title
-title_results = ctk.CTkLabel(
+title_results2 = ctk.CTkLabel(
     frame_results2, 
     text="Results Panel", 
     font=ctk.CTkFont(family="OCR A Extended", 
@@ -821,7 +845,7 @@ title_results = ctk.CTkLabel(
     fg_color=("#E1E5F2", "#0A0A2A"),
     bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
-title_results.place(relx=0.5, rely=0.15,anchor=tk.CENTER)
+title_results2.place(relx=0.5, rely=0.15,anchor=tk.CENTER)
 
 # Montly cost results
 montly_cost = ctk.CTkLabel(
@@ -3317,6 +3341,12 @@ map_widgets = {
         "btn9":(list_buttons_menu[8], 8), 
         "btn10":(list_buttons_menu[9], 9),
         "btn_back":return_button
+    },
+    "interface1":{
+        "title":title1, "frames":(title_input1,title_results1), 
+        "label1":order, "errors":errors1, "buttons_frm1":(button_convert,button_clean), 
+        "label2":fahrenheit_title, "label3":kelvin_title, "buttons_copy":(button_copy1,button_copy2),
+        "button_back":return_button1
     }
 }
 
@@ -3437,13 +3467,22 @@ def record_logic(button_pressed):
         for widget in frame_record.winfo_children():
             widget.destroy()
         if str(button_pressed) == ".!ctkframe3.!ctkbutton2":
-            for i, value in enumerate(histories["temperature_conversion_page"]):
-                text = "\n".join(f"{c}: {v}" for c, v in value.items())
-                history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#CC0000", "#ff5555"),
-                corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
-                hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#CC0000", "#ff5555"))
-                history.configure(command=lambda actual_history=value, f=button_pressed:access_the_corresponding_history(actual_history, f))
-                history.grid(row=i, column=0, pady=5)
+            if lang=="en":
+                for i, value in enumerate(histories["temperature_conversion_page"]):
+                    text = "\n".join(f"{TRANSLATIONS['en']['record']['temperature'][c]}: {v}" for c, v in value.items())
+                    history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#CC0000", "#ff5555"),
+                    corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
+                    hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#CC0000", "#ff5555"))
+                    history.configure(command=lambda actual_history=value, f=button_pressed:access_the_corresponding_history(actual_history, f))
+                    history.grid(row=i, column=0, pady=5)
+            else:
+                for i, value in enumerate(histories["temperature_conversion_page"]):
+                    text = "\n".join(f"{TRANSLATIONS['es']['record']['temperature'][c]}: {v}" for c, v in value.items())
+                    history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#CC0000", "#ff5555"),
+                    corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
+                    hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#CC0000", "#ff5555"))
+                    history.configure(command=lambda actual_history=value, f=button_pressed:access_the_corresponding_history(actual_history, f))
+                    history.grid(row=i, column=0, pady=5)
         elif str(button_pressed) == ".!ctkframe4.!ctkbutton2":
             for i, value in enumerate(histories["cloud_storage_cost_page"]):
                 text = "\n".join(f"{c}: {v}" for c, v in value.items())
