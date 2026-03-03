@@ -2,7 +2,7 @@
 import customtkinter as ctk
 import tkinter as tk
 from PIL import Image, ImageTk
-from src.traductor import TRANSLATIONS
+from src.translate import TRANSLATIONS
 import sys
 import os
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -446,10 +446,10 @@ def copy_text_kelvin():
     app.update()
     if lang == "en":
         button_copy2.configure(text="COPIED TEXT")
-        app.after(2000, lambda: button_copy1.configure(text="COPY"))
+        app.after(2000, lambda: button_copy2.configure(text="COPY"))
     else:
         button_copy2.configure(text="TEXTO COPIADO")
-        app.after(2000, lambda: button_copy1.configure(text="COPIAR"))
+        app.after(2000, lambda: button_copy2.configure(text="COPIAR"))
         
 # Title
 title1 = ctk.CTkLabel(
@@ -666,15 +666,22 @@ def calculate_cost():
     try:
         gb = float(entry_cloud1.get())
         c = float(entry_cloud2.get())
-    except ValueError as v:
-        errors_cloud.configure(text="")
-        errors_cloud.configure(text=f"Error: {v}")
-        app.after(3000, lambda:errors_cloud.configure(text="Any errors will appear here"))
+    except ValueError:
+        if lang == "en":
+            errors_cloud.configure(text=f"Error: Enter numbers only, no text or symbols")
+            app.after(3000, lambda:errors_cloud.configure(text="Any errors will appear here"))
+        else:
+            errors_cloud.configure(text=f"Error: Ingrese solo numeros, no texto o símbolos")
+            app.after(3000, lambda:errors_cloud.configure(text="Cualquier error aparecerá aquí"))
         return
     
     if gb <= 0 or c <= 0:
-        errors_cloud.configure(text=f"Error: Values must be greater than zero")
-        app.after(3000, lambda:errors_cloud.configure(text="Any errors will appear here"))
+        if lang=="en":
+            errors_cloud.configure(text=f"Error: Values must be greater than zero")
+            app.after(3000, lambda:errors_cloud.configure(text="Any errors will appear here"))
+        else:
+            errors_cloud.configure(text=f"Error: Los valores deben ser mayores a 0")
+            app.after(3000, lambda:errors_cloud.configure(text="Cualquier error aparecerá aquí"))
         return
     
     cm = cloud_storage_cost.monthly_cost(gb, c)
@@ -700,16 +707,24 @@ def copy_results_cloud1():
     app.clipboard_clear()
     app.clipboard_append(copy)
     app.update()
-    button_copy_cloud.configure(text="COPIED TEXT")
-    app.after(2000, lambda:button_copy_cloud.configure(text="COPY"))
+    if lang=="en":
+        button_copy_cloud.configure(text="COPIED TEXT")
+        app.after(2000, lambda:button_copy_cloud.configure(text="COPY"))
+    else:
+        button_copy_cloud.configure(text="TEXTO COPIADO")
+        app.after(2000, lambda:button_copy_cloud.configure(text="COPIAR"))
     
 def copy_results_cloud2():
     copy = anual_cost_results.cget("text")
     app.clipboard_clear()
     app.clipboard_append(copy)
     app.update()
-    button_copy_cloud2.configure(text="COPIED TEXT")
-    app.after(2000, lambda:button_copy_cloud2.configure(text="COPY"))
+    if lang=="en":
+        button_copy_cloud2.configure(text="COPIED TEXT")
+        app.after(2000, lambda:button_copy_cloud2.configure(text="COPY"))
+    else:
+        button_copy_cloud2.configure(text="TEXTO COPIADO")
+        app.after(2000, lambda:button_copy_cloud2.configure(text="COPIAR"))
 
 # Title
 title2 = ctk.CTkLabel(
@@ -946,14 +961,22 @@ def calculate_execution():
     try:
         n = float(entry_exe1.get())
         v = float(entry_exe2.get())
-    except ValueError as v:
-        errors_exe.configure(text=f"Error: {v}")
-        app.after(3000, lambda:errors_exe.configure(text="Any errors will appear here"))
+    except ValueError:
+        if lang=="en":
+            errors_exe.configure(text=f"Error: Enter numbers only, no text or symbols")
+            app.after(3000, lambda:errors_exe.configure(text="Any errors will appear here"))
+        else:
+            errors_exe.configure(text=f"Error: Ingrese solo numeros, no texto o símbolos")
+            app.after(3000, lambda:errors_exe.configure(text="Cualquier error aparecerá aquí"))
         return
     
     if n <= 0 or v <= 0:
-        errors_exe.configure(text=f"Error: Values must be greater than zero")
-        app.after(3000, lambda:errors_exe.configure(text="Any errors will appear here"))
+        if lang=="en":
+            errors_exe.configure(text=f"Error: Values must be greater than zero")
+            app.after(3000, lambda:errors_exe.configure(text="Any errors will appear here"))
+        else:
+            errors_exe.configure(text=f"Error: Los valores deben see mayores a 0")
+            app.after(3000, lambda:errors_exe.configure(text="Cualquier error aparecerá aquí"))
         return
     
     ts = execution_time_calculator.time_seconds(n,v)
@@ -979,16 +1002,24 @@ def copy_results_exe1():
     app.clipboard_clear()
     app.clipboard_append(copy)
     app.update()
-    button_copy_exe.configure(text="COPIED TEXT")
-    app.after(2000, lambda:button_copy_exe.configure(text="COPY"))
+    if lang=="en":
+        button_copy_exe.configure(text="COPIED TEXT")
+        app.after(2000, lambda:button_copy_exe.configure(text="COPY"))
+    else:
+        button_copy_exe.configure(text="TEXTO COPIADO")
+        app.after(2000, lambda:button_copy_exe.configure(text="COPIAR"))
     
 def copy_results_exe2():
     copy = time_minutes_results.cget("text")
     app.clipboard_clear()
     app.clipboard_append(copy)
     app.update()
-    button_copy_exe2.configure(text="COPIED TEXT")
-    app.after(2000, lambda:button_copy_exe2.configure(text="COPY"))
+    if lang=="en":
+        button_copy_exe2.configure(text="COPIED TEXT")
+        app.after(2000, lambda:button_copy_exe2.configure(text="COPY"))
+    else:
+        button_copy_exe2.configure(text="TEXTO COPIADO")
+        app.after(2000, lambda:button_copy_exe2.configure(text="COPIAR"))
 
 # Title
 title3 = ctk.CTkLabel(
@@ -1230,8 +1261,12 @@ def calculate_euclidean():
         x2 = float(entry_euclidean3.get())
         y2 = float(entry_euclidean4.get())
     except ValueError as v:
-        errors_euclidean.configure(text=f"Error: {v}")
-        app.after(3000, lambda:errors_euclidean.configure(text="Any errors will appear here"))
+        if lang=="en":
+            errors_euclidean.configure(text=f"Error: Enter numbers only, no text or symbols")
+            app.after(3000, lambda:errors_euclidean.configure(text="Any errors will appear here"))
+        else:
+            errors_euclidean.configure(text=f"Error: Ingrese solo numeros, no texto o símbolos")
+            app.after(3000, lambda:errors_euclidean.configure(text="Cualquier error aparecerá aquí"))
         return
     
     coordinates_results.configure(text=f"(P1: {entry_euclidean1.get()}, {entry_euclidean2.get()} | P2: {entry_euclidean3.get()}, {entry_euclidean4.get()})")
@@ -1258,16 +1293,24 @@ def copy_results_euclidean1():
     app.clipboard_clear()
     app.clipboard_append(copy)
     app.update()
-    button_copy_euclidean.configure(text="COPIED TEXT")
-    app.after(2000, lambda:button_copy_euclidean.configure(text="COPY"))
+    if lang=="en":
+        button_copy_euclidean.configure(text="COPIED TEXT")
+        app.after(2000, lambda:button_copy_euclidean.configure(text="COPY"))
+    else:
+        button_copy_euclidean.configure(text="TEXTO COPIADO")
+        app.after(2000, lambda:button_copy_euclidean.configure(text="COPIAR"))
     
 def copy_results_euclidean2():
     copy = euclidean_distance_results.cget("text")
     app.clipboard_clear()
     app.clipboard_append(copy)
     app.update()
-    button_copy_euclidean2.configure(text="COPIED TEXT")
-    app.after(2000, lambda:button_copy_euclidean2.configure(text="COPY"))
+    if lang=="en":
+        button_copy_euclidean2.configure(text="COPIED TEXT")
+        app.after(2000, lambda:button_copy_euclidean2.configure(text="COPY"))
+    else:
+        button_copy_euclidean2.configure(text="TEXTO COPIADO")
+        app.after(2000, lambda:button_copy_euclidean2.configure(text="COPIAR"))
 
 # Title
 title4 = ctk.CTkLabel(
@@ -1546,14 +1589,22 @@ def calculate_grades():
         n2 = float(entry_grade2.get())
         n3 = float(entry_grade3.get())
         n4 = float(entry_grade4.get())
-    except ValueError as v:
-        errors_grade.configure(text=f"Error: {v}")
-        app.after(3000, lambda:errors_grade.configure(text="Any errors will appear here"))
+    except ValueError:
+        if lang=="en":
+            errors_grade.configure(text=f"Error: Enter numbers only, no text or symbols")
+            app.after(3000, lambda:errors_grade.configure(text="Any errors will appear here"))
+        else:
+            errors_grade.configure(text=f"Error:Ingrese solo números, no texto o símbolos")
+            app.after(3000, lambda:errors_grade.configure(text="Cualquier error aparecerá aquí"))
         return
     
     if n1 < 0 or n2 < 0 or n3 < 0 or n4 < 0:
-        errors_grade.configure(text="Error: Please enter only numbers greater than or equal to zero")
-        app.after(3000, lambda:errors_grade.configure(text="Any errors will appear here"))
+        if lang=="en":
+            errors_grade.configure(text="Error: Please enter only numbers greater than or equal to zero")
+            app.after(3000, lambda:errors_grade.configure(text="Any errors will appear here"))
+        else:
+            errors_grade.configure(text="Error: Por favor ingrese solo numeros mayores o iguales a 0")
+            app.after(3000, lambda:errors_grade.configure(text="Cualquier error aparecerá aquí"))
         return
     
     grades_results.configure(text=f"(G1: {entry_grade1.get()}| G2: {entry_grade2.get()}| G3: {entry_grade3.get()}| G4: {entry_grade4.get()})")
@@ -1580,16 +1631,24 @@ def copy_results_grade1():
     app.clipboard_clear()
     app.clipboard_append(copy)
     app.update()
-    button_copy_grades.configure(text="COPIED TEXT")
-    app.after(2000, lambda:button_copy_grades.configure(text="COPY"))
+    if lang=="en":
+        button_copy_grades.configure(text="COPIED TEXT")
+        app.after(2000, lambda:button_copy_grades.configure(text="COPY"))
+    else:
+        button_copy_grades.configure(text="COPIAR TEXTO")
+        app.after(2000, lambda:button_copy_grades.configure(text="COPIAR"))
     
 def copy_results_grade2():
     copy = average_grade_results.cget("text")
     app.clipboard_clear()
     app.clipboard_append(copy)
     app.update()
-    button_copy_grades2.configure(text="COPIED TEXT")
-    app.after(2000, lambda:button_copy_grades2.configure(text="COPY"))
+    if lang=="en":
+        button_copy_grades2.configure(text="COPIED TEXT")
+        app.after(2000, lambda:button_copy_grades2.configure(text="COPY"))
+    else:
+        button_copy_grades2.configure(text="COPIAR TEXTO")
+        app.after(2000, lambda:button_copy_grades2.configure(text="COPIAR"))
 
 # Title
 title5 = ctk.CTkLabel(
@@ -1867,14 +1926,22 @@ def calculate_interest():
         c = float(entry_interest1.get())
         i = float(entry_interest3.get())
         t = float(entry_interest2.get())
-    except ValueError as v:
-        errors_interest.configure(text=f"Error: {v}")
-        app.after(3000, lambda:errors_interest.configure(text="Any errors will appear here"))
+    except ValueError:
+        if lang=="en":
+            errors_interest.configure(text=f"Error: Enter numbers only, no text or symbols")
+            app.after(3000, lambda:errors_interest.configure(text="Any errors will appear here"))
+        else:
+            errors_interest.configure(text=f"Error: Ingrese solo números, no texto o símbolos")
+            app.after(3000, lambda:errors_interest.configure(text="Cualquier error aparecerá aquí"))
         return
     
     if c <= 0 or i <= 0 or t <= 0:
-        errors_interest.configure(text="Error: All values must be greater than zero")
-        app.after(3000, lambda:errors_interest.configure(text="Any errors will appear here"))
+        if lang=="en":
+            errors_interest.configure(text="Error: All values must be greater than zero")
+            app.after(3000, lambda:errors_interest.configure(text="Any errors will appear here"))
+        else:
+            errors_interest.configure(text="Error: Todos los valores deben ser mayores a 0")
+            app.after(3000, lambda:errors_interest.configure(text="Cualquier error aparecerá aquí"))
         return
     
     i = simple_interest_calculator.rate_percentage(i)
@@ -1904,16 +1971,24 @@ def copy_results_interest1():
     app.clipboard_clear()
     app.clipboard_append(copy)
     app.update()
-    button_copy_interest.configure(text="COPIED TEXT")
-    app.after(2000, lambda:button_copy_interest.configure(text="COPY"))
+    if lang=="en":
+        button_copy_interest.configure(text="COPIED TEXT")
+        app.after(2000, lambda:button_copy_interest.configure(text="COPY"))
+    else:
+        button_copy_interest.configure(text="TEXTO COPIADO")
+        app.after(2000, lambda:button_copy_interest.configure(text="COPIAR"))
     
 def copy_results_interest2():
     copy = amount_results.cget("text")
     app.clipboard_clear()
     app.clipboard_append(copy)
     app.update()
-    button_copy_interest2.configure(text="COPIED TEXT")
-    app.after(2000, lambda:button_copy_interest2.configure(text="COPY"))
+    if lang=="en":
+        button_copy_interest2.configure(text="COPIED TEXT")
+        app.after(2000, lambda:button_copy_interest2.configure(text="COPY"))
+    else:
+        button_copy_interest2.configure(text="TEXTO COPIADO")
+        app.after(2000, lambda:button_copy_interest2.configure(text="COPIAR"))
 
 # Title
 title6 = ctk.CTkLabel(
@@ -2171,15 +2246,22 @@ def calculate_speed():
     try:
         d = float(entry_speed1.get())
         t = float(entry_speed2.get())
-    except ValueError as v:
-        errors_speed.configure(text="")
-        errors_speed.configure(text=f"Error: {v}")
-        app.after(3000, lambda:errors_speed.configure(text="Any errors will appear here"))
+    except ValueError:
+        if lang=="en":
+            errors_speed.configure(text=f"Error: Enter numbers only, no text or symbols")
+            app.after(3000, lambda:errors_speed.configure(text="Any errors will appear here"))
+        else:
+            errors_speed.configure(text=f"Error: Ingrese solo números, no texto o símbolos")
+            app.after(3000, lambda:errors_speed.configure(text="Cualquier error aparecerá aquí"))
         return
     
     if d <= 0 or t <= 0:
-        errors_speed.configure(text="Error: All values must be greater than zero")
-        app.after(3000, lambda:errors_speed.configure(text="Any errors will appear here"))
+        if lang=="en":
+            errors_speed.configure(text="Error: All values must be greater than zero")
+            app.after(3000, lambda:errors_speed.configure(text="Any errors will appear here"))
+        else:
+            errors_speed.configure(text="Error: Todos los valores deben ser mayores a 0")
+            app.after(3000, lambda:errors_speed.configure(text="Cualquier error aparecerá aquí"))
         return
     
     vkm = average_speed_of_a_drone.speed_kmh(d, t)
@@ -2206,16 +2288,24 @@ def copy_results_speed1():
     app.clipboard_clear()
     app.clipboard_append(copy)
     app.update()
-    button_copy_speed.configure(text="COPIED TEXT")
-    app.after(2000, lambda:button_copy_speed.configure(text="COPY"))
+    if lang=="en":
+        button_copy_speed.configure(text="COPIED TEXT")
+        app.after(2000, lambda:button_copy_speed.configure(text="COPY"))
+    else:
+        button_copy_speed.configure(text="TEXTO COPIADO")
+        app.after(2000, lambda:button_copy_speed.configure(text="COPIAR"))
     
 def copy_results_speed2():
     copy = ms_results.cget("text")
     app.clipboard_clear()
     app.clipboard_append(copy)
     app.update()
-    button_copy_speed2.configure(text="COPIED TEXT")
-    app.after(2000, lambda:button_copy_speed2.configure(text="COPY"))
+    if lang=="en":
+        button_copy_speed2.configure(text="COPIED TEXT")
+        app.after(2000, lambda:button_copy_speed2.configure(text="COPY"))
+    else:
+        button_copy_speed2.configure(text="TEXTO COPIADO")
+        app.after(2000, lambda:button_copy_speed2.configure(text="COPIAR"))
 
 # Title
 title7 = ctk.CTkLabel(
@@ -2365,7 +2455,7 @@ kmh = ctk.CTkLabel(
     fg_color=("#E1E5F2", "#0A0A2A"),
     bg_color=("#F0F2F5", "#1A1A2E"),
     corner_radius=50)
-kmh.place(relx=0.18, rely=0.43, anchor=tk.CENTER)
+kmh.place(relx=0.19, rely=0.43, anchor=tk.CENTER)
 
 kmh_results = ctk.CTkLabel(
     frame_results7,
@@ -2454,20 +2544,31 @@ def calculate_index():
     try:
         p = float(entry_index1.get())
         h = float(entry_index2.get())
-    except ValueError as v:
-        errors_index.configure(text="")
-        errors_index.configure(text=f"Error: {v}")
-        app.after(3000, lambda:errors_index.configure(text="Any errors will appear here"))
+    except ValueError:
+        if lang=="en":
+            errors_index.configure(text=f"Error: Enter numbers only, no text or symbols")
+            app.after(3000, lambda:errors_index.configure(text="Any errors will appear here"))
+        else:
+            errors_index.configure(text=f"Error: Ingrese solo números, no texto o símbolos")
+            app.after(3000, lambda:errors_index.configure(text="Cualquier error aparecerá aquí"))
         return
     
     if not 15 <= p <= 635:
-        errors_index.configure(text="Error: Weight must be between 15 and 635 kg")
-        app.after(3000, lambda:errors_index.configure(text="Any errors will appear here"))
+        if lang=="en":
+            errors_index.configure(text="Error: Weight must be between 15 and 635 kg")
+            app.after(3000, lambda:errors_index.configure(text="Any errors will appear here"))
+        else:
+            errors_index.configure(text="Error: El peso debe estar entre 15 y 635 kg")
+            app.after(3000, lambda:errors_index.configure(text="Cualquier error aparecerá aquí"))
         return
     
     if not 0.5 <= h <= 2.72:
-        errors_index.configure(text="Height must be between 0.5 and 2.72 m")
-        app.after(3000, lambda:errors_index.configure(text="Any errors will appear here"))
+        if lang=="en":
+            errors_index.configure(text="Height must be between 0.5 and 2.72 m")
+            app.after(3000, lambda:errors_index.configure(text="Any errors will appear here"))
+        else:
+            errors_index.configure(text="La altura debe estar entre 0.5 y 2.72 m.")
+            app.after(3000, lambda:errors_index.configure(text="Cualquier error aparecerá aquí"))
         return
     
     l = ["Underweight",  "Normal Weight", "Overweight", "Obesity"]
@@ -2475,36 +2576,44 @@ def calculate_index():
     imc = body_mass_index_calculator.calculate_imc(p, h)
     results = body_mass_index_calculator.results_imc(l, imc)
     
-    bodymi_results.configure(text=f"{imc:.2f} | {results}")
+    bodymi_results.configure(text=f"{imc:.2f}")
     
     histories["body_mass_index_calculator_page"].insert(0, {
         "Weight in kilograms(kg)":p,
         "Height in meters(m)":h,
-        "Body Mass Index":f"{imc:.2f}",
-        "Category":results,
+        "IMC":f"{imc:.2f}",
     })
+    return imc
     
 def clean_text_index():
     entry_index1.delete(0, "end")
     entry_index2.delete(0, "end")
     entry_index1.focus()
-    bodymi_results.configure(text="00.00 | Category")
+    bodymi_results.configure(text="00.00")
     
 def copy_results_index1():
     copy = bodymi_results.cget("text")
     app.clipboard_clear()
     app.clipboard_append(copy)
     app.update()
-    button_copy_index1.configure(text="COPIED TEXT")
-    app.after(2000, lambda:button_copy_index1.configure(text="COPY"))
+    if lang=="en":
+        button_copy_index1.configure(text="COPIED TEXT")
+        app.after(2000, lambda:button_copy_index1.configure(text="COPY"))
+    else:
+        button_copy_index1.configure(text="TEXTO COPIADO")
+        app.after(2000, lambda:button_copy_index1.configure(text="COPIAR"))
     
 def copy_results_index2():
     copy = table_results.cget("text")
     app.clipboard_clear()
     app.clipboard_append(copy)
     app.update()
-    button_copy_index2.configure(text="COPIED TEXT")
-    app.after(2000, lambda:button_copy_index2.configure(text="COPY"))
+    if lang=="en":
+        button_copy_index2.configure(text="COPIED TEXT")
+        app.after(2000, lambda:button_copy_index2.configure(text="COPY"))
+    else:
+        button_copy_index2.configure(text="TEXTO COPIADO")
+        app.after(2000, lambda:button_copy_index2.configure(text="COPIAR"))
 
 # Title
 title8 = ctk.CTkLabel(
@@ -2647,7 +2756,7 @@ title_results_index.place(relx=0.5, rely=0.15,anchor=tk.CENTER)
 # IMC km/h results
 bodymi = ctk.CTkLabel(
     frame_results8, 
-    text="The Body Mass Index is:", 
+    text="IMC:", 
     font=ctk.CTkFont(family="OCR A Extended", size=12, weight="bold"), 
     text_color=("#1A1A2E", "#FFFFFF"),
     width=160,
@@ -2658,7 +2767,7 @@ bodymi.place(relx=0.17, rely=0.43, anchor=tk.CENTER)
 
 bodymi_results = ctk.CTkLabel(
     frame_results8,
-    text="00.00 | Category",
+    text="00.00",
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
     text_color=("#3333CC", "#5555FF"), 
@@ -2684,7 +2793,7 @@ button_copy_index1.place(relx=0.82, rely=0.43, anchor=tk.CENTER)
 # Table results
 table_results = ctk.CTkLabel(
     frame_results8,
-    text=f"IMC Table: \nUnderweight: < 18.5 | Normal weight: 18.5 - 24.9 Overweight: 25.0 - 29.9 | Obesity: ≥ 30.0",
+    text="IMC Table: \nUnderweight: < 18.5 | Normal weight: 18.5 - 24.9 Overweight: 25.0 - 29.9 | Obesity: ≥ 30.0",
     font=ctk.CTkFont(family="OCR A Extended", 
     size=12, weight="bold"), 
     wraplength=340,
@@ -3347,6 +3456,56 @@ map_widgets = {
         "label1":order, "errors":errors1, "buttons_frm1":(button_convert,button_clean), 
         "label2":fahrenheit_title, "label3":kelvin_title, "buttons_copy":(button_copy1,button_copy2),
         "button_back":return_button1
+    },
+    "interface2":{
+        "title":title2, "frames":(title_input2,title_results2), 
+        "label1":order_cloud_1, "label2":order_cloud_2,
+        "errors":errors_cloud, "buttons_frm1":(button_calculate,button_clean2), 
+        "label3":montly_cost, "label4":anual_cost, 
+        "buttons_copy":(button_copy_cloud,button_copy_cloud2), "button_back":return_button2
+    },
+    "interface3":{
+        "title":title3, "frames":(title_input3,title_results_exe), 
+        "label1":order_exe_1, "label2":order_exe_2,
+        "errors":errors_exe, "buttons_frm1":(button_calculate_exe,button_clean3), 
+        "label3":time_seconds, "label4":time_minutes, 
+        "buttons_copy":(button_copy_exe,button_copy_exe2), "button_back":return_button3
+    },
+    "interface4":{
+        "title":title4, "frames":(title_input4,title_results_euclidean), 
+        "label1":order_euclidean1, "label2":order_euclidean3,
+        "errors":errors_euclidean, "buttons_frm1":(button_calculate_euclidean,button_clean4), 
+        "label3":coordinates, "label4":euclidean_distance, 
+        "buttons_copy":(button_copy_euclidean,button_copy_euclidean2), "button_back":return_button4
+    },
+    "interface5":{
+        "title":title5, "frames":(title_input5,title_results_grade), 
+        "label1":order_grade1, "label2":order_grade3,
+        "errors":errors_grade, "buttons_frm1":(button_calculate_grade,button_clean5), 
+        "label3":grades, "label4":average, 
+        "buttons_copy":(button_copy_grades,button_copy_grades2), "button_back":return_button5
+    },
+    "interface6":{
+        "title":title6, "frames":(title_input6,title_results_interest), 
+        "label1":order_interest1, "label3":order_interest3,
+        "label2":order_interest2, "errors":errors_interest, 
+        "buttons_frm1":(button_calculate_interest,button_clean6), "label4":interest, 
+        "label5":amount, "buttons_copy":(button_copy_interest,button_copy_interest2), 
+        "button_back":return_button6
+    },
+    "interface7":{
+        "title":title7, "frames":(title_input7,title_results_speed), 
+        "label1":order_speed1, "label2":order_speed2, 
+        "errors":errors_speed, "buttons_frm1":(button_calculate_speed,button_clean7), 
+        "label3":kmh, "label4":ms, 
+        "buttons_copy":(button_copy_speed,button_copy_speed2), "button_back":return_button7
+    },
+    "interface8":{
+        "title":title8, "frames":(title_input8,title_results_index), 
+        "label1":order_index1, "label2":order_index2, 
+        "errors":errors_index, "buttons_frm1":(button_calculate_index,button_clean8), 
+        "label3":bodymi, "label4":table_results, 
+        "buttons_copy":(button_copy_index1,button_copy_index2), "button_back":return_button8
     }
 }
 
@@ -3354,7 +3513,6 @@ map_widgets = {
 CALCULATION HISTORY SECTION
 """
 def access_the_corresponding_history(actual_history, f):
-    print(actual_history)
     if str(f) == ".!ctkframe3.!ctkbutton2":
         entry.delete(0, "end")
         entry.insert(0, actual_history["Celsius"])
@@ -3417,7 +3575,7 @@ def access_the_corresponding_history(actual_history, f):
         entry_index1.insert(0, actual_history["Weight in kilograms(kg)"])
         entry_index2.delete(0, "end")
         entry_index2.insert(0, actual_history["Height in meters(m)"])
-        bodymi_results.configure(text=f"{actual_history['Body Mass Index']} | {actual_history['Category']}")
+        bodymi_results.configure(text=f"{actual_history['IMC']}")
     elif str(f) == ".!ctkframe11.!ctkbutton2":
         entry_energy1.delete(0, "end")
         entry_energy1.insert(0, actual_history["Hours of the computer operates a day"])
@@ -3484,77 +3642,158 @@ def record_logic(button_pressed):
                     history.configure(command=lambda actual_history=value, f=button_pressed:access_the_corresponding_history(actual_history, f))
                     history.grid(row=i, column=0, pady=5)
         elif str(button_pressed) == ".!ctkframe4.!ctkbutton2":
-            for i, value in enumerate(histories["cloud_storage_cost_page"]):
-                text = "\n".join(f"{c}: {v}" for c, v in value.items())
-                history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#7722CC", "#AA55FF"),
-                corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
-                hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#7722CC", "#AA55FF"))
-                history.configure(command=lambda actual_history=value, f=button_pressed:access_the_corresponding_history(actual_history, f))
-                history.grid(row=i, column=0, pady=5)
+            if lang=="en":
+                for i, value in enumerate(histories["cloud_storage_cost_page"]):
+                    text = "\n".join(f"{TRANSLATIONS['en']['record']['storage'][c]}: {v}" for c, v in value.items())
+                    history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#7722CC", "#AA55FF"),
+                    corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
+                    hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#7722CC", "#AA55FF"))
+                    history.configure(command=lambda actual_history=value, f=button_pressed:access_the_corresponding_history(actual_history, f))
+                    history.grid(row=i, column=0, pady=5)
+            else:
+                for i, value in enumerate(histories["cloud_storage_cost_page"]):
+                    text = "\n".join(f"{TRANSLATIONS['es']['record']['storage'][c]}: {v}" for c, v in value.items())
+                    history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#7722CC", "#AA55FF"),
+                    corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
+                    hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#7722CC", "#AA55FF"))
+                    history.configure(command=lambda actual_history=value, f=button_pressed:access_the_corresponding_history(actual_history, f))
+                    history.grid(row=i, column=0, pady=5)
         elif str(button_pressed) == ".!ctkframe5.!ctkbutton2":
-            for i, value in enumerate(histories["execution_time_calculator_page"]):
-                text = "\n".join(f"{c}: {v}" for c, v in value.items())
-                history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#A18800", "#FFFF55"),
-                corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
-                hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#A18800", "#FFFF55"))
-                history.configure(command=lambda actual_history=value, f=button_pressed:access_the_corresponding_history(actual_history, f))
-                history.grid(row=i, column=0, pady=5)
+            if lang=="en":
+                for i, value in enumerate(histories["execution_time_calculator_page"]):
+                    text = "\n".join(f"{TRANSLATIONS['en']['record']['execution'][c]}: {v}" for c, v in value.items())
+                    history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#A18800", "#FFFF55"),
+                    corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
+                    hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#A18800", "#FFFF55"))
+                    history.configure(command=lambda actual_history=value, f=button_pressed:access_the_corresponding_history(actual_history, f))
+                    history.grid(row=i, column=0, pady=5)
+            else:
+                for i, value in enumerate(histories["execution_time_calculator_page"]):
+                    text = "\n".join(f"{TRANSLATIONS['es']['record']['execution'][c]}: {v}" for c, v in value.items())
+                    history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#A18800", "#FFFF55"),
+                    corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
+                    hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#A18800", "#FFFF55"))
+                    history.configure(command=lambda actual_history=value, f=button_pressed:access_the_corresponding_history(actual_history, f))
+                    history.grid(row=i, column=0, pady=5)
         elif str(button_pressed) == ".!ctkframe6.!ctkbutton2":
-            for i, value in enumerate(histories["euclidean_distance_calculator_page"]):
-                text = "\n".join(f"{c}: {v}" for c, v in value.items())
-                history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#008800", "#55FF55"),
-                corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
-                hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#008800", "#55FF55"))
-                history.configure(command=lambda actual_history=value, f=button_pressed:access_the_corresponding_history(actual_history, f))
-                history.grid(row=i, column=0, pady=5)
+            if lang=="en":
+                for i, value in enumerate(histories["euclidean_distance_calculator_page"]):
+                    text = "\n".join(f"{TRANSLATIONS['en']['record']['euclidean'][c]}: {v}" for c, v in value.items())
+                    history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#008800", "#55FF55"),
+                    corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
+                    hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#008800", "#55FF55"))
+                    history.configure(command=lambda actual_history=value, f=button_pressed:access_the_corresponding_history(actual_history, f))
+                    history.grid(row=i, column=0, pady=5)
+            else:
+                for i, value in enumerate(histories["euclidean_distance_calculator_page"]):
+                    text = "\n".join(f"{TRANSLATIONS['es']['record']['euclidean'][c]}: {v}" for c, v in value.items())
+                    history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#008800", "#55FF55"),
+                    corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
+                    hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#008800", "#55FF55"))
+                    history.configure(command=lambda actual_history=value, f=button_pressed:access_the_corresponding_history(actual_history, f))
+                    history.grid(row=i, column=0, pady=5)
         elif str(button_pressed) == ".!ctkframe7.!ctkbutton2":
-            for i, value in enumerate(histories["average_grade_page"]):
-                text = "\n".join(f"{c}: {v}" for c, v in value.items())
-                history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#D60073", "#FF55AA"),
-                corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
-                hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#D60073", "#FF55AA"))
-                history.configure(command=lambda actual_history=value, f=button_pressed:access_the_corresponding_history(actual_history, f))
-                history.grid(row=i, column=0, pady=5)
+            if lang=="en":
+                for i, value in enumerate(histories["average_grade_page"]):
+                    text = "\n".join(f"{TRANSLATIONS['en']['record']['grades'][c]}: {v}" for c, v in value.items())
+                    history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#D60073", "#FF55AA"),
+                    corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
+                    hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#D60073", "#FF55AA"))
+                    history.configure(command=lambda actual_history=value, f=button_pressed:access_the_corresponding_history(actual_history, f))
+                    history.grid(row=i, column=0, pady=5)
+            else:
+                for i, value in enumerate(histories["average_grade_page"]):
+                    text = "\n".join(f"{TRANSLATIONS['es']['record']['grades'][c]}: {v}" for c, v in value.items())
+                    history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#D60073", "#FF55AA"),
+                    corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
+                    hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#D60073", "#FF55AA"))
+                    history.configure(command=lambda actual_history=value, f=button_pressed:access_the_corresponding_history(actual_history, f))
+                    history.grid(row=i, column=0, pady=5)
         elif str(button_pressed) == ".!ctkframe8.!ctkbutton2":
-            for i, value in enumerate(histories["simple_interest_calculator_page"]):
-                text = "\n".join(f"{c}: {v}" for c, v in value.items())
-                history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#E67E00", "#FFAA00"),
-                corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
-                hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#E67E00", "#FFAA00"))
-                history.configure(command=lambda actual_history=value, f=button_pressed:access_the_corresponding_history(actual_history, f))
-                history.grid(row=i, column=0, pady=5)
+            if lang=="en":
+                for i, value in enumerate(histories["simple_interest_calculator_page"]):
+                    text = "\n".join(f"{TRANSLATIONS['en']['record']['interest'][c]}: {v}" for c, v in value.items())
+                    history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#E67E00", "#FFAA00"),
+                    corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
+                    hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#E67E00", "#FFAA00"))
+                    history.configure(command=lambda actual_history=value, f=button_pressed:access_the_corresponding_history(actual_history, f))
+                    history.grid(row=i, column=0, pady=5)
+            else:
+                for i, value in enumerate(histories["simple_interest_calculator_page"]):
+                    text = "\n".join(f"{TRANSLATIONS['es']['record']['interest'][c]}: {v}" for c, v in value.items())
+                    history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#E67E00", "#FFAA00"),
+                    corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
+                    hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#E67E00", "#FFAA00"))
+                    history.configure(command=lambda actual_history=value, f=button_pressed:access_the_corresponding_history(actual_history, f))
+                    history.grid(row=i, column=0, pady=5)
         elif str(button_pressed) == ".!ctkframe9.!ctkbutton2":
-            for i, value in enumerate(histories["average_speed_of_a_drone_page"]):
-                text = "\n".join(f"{c}: {v}" for c, v in value.items())
-                history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#008B8B", "#55FFFF"),
-                corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
-                hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#008B8B", "#55FFFF"))
-                history.configure(command=lambda actual_history=value, f=button_pressed:access_the_corresponding_history(actual_history, f))
-                history.grid(row=i, column=0, pady=5)
+            if lang=="en":
+                for i, value in enumerate(histories["average_speed_of_a_drone_page"]):
+                    text = "\n".join(f"{TRANSLATIONS['en']['record']['drone'][c]}: {v}" for c, v in value.items())
+                    history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#008B8B", "#55FFFF"),
+                    corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
+                    hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#008B8B", "#55FFFF"))
+                    history.configure(command=lambda actual_history=value, f=button_pressed:access_the_corresponding_history(actual_history, f))
+                    history.grid(row=i, column=0, pady=5)
+            else:
+                for i, value in enumerate(histories["average_speed_of_a_drone_page"]):
+                    text = "\n".join(f"{TRANSLATIONS['es']['record']['drone'][c]}: {v}" for c, v in value.items())
+                    history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#008B8B", "#55FFFF"),
+                    corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
+                    hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#008B8B", "#55FFFF"))
+                    history.configure(command=lambda actual_history=value, f=button_pressed:access_the_corresponding_history(actual_history, f))
+                    history.grid(row=i, column=0, pady=5)
         elif str(button_pressed) == ".!ctkframe10.!ctkbutton2":
-            for i, value in enumerate(histories["body_mass_index_calculator_page"]):
-                text = "\n".join(f"{c}: {v}" for c, v in value.items())
-                history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#3333CC", "#5555FF"),
-                corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
-                hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#3333CC", "#5555FF"))
-                history.configure(command=lambda actual_history=value, f=button_pressed:access_the_corresponding_history(actual_history, f))
-                history.grid(row=i, column=0, pady=5)
+            if lang=="en":
+                for i, value in enumerate(histories["body_mass_index_calculator_page"]):
+                    text = "\n".join(f"{TRANSLATIONS['en']['record']['imc'][c]}: {v}" for c, v in value.items())
+                    history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#3333CC", "#5555FF"),
+                    corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
+                    hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#3333CC", "#5555FF"))
+                    history.configure(command=lambda actual_history=value, f=button_pressed:access_the_corresponding_history(actual_history, f))
+                    history.grid(row=i, column=0, pady=5)
+            else:
+                for i, value in enumerate(histories["body_mass_index_calculator_page"]):
+                    text = "\n".join(f"{TRANSLATIONS['es']['record']['imc'][c]}: {v}" for c, v in value.items())
+                    history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#3333CC", "#5555FF"),
+                    corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
+                    hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#3333CC", "#5555FF"))
+                    history.configure(command=lambda actual_history=value, f=button_pressed:access_the_corresponding_history(actual_history, f))
+                    history.grid(row=i, column=0, pady=5)
         elif str(button_pressed) == ".!ctkframe11.!ctkbutton2":
-            for i, value in enumerate(histories["energy_consumption_page"]):
-                text = "\n".join(f"{c}: {v}" for c, v in value.items())
-                history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#669900", "#AAFF55"),
-                corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
-                hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#669900", "#AAFF55"))
-                history.configure(command=lambda actual_history=value, f=button_pressed:access_the_corresponding_history(actual_history, f))
-                history.grid(row=i, column=0, pady=5)
+            if lang=="en":
+                for i, value in enumerate(histories["energy_consumption_page"]):
+                    text = "\n".join(f"{TRANSLATIONS['en']['record']['energy'][c]}: {v}" for c, v in value.items())
+                    history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#669900", "#AAFF55"),
+                    corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
+                    hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#669900", "#AAFF55"))
+                    history.configure(command=lambda actual_history=value, f=button_pressed:access_the_corresponding_history(actual_history, f))
+                    history.grid(row=i, column=0, pady=5)
+            else:
+                for i, value in enumerate(histories["energy_consumption_page"]):
+                    text = "\n".join(f"{TRANSLATIONS['es']['record']['energy'][c]}: {v}" for c, v in value.items())
+                    history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#669900", "#AAFF55"),
+                    corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
+                    hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#669900", "#AAFF55"))
+                    history.configure(command=lambda actual_history=value, f=button_pressed:access_the_corresponding_history(actual_history, f))
+                    history.grid(row=i, column=0, pady=5)
         else:
-            for i, value in enumerate(histories["currency_conversion_page"]):
-                text = "\n".join(f"{c}: {v}" for c, v in value.items())
-                history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#778800", "#AAFF00"),
-                corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
-                hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#778800", "#AAFF00"))
-                history.configure(command=lambda actual_history=value, f=button_pressed:access_the_corresponding_history(actual_history, f))
-                history.grid(row=i, column=0, pady=5)
+            if lang=="en":
+                for i, value in enumerate(histories["currency_conversion_page"]):
+                    text = "\n".join(f"{TRANSLATIONS['en']['record']['currency'][c]}: {v}" for c, v in value.items())
+                    history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#778800", "#AAFF00"),
+                    corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
+                    hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#778800", "#AAFF00"))
+                    history.configure(command=lambda actual_history=value, f=button_pressed:access_the_corresponding_history(actual_history, f))
+                    history.grid(row=i, column=0, pady=5)
+            else:
+                for i, value in enumerate(histories["currency_conversion_page"]):
+                    text = "\n".join(f"{TRANSLATIONS['es']['record']['currency'][c]}: {v}" for c, v in value.items())
+                    history = ctk.CTkButton(frame_record, text=text, width=315, text_color=("#778800", "#AAFF00"),
+                    corner_radius=25, fg_color=("#E1E5F2", "#0A0A2A"), bg_color=("#F0F2F5", "#1A1A2E"),
+                    hover_color=("#D1D9E6", "#0E0E3D"), border_width=3, border_color=("#778800", "#AAFF00"))
+                    history.configure(command=lambda actual_history=value, f=button_pressed:access_the_corresponding_history(actual_history, f))
+                    history.grid(row=i, column=0, pady=5)
         buttons = frame_record.winfo_children()
         if len(buttons) > 10:
             buttons[-1].destroy()
