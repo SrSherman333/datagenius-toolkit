@@ -39,6 +39,10 @@ def resource_path(relative_path):
         
     return os.path.join(base_path, relative_path)
 
+icon_path = resource_path("docs/images/icon.png")
+icon_image = ImageTk.PhotoImage(Image.open(icon_path))
+app.iconphoto(False, icon_image)
+
 # Creation of the pages
 pages = {}
 

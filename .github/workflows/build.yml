@@ -7,7 +7,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-20.04, windows-latest]
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -26,12 +26,12 @@ jobs:
           pip install -r requirements.txt
 
       - name: Create the binary (Linux)
-        if: matrix.os == 'ubuntu-latest'
-        run: pyinstaller --onefile --windowed --add-data "docs/images:docs/images" --hidden-import "PIL._tkinter_finder" --collect-all "customtkinter" src/gui/main_gui.py
+        if: matrix.os == 'ubuntu-20.04'
+        run: pyinstaller --onefile --windowed --name "DataGenius Toolkit" --icon="docs/images/icon.png" --add-data "docs/images:docs/images" --hidden-import "PIL._tkinter_finder" --collect-all "customtkinter" src/gui/main_gui.py
 
       - name: Create the .exe (Windows)
         if: matrix.os == 'windows-latest'
-        run: pyinstaller --onefile --windowed --add-data "docs/images;docs/images" --hidden-import "PIL._tkinter_finder" --collect-all "customtkinter" src/gui/main_gui.py
+        run: pyinstaller --onefile --windowed --name "DataGenius Toolkit" --icon="docs/images/icon.ico" --add-data "docs/images;docs/images" --hidden-import "PIL._tkinter_finder" --collect-all "customtkinter" src/gui/main_gui.py
 
       - name: Save files
         uses: actions/upload-artifact@v4

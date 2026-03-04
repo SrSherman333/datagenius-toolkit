@@ -3,7 +3,7 @@
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Status](https://img.shields.io/badge/Status-Active-brightgreen.svg)](https://github.com/SrSherman333/datagenius-toolkit)
-[![GitHub commits](https://badgen.net/github/commits/SrSherman333/datagenius-toolkit)](https://github.com/SrSherman333/datagenius-toolkit/commits/main)
+[![GitHub commits](https://img.shields.io/github/commit-activity/t/SrSherman333/datagenius-toolkit)](https://github.com/SrSherman333/datagenius-toolkit/commits/main)
 
 **Suite of 10 scientific calculators developed in Python for Programming Fundamentals - UTMACH CDIA**
 
@@ -22,6 +22,7 @@
 - **Dark/light** mode
 - **Calculation history** for each calculator
 - **Internationalization** (English/Spanish)
+- **Executable files** for Linux and Windows
 
 ## Calculators Included
 | # | Calculator | Description | Icon |
@@ -74,6 +75,10 @@ Console version
 python src/main.py
 ```
 
+Executable version
+- **Linux:** Download the binary, give it execution permissions (chmod +x) and run it
+- **Windows:** Download the .exe from Releases and run it
+
 ## Project Structure
 ```text
 datagenius-toolkit/
@@ -105,7 +110,7 @@ pip install -e .
 
 ## Upcoming Improvements
 - [x] Add unit tests
-- [ ] Create an executable .exe
+- [x] Create an executable .exe
 - [x] Implement dark/light mode
 - [x] Add calculation history
 - [x] Internationalization (Spanish/English)
@@ -125,4 +130,4 @@ Technical University of Machala (UTMACH) - 2025 - 2026
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details
 
-<div align="center">😄</div>
+<div align="center">☘️👻</div>
