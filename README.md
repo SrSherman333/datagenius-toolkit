@@ -21,6 +21,7 @@
 - **Modular** and well-documented code
 - **Dark/light** mode
 - **Calculation history** for each calculator
+- **Internationalization** (English/Spanish)
 
 ## Calculators Included
 | # | Calculator | Description | Icon |
@@ -66,7 +67,7 @@ pip install -r requirements.txt
 ### Execution
 Version with graphical interface (recommended)
 ```bash
-python src/gui/main_gui.py
+python python3 -m src.gui.main_gui
 ```
 Console version
 ```bash
@@ -79,7 +80,8 @@ datagenius-toolkit/
 ├── src/
 │   ├── calculators/     # 10 modules with the logic of each calculator
 │   ├── gui/            # Graphic interface with CustomTkinter
-│   └── main.py         # Console Version
+│   ├── main.py         # Console Version
+│   └── translate.py    # File where the translation (English/Spanish) of the entire program is stored
 ├── docs/               # Icons and screenshots
 ├── .gitignore          # Files ignored by Git
 ├── tests/              # Test files with pytest
@@ -106,8 +108,7 @@ pip install -e .
 - [ ] Create an executable .exe
 - [x] Implement dark/light mode
 - [x] Add calculation history
-- [ ] Internationalization (Spanish/English)
-- [ ] Advanced scientific calculators
+- [x] Internationalization (Spanish/English)
 
 ## Autor
 <b>Dereck Misael Tandazo Brito</b> - Student of Data Science and AI - UTMACH

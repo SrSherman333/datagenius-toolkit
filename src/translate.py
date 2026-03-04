@@ -39,8 +39,8 @@ TRANSLATIONS = {
                     "Average speed in m/s":"Velocidad promedio en m/s"},
             "imc":{"Weight in kilograms(kg)":"Peso en kilogramos(kg)",
                 "Height in meters(m)":"Altura en metros(m)", "IMC":"IMC"},
-            "energy":{"Hours of the computer operates a day":"Horas del computador operando al día",
-                    "Power of the computer(W)":"Energía del computador(W)",
+            "energy":{"Hours of the computer operates a day":"Horas al día que funciona el computador",
+                    "Power of the computer(W)":"Potencia del computador(W)",
                     "Daily usage | Power consumption":"Uso diario | Consumo de energía",
                     "Monthly consumption":"Consumo mensual"},
             "currency":{"Local currency":"Moneda local","USD rate":"Tasa en USD",
@@ -102,6 +102,21 @@ TRANSLATIONS = {
             "errors":"Cualquier error aparecerá aquí", "buttons_frm1":("CALCULAR","LIMPIAR"), 
             "label3":"IMC:", "label4":"Tabla de IMC: \nPeso inferior: < 18.5 | Peso normal: 18.5 - 24.9 Peso superior: 25.0 - 29.9 | Obesidad: ≥ 30.0:", 
             "buttons_copy":("COPIAR","COPIAR"), "button_back":"Volver al menú"
+        },
+        "interface9":{
+            "title":"CONSUMO ENERGÉTICO DE COMPUTADOR", "frames":("Entrada de Datos","Panel de Resultados"), 
+            "label1":"Horas al día que funciona el computador:", "label2":"Ingrese la potencia del computador (W):", 
+            "errors":"Cualquier error aparecerá aquí", "buttons_frm1":("CALCULAR","LIMPIAR"), 
+            "label3":"Uso diario | Consumo de energía:", "label4":"El consumo mensual es:", 
+            "buttons_copy":("COPIAR","COPIAR"), "button_back":"Volver al menú"
+        },
+        "interface10":{
+            "title":"CONVERSIÓN DE DIVISAS", "frames":("Entrada de Datos","Panel de Resultados"), 
+            "label1":"Moneda local:", "label2":"Tasa USD(ej. 0.05):",
+            "label3":"Tasa EUR(ej. 0.045):", "errors":"Cualquier error aparecerá aquí", 
+            "buttons_frm1":("CALCULAR","LIMPIAR"), "label4":"Moneda local:", 
+            "label5":"Dólares | Euros:", "buttons_copy":("COPIAR","COPIAR"), 
+            "button_back":"Volver al menú"
         }},
     "en":{
         "initial_page":{
@@ -204,6 +219,21 @@ TRANSLATIONS = {
             "errors":"Any errors will appear here", "buttons_frm1":("CALCULATE","CLEAN"), 
             "label3":"IMC:", "label4":"IMC Table: \nUnderweight: < 18.5 | Normal weight: 18.5 - 24.9 Overweight: 25.0 - 29.9 | Obesity: ≥ 30.0:", 
             "buttons_copy":("COPY","COPY"), "button_back":"Back to menu"
+        },
+        "interface9":{
+            "title":"ENERGY CONSUMPTION OF A COMPUTER", "frames":("Input Section","Results Panel"), 
+            "label1":"Enter the hours of the computer operates a day:", "label2":"Enter the value of the power of the computer (W):", 
+            "errors":"Any errors will appear here", "buttons_frm1":("CALCULATE","CLEAN"), 
+            "label3":"Daily usage | Power consumption:", "label4":"The monthly consumption is:", 
+            "buttons_copy":("COPY","COPY"), "button_back":"Back to menu"
+        },
+        "interface10":{
+            "title":"CURRENCY CONVERSION", "frames":("Input Section","Results Panel"), 
+            "label1":"Local currency:", "label2":"USD rate(e.g., 0.05):",
+            "label3":"EUR rate(e.g., 0.045):", "errors":"Any errors will appear here", 
+            "buttons_frm1":("CALCULATE","CLEAN"), "label4":"Local amount:", 
+            "label5":"Dollars | Euros:", "buttons_copy":("COPY","COPY"), 
+            "button_back":"Back to menu"
         }
         }
     }

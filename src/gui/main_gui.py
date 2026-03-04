@@ -1635,7 +1635,7 @@ def copy_results_grade1():
         button_copy_grades.configure(text="COPIED TEXT")
         app.after(2000, lambda:button_copy_grades.configure(text="COPY"))
     else:
-        button_copy_grades.configure(text="COPIAR TEXTO")
+        button_copy_grades.configure(text="TEXTO COPIADO")
         app.after(2000, lambda:button_copy_grades.configure(text="COPIAR"))
     
 def copy_results_grade2():
@@ -1647,7 +1647,7 @@ def copy_results_grade2():
         button_copy_grades2.configure(text="COPIED TEXT")
         app.after(2000, lambda:button_copy_grades2.configure(text="COPY"))
     else:
-        button_copy_grades2.configure(text="COPIAR TEXTO")
+        button_copy_grades2.configure(text="TEXTO COPIADO")
         app.after(2000, lambda:button_copy_grades2.configure(text="COPIAR"))
 
 # Title
@@ -2844,19 +2844,30 @@ def calculate_energy():
         h = float(entry_energy1.get())
         p = float(entry_energy2.get())
     except ValueError as v:
-        errors_energy.configure(text="")
-        errors_energy.configure(text=f"Error: {v}")
-        app.after(3000, lambda:errors_energy.configure(text="Any errors will appear here"))
+        if lang=="en":
+            errors_energy.configure(text=f"Error: Enter numbers only, no text or symbols")
+            app.after(3000, lambda:errors_energy.configure(text="Any errors will appear here"))
+        else:
+            errors_energy.configure(text=f"Error: Ingrese solo números, no texto o símbolos")
+            app.after(3000, lambda:errors_energy.configure(text="Cualquier error aparecerá aquí"))
         return
     
     if not 0 < h <= 24:
-        errors_energy.configure(text="Error: Hours must be between 0 and 24")
-        app.after(3000, lambda:errors_energy.configure(text="Any errors will appear here"))
+        if lang=="en":
+            errors_energy.configure(text="Error: Hours must be between 0 and 24")
+            app.after(3000, lambda:errors_energy.configure(text="Any errors will appear here"))
+        else:
+            errors_energy.configure(text="Error: Las horas deben estar entre 0 y 24")
+            app.after(3000, lambda:errors_energy.configure(text="Cualquier error aparecerá aquí"))
         return
     
     if not 0 < p <= 2500:
-        errors_energy.configure(text="Error: Enter a realistic power value (between 1W and 2500W)")
-        app.after(3000, lambda:errors_energy.configure(text="Any errors will appear here"))
+        if lang=="en":
+            errors_energy.configure(text="Error: Enter a realistic power value (between 1W and 2500W)")
+            app.after(3000, lambda:errors_energy.configure(text="Any errors will appear here"))
+        else:
+            errors_energy.configure(text="Error: Ingrese un valor de potencia realista (entre 1 W y 2500 W)")
+            app.after(3000, lambda:errors_energy.configure(text="Cualquier error aparecerá aquí"))
         return
     
     dailyp_results.configure(text=f"{h}h | {p}W")
@@ -2881,16 +2892,24 @@ def copy_results_energy1():
     app.clipboard_clear()
     app.clipboard_append(copy)
     app.update()
-    button_copy_energy1.configure(text="COPIED TEXT")
-    app.after(2000, lambda:button_copy_energy1.configure(text="COPY"))
+    if lang=="en":
+        button_copy_energy1.configure(text="COPIED TEXT")
+        app.after(2000, lambda:button_copy_energy1.configure(text="COPY"))
+    else:
+        button_copy_energy1.configure(text="TEXTO COPIADO")
+        app.after(2000, lambda:button_copy_energy1.configure(text="COPIAR"))
     
 def copy_results_energy2():
     copy = consumption_results.cget("text")
     app.clipboard_clear()
     app.clipboard_append(copy)
     app.update()
-    button_copy_energy2.configure(text="COPIED TEXT")
-    app.after(2000, lambda:button_copy_energy2.configure(text="COPY"))
+    if lang=="en":
+        button_copy_energy2.configure(text="COPIED TEXT")
+        app.after(2000, lambda:button_copy_energy2.configure(text="COPY"))
+    else:
+        button_copy_energy2.configure(text="TEXTO COPIADO")
+        app.after(2000, lambda:button_copy_energy2.configure(text="COPIAR"))
 
 # Title
 title9 = ctk.CTkLabel(
@@ -3132,20 +3151,31 @@ def calculate_currency():
         m = float(entry_currency1.get())
         t_usd = float(entry_currency2.get())
         t_eur = float(entry_currency3.get())
-    except ValueError as v:
-        errors_currency.configure(text="")
-        errors_currency.configure(text=f"Error: {v}")
-        app.after(3000, lambda:errors_currency.configure(text="Any errors will appear here"))
+    except ValueError:
+        if lang=="en":
+            errors_currency.configure(text=f"Error: Enter numbers only, no text or symbols")
+            app.after(3000, lambda:errors_currency.configure(text="Any errors will appear here"))
+        else:
+            errors_currency.configure(text=f"Error: Ingrese solo números, no texto o símbolos")
+            app.after(3000, lambda:errors_currency.configure(text="Cualquier error aparecerá aquí"))
         return
     
     if m <= 0 or t_usd <= 0 or t_eur <= 0:
-        errors_currency.configure(text="Error: All values must be greater than zero")
-        app.after(3000, lambda:errors_currency.configure(text="Any errors will appear here"))
+        if lang=="en":
+            errors_currency.configure(text="Error: All values must be greater than zero")
+            app.after(3000, lambda:errors_currency.configure(text="Any errors will appear here"))
+        else:
+            errors_currency.configure(text="Error: Todos los valores deben ser mayores a 0")
+            app.after(3000, lambda:errors_currency.configure(text="Cualquier error aparecerá aquí"))
         return
     
     if t_usd > 10 or t_eur > 10:
-        errors_currency.configure(text="Warning: Exchange rates seem unusually high (> 10)")
-        app.after(3000, lambda:errors_currency.configure(text="Any errors will appear here"))
+        if lang=="en":
+            errors_currency.configure(text="Error: Exchange rates seem unusually high (> 10)")
+            app.after(3000, lambda:errors_currency.configure(text="Any errors will appear here"))
+        else:
+            errors_currency.configure(text="Error: La tasa de cambio parece inusualmente alta (> 10)")
+            app.after(3000, lambda:errors_currency.configure(text="Cualquier error aparecerá aquí"))
         return
     
     local_results.configure(text=f"{m:.2f}")
@@ -3171,16 +3201,24 @@ def copy_results_currency1():
     app.clipboard_clear()
     app.clipboard_append(copy)
     app.update()
-    button_copy_currency1.configure(text="COPIED TEXT")
-    app.after(2000, lambda:button_copy_currency1.configure(text="COPY"))
+    if lang=="en":
+        button_copy_currency1.configure(text="COPIED TEXT")
+        app.after(2000, lambda:button_copy_currency1.configure(text="COPY"))
+    else:
+        button_copy_currency1.configure(text="TEXTO COPIADO")
+        app.after(2000, lambda:button_copy_currency1.configure(text="COPIAR"))
     
 def copy_results_currency2():
     copy = dollaeur_results.cget("text")
     app.clipboard_clear()
     app.clipboard_append(copy)
     app.update()
-    button_copy_currency2.configure(text="COPIED TEXT")
-    app.after(2000, lambda:button_copy_currency2.configure(text="COPY"))
+    if lang=="en":
+        button_copy_currency2.configure(text="COPIED TEXT")
+        app.after(2000, lambda:button_copy_currency2.configure(text="COPY"))
+    else:
+        button_copy_currency2.configure(text="TEXTO COPIADO")
+        app.after(2000, lambda:button_copy_currency2.configure(text="COPIAR"))
 
 # Title
 title10 = ctk.CTkLabel(
@@ -3506,6 +3544,21 @@ map_widgets = {
         "errors":errors_index, "buttons_frm1":(button_calculate_index,button_clean8), 
         "label3":bodymi, "label4":table_results, 
         "buttons_copy":(button_copy_index1,button_copy_index2), "button_back":return_button8
+    },
+    "interface9":{
+        "title":title9, "frames":(title_input9,title_results_energy), 
+        "label1":order_energy1, "label2":order_energy2, 
+        "errors":errors_energy, "buttons_frm1":(button_calculate_energy,button_clean9), 
+        "label3":dailyp, "label4":consumption, 
+        "buttons_copy":(button_copy_energy1,button_copy_energy2), "button_back":return_button9
+    },
+    "interface10":{
+        "title":title10, "frames":(title_input10,title_results_currency), 
+        "label1":order_currency1, "label2":order_currency2,
+        "label3":order_currency3, "errors":errors_currency, 
+        "buttons_frm1":(button_calculate_currency,button_clean10), "label4":local, 
+        "label5":dollaeur, "buttons_copy":(button_copy_currency1,button_copy_currency2), 
+        "button_back":return_button10
     }
 }
 
