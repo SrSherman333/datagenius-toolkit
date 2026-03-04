@@ -7,7 +7,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ubuntu-20.04, windows-latest]
+        os: [ubuntu-22.04, windows-latest]
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -26,7 +26,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Create the binary (Linux)
-        if: matrix.os == 'ubuntu-20.04'
+        if: matrix.os == 'ubuntu-22.04'
         run: pyinstaller --onefile --windowed --name "DataGenius Toolkit" --icon="docs/images/icon.png" --add-data "docs/images:docs/images" --hidden-import "PIL._tkinter_finder" --collect-all "customtkinter" src/gui/main_gui.py
 
       - name: Create the .exe (Windows)
