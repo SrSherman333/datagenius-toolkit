@@ -26,11 +26,11 @@ jobs:
           pip install -r requirements.txt
 
       - name: Create the binary (Linux)
-        if: ${{ matrix.os == 'ubuntu-latest' }}
+        if: matrix.os == 'ubuntu-latest'
         run: pyinstaller --onefile --windowed --add-data "docs/images:docs/images" --hidden-import "PIL._tkinter_finder" --collect-all "customtkinter" src/gui/main_gui.py
 
       - name: Create the .exe (Windows)
-        if: ${{ matrix.os == 'windows-latest' }}
+        if: matrix.os == 'windows-latest'
         run: pyinstaller --onefile --windowed --add-data "docs/images;docs/images" --hidden-import "PIL._tkinter_finder" --collect-all "customtkinter" src/gui/main_gui.py
 
       - name: Save files
