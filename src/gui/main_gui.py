@@ -5,10 +5,6 @@ from PIL import Image, ImageTk
 from src.translate import TRANSLATIONS
 import sys
 import os
-current_dir = os.path.dirname(os.path.abspath(__file__))
-parent_dir = os.path.dirname(current_dir)
-src_dir = os.path.join(parent_dir, 'calculators')
-sys.path.append(src_dir)
 
 # Configuration of the window
 ctk.set_appearance_mode("dark")
@@ -34,6 +30,14 @@ def bind_mouse_wheel(frame):
     frame.bind("<Leave>", lambda _: app.unbind_all("<Button-4>"))
     frame.bind("<Leave>", lambda _: app.unbind_all("<Button-5>"))
 
+# To be able to save the images in the .exe
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+        
+    return os.path.join(base_path, relative_path)
 
 # Creation of the pages
 pages = {}
@@ -109,8 +113,8 @@ central_device.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
 # Icon inside of the central_device
 # Possible errors
 try:
-    devicedark_image_original = Image.open("docs/images/Dark/icon_firstframe_dark.jpg")
-    devicelight_image_original = Image.open("docs/images/Light/icon_firstframe_light.png")
+    devicedark_image_original = Image.open(resource_path("docs/images/Dark/icon_firstframe_dark.jpg"))
+    devicelight_image_original = Image.open(resource_path("docs/images/Light/icon_firstframe_light.png"))
     device_photo = ctk.CTkImage(light_image=devicelight_image_original, dark_image=devicedark_image_original, size=(160, 160))
 except Exception as e:
     print(f"Error loading image: {e}. Using text icon.")
@@ -141,8 +145,8 @@ start_button = ctk.CTkButton(
 start_button.place(relx=0.5, rely=0.85, anchor=tk.CENTER)
 
 try:
-    dark_mode_image_original = Image.open("docs/images/Dark/icon_darkmode.png")
-    light_mode_image_original = Image.open("docs/images/Light/icon_lightmode.png")
+    dark_mode_image_original = Image.open(resource_path("docs/images/Dark/icon_darkmode.png"))
+    light_mode_image_original = Image.open(resource_path("docs/images/Light/icon_lightmode.png"))
     theme_mode_photo = ctk.CTkImage(light_image=light_mode_image_original, dark_image=dark_mode_image_original, size=(80, 80))
 except Exception as e:
     print(f"Error loading image: {e}. Using text icon.")
@@ -169,8 +173,8 @@ theme_mode = ctk.CTkButton(
 theme_mode.place(relx=0.1, rely=0.85, anchor=tk.CENTER)
 
 try:
-    lang_dark_image_original = Image.open("docs/images/Dark/icon_languages.png")
-    lang_light_image_original = Image.open("docs/images/Light/icon_languages.png")
+    lang_dark_image_original = Image.open(resource_path("docs/images/Dark/icon_languages.png"))
+    lang_light_image_original = Image.open(resource_path("docs/images/Light/icon_languages.png"))
     lang_photo = ctk.CTkImage(light_image=lang_light_image_original, dark_image=lang_dark_image_original, size=(40, 40))
 except Exception as e:
     print(f"Error loading image: {e}. Using text icon.")
@@ -239,8 +243,8 @@ title_label2 = ctk.CTkLabel(
 title_label2.place(relx=0.5, rely=0.1, anchor=tk.CENTER) 
 
 try:
-    dark_mode_image_original = Image.open("docs/images/Dark/icon_darkmode.png")
-    light_mode_image_original = Image.open("docs/images/Light/icon_lightmode.png")
+    dark_mode_image_original = Image.open(resource_path("docs/images/Dark/icon_darkmode.png"))
+    light_mode_image_original = Image.open(resource_path("docs/images/Light/icon_lightmode.png"))
     theme_mode_photo = ctk.CTkImage(light_image=light_mode_image_original, dark_image=dark_mode_image_original, size=(60,60))
 except Exception as e:
     print(f"Error loading image: {e}. Using text icon.")
@@ -330,8 +334,8 @@ buttons_config = [
 ]
 for i in range(10):
     try:
-        dark_icon_image_original = Image.open(f"docs/images/Dark/icon{i+1}.jpg")
-        light_icon_image_original = Image.open(f"docs/images/Light/icon{i+1}.jpg")
+        dark_icon_image_original = Image.open(resource_path(f"docs/images/Dark/icon{i+1}.jpg"))
+        light_icon_image_original = Image.open(resource_path(f"docs/images/Light/icon{i+1}.jpg"))
         theme_icon_photo = ctk.CTkImage(light_image=light_icon_image_original, dark_image=dark_icon_image_original, size=(64, 64))
     except Exception as e:
         print(f"Error loading image: {e}. Using text icon.")
@@ -391,7 +395,7 @@ descriptions_buttons()
 
 # TEMPERATURE CONVERSION PAGE CONTENT-----------------------
 # Functions
-import temperature_conversion
+from src.calculators.temperature_conversion import celsius_to_kelvin, celsius_to_fahrenheit
 def calculate_values():
     value = entry.get()
     try:
@@ -412,13 +416,13 @@ def calculate_values():
             errors1.configure(text=f"Error: La temperatura no puede estar por debajo del 0 absoluto (-273.15°C)")
             app.after(3000, lambda:errors1.configure(text="Cualquier error aparecerá aquí"))
         return
-    fahrenheit_results.configure(text=f"{temperature_conversion.celsius_to_fahrenheit(value):.2f}°F")
-    kelvin_results.configure(text=f"{temperature_conversion.celsius_to_kelvin(value):.2f}K")
+    fahrenheit_results.configure(text=f"{celsius_to_fahrenheit(value):.2f}°F")
+    kelvin_results.configure(text=f"{celsius_to_kelvin(value):.2f}K")
     
     histories["temperature_conversion_page"].insert(0, {
         "Celsius":value,
-        "In Fahrenheit":f"{temperature_conversion.celsius_to_fahrenheit(value):.2f}°F",
-        "In Kelvin":f"{temperature_conversion.celsius_to_kelvin(value):.2f}K"
+        "In Fahrenheit":f"{celsius_to_fahrenheit(value):.2f}°F",
+        "In Kelvin":f"{celsius_to_kelvin(value):.2f}K"
     })
 
 def clean():
@@ -661,7 +665,7 @@ return_button1.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
 
 # CLOUD STORAGE COST PAGE CONTENT-----------------------
 # Functions
-import cloud_storage_cost
+from src.calculators.cloud_storage_cost import monthly_cost, annual_cost
 def calculate_cost():
     try:
         gb = float(entry_cloud1.get())
@@ -684,15 +688,15 @@ def calculate_cost():
             app.after(3000, lambda:errors_cloud.configure(text="Cualquier error aparecerá aquí"))
         return
     
-    cm = cloud_storage_cost.monthly_cost(gb, c)
+    cm = monthly_cost(gb, c)
     montly_cost_results.configure(text=f"{cm:.2f}$")
-    anual_cost_results.configure(text=f"{cloud_storage_cost.annual_cost(cm):.2f}$")
+    anual_cost_results.configure(text=f"{annual_cost(cm):.2f}$")
     
     histories["cloud_storage_cost_page"].insert(0, {
         "GB":gb,
         "Cost per GB":c,
         "Monthly cost":f"{cm:.2f}$",
-        "Annual cost":f"{cloud_storage_cost.annual_cost(cm):.2f}$"
+        "Annual cost":f"{annual_cost(cm):.2f}$"
     })
     
 def clean_text_cloud():
@@ -956,7 +960,7 @@ return_button2.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
 
 # EXECUTION TIME CALCULATOR PAGE CONTENT-----------------------
 # Functions
-import execution_time_calculator
+from src.calculators.execution_time_calculator import time_minutes, time_seconds
 def calculate_execution():
     try:
         n = float(entry_exe1.get())
@@ -979,15 +983,15 @@ def calculate_execution():
             app.after(3000, lambda:errors_exe.configure(text="Cualquier error aparecerá aquí"))
         return
     
-    ts = execution_time_calculator.time_seconds(n,v)
+    ts = time_seconds(n,v)
     time_seconds_results.configure(text=f"{ts:.2f}s")
-    time_minutes_results.configure(text=f"{execution_time_calculator.time_minutes(ts):.2f}min")
+    time_minutes_results.configure(text=f"{time_minutes(ts):.2f}min")
     
     histories["execution_time_calculator_page"].insert(0, {
         "Number of operations":n,
         "Execution speed":v,
         "Time in seconds":f"{ts:.2f}s",
-        "Time in minutes":f"{execution_time_calculator.time_minutes(ts):.2f}min"
+        "Time in minutes":f"{time_minutes(ts):.2f}min"
     })
     
 def clean_text_exe():
@@ -1253,7 +1257,7 @@ return_button3.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
 
 # EUCLIDEAN DISTANCE CALCULATOR PAGE CONTENT-----------------------
 # Functions
-import euclidean_distance_calculator
+from src.calculators.euclidean_distance_calculator import euclidean_distance
 def calculate_euclidean():
     try:
         x1 = float(entry_euclidean1.get())
@@ -1270,13 +1274,13 @@ def calculate_euclidean():
         return
     
     coordinates_results.configure(text=f"(P1: {entry_euclidean1.get()}, {entry_euclidean2.get()} | P2: {entry_euclidean3.get()}, {entry_euclidean4.get()})")
-    euclidean_distance_results.configure(text=f"{euclidean_distance_calculator.euclidean_distance(x1, y1, x2, y2):.2f}")
+    euclidean_distance_results.configure(text=f"{euclidean_distance(x1, y1, x2, y2):.2f}")
     
     histories["euclidean_distance_calculator_page"].insert(0, {
         "Point 1":(x1, y1),
         "Point 2":(x2, y2),
         "Coordinates":f"(P1: {entry_euclidean1.get()}, {entry_euclidean2.get()} | P2: {entry_euclidean3.get()}, {entry_euclidean4.get()})",
-        "Euclidean distance":f"{euclidean_distance_calculator.euclidean_distance(x1, y1, x2, y2):.2f}"
+        "Euclidean distance":f"{euclidean_distance(x1, y1, x2, y2):.2f}"
     })
     
 def clean_text_euclidean():
@@ -1582,7 +1586,7 @@ return_button4.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
 
 # AVERAGE GRADE PAGE CONTENT-----------------------
 # Functions
-import average_grade
+from src.calculators.average_grade import calculate_average
 def calculate_grades():
     try:
         n1 = float(entry_grade1.get())
@@ -1608,13 +1612,13 @@ def calculate_grades():
         return
     
     grades_results.configure(text=f"(G1: {entry_grade1.get()}| G2: {entry_grade2.get()}| G3: {entry_grade3.get()}| G4: {entry_grade4.get()})")
-    average_grade_results.configure(text=f"{average_grade.calculate_average(n1, n2, n3, n4):.2f}")
+    average_grade_results.configure(text=f"{calculate_average(n1, n2, n3, n4):.2f}")
     
     histories["average_grade_page"].insert(0, {
         "Grades 1 and 2":(n1, n2),
         "Grades 3 and 4":(n3, n4),
         "Grades":f"(G1: {entry_grade1.get()}| G2: {entry_grade2.get()}| G3: {entry_grade3.get()}| G4: {entry_grade4.get()})",
-        "Average grade":f"{average_grade.calculate_average(n1, n2, n3, n4):.2f}"
+        "Average grade":f"{calculate_average(n1, n2, n3, n4):.2f}"
     })
     
 def clean_text_grade():
@@ -1920,7 +1924,7 @@ return_button5.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
 
 # SIMPLE INTEREST CALCULATOR PAGE CONTENT-----------------------
 # Functions
-import simple_interest_calculator
+from src.calculators.simple_interest_calculator import calculate_total_amount, rate_percentage
 def calculate_interest():
     try:
         c = float(entry_interest1.get())
@@ -1944,8 +1948,8 @@ def calculate_interest():
             app.after(3000, lambda:errors_interest.configure(text="Cualquier error aparecerá aquí"))
         return
     
-    i = simple_interest_calculator.rate_percentage(i)
-    m = simple_interest_calculator.calculate_total_amount(c, i ,t)
+    i = rate_percentage(i)
+    m = calculate_total_amount(c, i ,t)
     
     interest_results.configure(text=f"{m-c:.2f}$")
     amount_results.configure(text=f"{m:.2f}$")
@@ -2241,7 +2245,7 @@ return_button6.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
 
 # AVERAGE SPEED OF A DRONE PAGE CONTENT-----------------------
 # Functions
-import average_speed_of_a_drone
+from src.calculators.average_speed_of_a_drone import speed_kmh, speed_ms
 def calculate_speed():
     try:
         d = float(entry_speed1.get())
@@ -2264,16 +2268,16 @@ def calculate_speed():
             app.after(3000, lambda:errors_speed.configure(text="Cualquier error aparecerá aquí"))
         return
     
-    vkm = average_speed_of_a_drone.speed_kmh(d, t)
+    vkm = speed_kmh(d, t)
     
     kmh_results.configure(text=f"{vkm:.2f}km/h")
-    ms_results.configure(text=f"{average_speed_of_a_drone.speed_ms(vkm):.2f}m/s")
+    ms_results.configure(text=f"{speed_ms(vkm):.2f}m/s")
     
     histories["average_speed_of_a_drone_page"].insert(0, {
         "Distance traveled (km)":d,
         "Time taken (hours)":t,
         "Average speed in km/h":f"{vkm:.2f}km/h",
-        "Average speed in m/s":f"{average_speed_of_a_drone.speed_ms(vkm):.2f}m/s",
+        "Average speed in m/s":f"{speed_ms(vkm):.2f}m/s",
     })
     
 def clean_text_speed():
@@ -2539,7 +2543,7 @@ return_button7.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
 
 # BODY MASS INDEX CALCULATOR PAGE CONTENT-----------------------
 # Functions
-import body_mass_index_calculator
+from src.calculators.body_mass_index_calculator import calculate_imc, results_imc
 def calculate_index():
     try:
         p = float(entry_index1.get())
@@ -2573,8 +2577,8 @@ def calculate_index():
     
     l = ["Underweight",  "Normal Weight", "Overweight", "Obesity"]
     
-    imc = body_mass_index_calculator.calculate_imc(p, h)
-    results = body_mass_index_calculator.results_imc(l, imc)
+    imc = calculate_imc(p, h)
+    results = results_imc(l, imc)
     
     bodymi_results.configure(text=f"{imc:.2f}")
     
@@ -2838,7 +2842,7 @@ return_button8.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
 
 # CALCULATOR ENERGY CONSUMPTION OF A COMPUTER PAGE CONTENT-----------------------
 # Functions
-import calculator_energy_consumption_of_a_computer
+from src.calculators.calculator_energy_consumption_of_a_computer import energy_consumption
 def calculate_energy():
     try:
         h = float(entry_energy1.get())
@@ -2871,13 +2875,13 @@ def calculate_energy():
         return
     
     dailyp_results.configure(text=f"{h}h | {p}W")
-    consumption_results.configure(text=f"{calculator_energy_consumption_of_a_computer.energy_consumption(p, h):.2f}kWh")
+    consumption_results.configure(text=f"{energy_consumption(p, h):.2f}kWh")
     
     histories["energy_consumption_page"].insert(0, {
         "Hours of the computer operates a day":h,
         "Power of the computer(W)":p,
         "Daily usage | Power consumption":f"{h}h | {p}W",
-        "Monthly consumption":f"{calculator_energy_consumption_of_a_computer.energy_consumption(p, h):.2f}kWh",
+        "Monthly consumption":f"{energy_consumption(p, h):.2f}kWh",
     })
     
 def clean_text_energy():
@@ -3145,7 +3149,7 @@ return_button9.place(relx=0.2, rely=0.9, anchor=tk.CENTER)
 
 # CURRENCY CONVERSION PAGE CONTENT-----------------------
 # Functions
-import currency_conversion
+from src.calculators.currency_conversion import calculate_eur, calculate_usd
 def calculate_currency():
     try:
         m = float(entry_currency1.get())
@@ -3179,13 +3183,13 @@ def calculate_currency():
         return
     
     local_results.configure(text=f"{m:.2f}")
-    dollaeur_results.configure(text=f"{currency_conversion.calculate_usd(m, t_usd):.2f}$ | {currency_conversion.calculate_eur(m, t_eur):.2f}€")
+    dollaeur_results.configure(text=f"{calculate_usd(m, t_usd):.2f}$ | {calculate_eur(m, t_eur):.2f}€")
     
     histories["currency_conversion_page"].insert(0, {
         "Local currency":f"{m:.2f}",
         "USD rate":t_usd,
         "EUR rate":t_eur,
-        "Dollars | Euros":f"{currency_conversion.calculate_usd(m, t_usd):.2f}$ | {currency_conversion.calculate_eur(m, t_eur):.2f}€",
+        "Dollars | Euros":f"{calculate_usd(m, t_usd):.2f}$ | {calculate_eur(m, t_eur):.2f}€",
     })
     
 def clean_text_currency():

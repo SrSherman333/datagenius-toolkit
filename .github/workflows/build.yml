@@ -1,0 +1,39 @@
+name: Generate Executables
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Download code
+        uses: actions/checkout@v4
+
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install libraries
+        run: |
+          pip install pyinstaller
+          pip install -r requeriments.txt
+
+      - name: Create the binary (Linux)
+        if: matrix.os == "ubuntu-latest"
+        run: pyinstaller --onefile --windowed \--add-data "docs/images:docs/images" \--hidden-import "PIL._tkinter_finder" \--collect-all "customtkinter" \src/gui/main_gui.py
+
+      - name: Create the .exe (Windows)
+        if: matrix.os == "windows-latest"
+        run: pyinstaller --onefile --windowed \--add-data "docs/images;docs/images" \--hidden-import "PIL._tkinter_finder" \--collect-all "customtkinter" \src/gui/main_gui.py
+
+      - name: Save files
+        uses: actions/upload-artifact@v4
+        with:
+          name: App-${{ matrix.os }}
+          path: dist/
