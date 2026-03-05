@@ -68,7 +68,7 @@ pip install -r requirements.txt
 ### Execution
 Version with graphical interface (recommended)
 ```bash
-python python3 -m src.gui.main_gui
+python3 -m src.gui.main_gui
 ```
 Console version
 ```bash
@@ -76,8 +76,8 @@ python src/main.py
 ```
 
 Executable version
-- **Linux:** Download the binary, give it execution permissions (chmod +x) and run it
-- **Windows:** Download the .exe from Releases and run it
+- **Linux:** <a href="https://github.com/SrSherman333/datagenius-toolkit/releases/tag/v2.0.0">Download the binary</a>, give it execution permissions (chmod +x) and run it
+- **Windows:** <a href="https://github.com/SrSherman333/datagenius-toolkit/releases/tag/v2.0.0">Download the .exe</a> from Releases and run it
 
 ## Project Structure
 ```text
