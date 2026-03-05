@@ -3864,8 +3864,8 @@ def record_logic(button_pressed):
             widget.destroy()
 
 try:
-    record_dark_original = Image.open("docs/images/Dark/icon_record_dark.png")
-    record_light_original = Image.open("docs/images/Light/icon_record_light.png")
+    record_dark_original = Image.open(resource_path("docs/images/Dark/icon_record_dark.png"))
+    record_light_original = Image.open(resource_path("docs/images/Light/icon_record_light.png"))
     record_photo = ctk.CTkImage(light_image=record_light_original, dark_image=record_dark_original, size=(70, 70))
 except Exception as e:
     print(f"Error loading image: {e}")
